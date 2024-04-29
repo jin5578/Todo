@@ -1,0 +1,71 @@
+[versions]
+agp = "8.1.0"
+org-jetbrains-kotlin-android = "1.8.10"
+hilt = "2.48.1"
+org-jetbrains-kotlin-jvm = "1.8.10"
+core-ktx = "1.13.0"
+lifecycle-runtime-ktx = "2.7.0"
+activity-compose = "1.9.0"
+compose-bom = "2024.04.01"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+datastore = "1.1.0"
+retrofit = "2.9.0"
+retrofit-converter-serialization = "1.0.0"
+kotlinx-serialization-json = "1.5.0"
+okhttp = "4.12.0"
+appcompat = "1.6.1"
+material = "1.11.0"
+navigation-compose = "2.7.7"
+hilt-navigation-compose = "1.2.0"
+orbit = "6.1.0"
+coil = "2.3.0"
+kotlin-kapt = "1.8.10"
+splash = "1.0.1"
+coroutines-core = "1.7.3"
+
+[libraries]
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+ui = { group = "androidx.compose.ui", name = "ui" }
+ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+material3 = { group = "androidx.compose.material3", name = "material3" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-converter-serialization" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+orbit-core = { group = "org.orbit-mvi", name = "orbit-core", version.ref = "orbit" }
+orbit-viewmodel = { group = "org.orbit-mvi", name = "orbit-viewmodel", version.ref = "orbit" }
+orbit-compose = { group = "org.orbit-mvi", name = "orbit-compose", version.ref = "orbit" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines-core" }
+
+[plugins]
+com-android-application = { id = "com.android.application", version.ref = "agp" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin-android" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin-kapt" }
+
+[bundles]
