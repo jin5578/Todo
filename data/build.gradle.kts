@@ -61,5 +61,8 @@ dependencies {
     //serialization
     implementation(libs.kotlinx.serialization.json)
 
+    //Timber
+    implementation(libs.timber)
+
     implementation(project(":domain"))
 }

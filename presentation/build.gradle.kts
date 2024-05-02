@@ -76,5 +76,8 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coil.compose)
 
+    //Timber
+    implementation(libs.timber)
+
     implementation(project(":domain"))
 }

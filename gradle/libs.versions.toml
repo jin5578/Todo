@@ -24,6 +24,7 @@ coil = "2.3.0"
 kotlin-kapt = "1.8.10"
 splash = "1.0.1"
 coroutines-core = "1.7.3"
+timber = "5.0.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -58,6 +59,7 @@ coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines-core" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
