@@ -7,7 +7,7 @@ import javax.inject.Inject
 class SetPinNumberUseCaseImpl @Inject constructor(
     private val lockDataStore: LockDataStore
 ) : SetPinNumberUseCase {
-    override suspend fun invoke(pinNumber: String) {
+    override suspend fun invoke(pinNumber: String): Result<Unit> = kotlin.runCatching {
         lockDataStore.setPinNumber(pinNumber)
     }
 }

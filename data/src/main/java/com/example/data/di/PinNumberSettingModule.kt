@@ -1,7 +1,9 @@
 package com.example.data.di
 
+import com.example.data.usecase.pinnumbersetting.ClearPinNumberUseCaseImpl
 import com.example.data.usecase.pinnumbersetting.GetPinNumberUseCaseImpl
 import com.example.data.usecase.pinnumbersetting.SetPinNumberUseCaseImpl
+import com.example.domain.usecase.pinnumbersetting.ClearPinNumberUseCase
 import com.example.domain.usecase.pinnumbersetting.GetPinNumberUseCase
 import com.example.domain.usecase.pinnumbersetting.SetPinNumberUseCase
 import dagger.Binds
@@ -17,4 +19,7 @@ abstract class PinNumberSettingModule {
 
     @Binds
     abstract fun bindSetPinNumberUseCase(uc: SetPinNumberUseCaseImpl): SetPinNumberUseCase
+
+    @Binds
+    abstract fun bindClearPinNumberUseCase(uc: ClearPinNumberUseCaseImpl): ClearPinNumberUseCase
 }
