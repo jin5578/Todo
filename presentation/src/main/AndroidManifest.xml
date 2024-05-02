@@ -11,5 +11,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".lockscreen.LockScreenActivity" />
+        <activity android:name=".main.MainActivity" />
     </application>
 </manifest>
