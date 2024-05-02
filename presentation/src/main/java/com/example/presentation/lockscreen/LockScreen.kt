@@ -8,13 +8,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,16 +48,17 @@ fun LockScreen(
     }
 
     LockScreen(
-        password = state.password,
-        onPasswordChange = viewModel::onPasswordChange,
+        pinNumber = state.pinNumber,
+        onPinNumberChange = viewModel::onPinNumberChange,
         onUnlockClick = viewModel::onUnlockClick
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun LockScreen(
-    password: String,
-    onPasswordChange: (String) -> Unit,
+    pinNumber: String,
+    onPinNumberChange: (String) -> Unit,
     onUnlockClick: () -> Unit,
 ) {
     Surface(
@@ -65,7 +71,7 @@ private fun LockScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "비밀번호",
+                text = "PIN Number를 입력하세요",
                 style = MaterialTheme.typography.labelSmall
             )
 
@@ -73,8 +79,13 @@ private fun LockScreen(
 
             TodoTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = password,
-                onValueChange = onPasswordChange
+                value = pinNumber,
+                onValueChange = onPinNumberChange,
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.NumberPassword,
+                    imeAction = ImeAction.Done
+                ),
             )
 
             Spacer(modifier = Modifier.height(height = 40.dp))
@@ -93,8 +104,8 @@ private fun LockScreen(
 private fun LockScreenPreview() {
     TodoTheme {
         LockScreen(
-            password = "",
-            onPasswordChange = {},
+            pinNumber = "",
+            onPinNumberChange = {},
             onUnlockClick = {}
         )
     }

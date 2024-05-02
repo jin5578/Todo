@@ -2,6 +2,7 @@ package com.example.presentation.lockscreen
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
+import com.example.domain.usecase.pinnumbersetting.GetPinNumberUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import org.orbitmvi.orbit.Container
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @OptIn(OrbitExperimental::class)
 @HiltViewModel
 class LockScreenViewModel @Inject constructor(
-
+    private val getPinNumberUseCase: GetPinNumberUseCase
 ) : ViewModel(), ContainerHost<LockScreenState, LockScreenSideEffect> {
     override val container: Container<LockScreenState, LockScreenSideEffect> = container(
         initialState = LockScreenState(),
@@ -30,22 +31,22 @@ class LockScreenViewModel @Inject constructor(
         }
     )
 
-    fun onPasswordChange(password: String) = blockingIntent {
-        reduce { state.copy(password = password) }
+    fun onPinNumberChange(pinNumber: String) = blockingIntent {
+        reduce { state.copy(pinNumber = pinNumber) }
     }
 
     fun onUnlockClick() = intent {
-        if (state.password == "111") {
+        if (state.pinNumber == getPinNumberUseCase()) {
             postSideEffect(LockScreenSideEffect.IntentToMain)
         } else {
-            postSideEffect(LockScreenSideEffect.Toast(message = "비밀번호가 다릅니다. 다시 확인해주세요."))
+            postSideEffect(LockScreenSideEffect.Toast(message = "PIN Number가 다릅니다. 다시 확인해주세요."))
         }
     }
 }
 
 @Immutable
 data class LockScreenState(
-    val password: String = ""
+    val pinNumber: String = ""
 )
 
 sealed interface LockScreenSideEffect {
