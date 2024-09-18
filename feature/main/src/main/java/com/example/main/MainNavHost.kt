@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import com.example.home.navigation.homeNavGraph
 
 @Composable
 internal fun MainNavHost(
@@ -23,7 +24,10 @@ internal fun MainNavHost(
             navController = navigator.navController,
             startDestination = navigator.startDestination,
         ) {
-
+            homeNavGraph(
+                onShowErrorSnackbar = onShowErrorSnackBar,
+                onShowMessageSnackBar = onShowMessageSnackBar,
+            )
         }
     }
 }
