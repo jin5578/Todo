@@ -23,7 +23,11 @@ dependencyResolutionManagement {
 rootProject.name = "Todo"
 include(":app")
 include(
+    ":core:data",
+    ":core:data-api",
+    ":core:datastore",
     ":core:design-system",
-    ":core:model"
+    ":core:domain",
+    ":core:model",
 )
 include(":feature:main")

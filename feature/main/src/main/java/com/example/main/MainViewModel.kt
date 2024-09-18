@@ -1,15 +1,15 @@
 package com.example.main
 
 import androidx.lifecycle.ViewModel
+import com.example.domain.usecase.GetThemeUseCase
 import com.example.model.Theme
-import com.example.model.ThemeType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-
+    getThemeUseCase: GetThemeUseCase
 ) : ViewModel() {
-    val theme = flow<Theme> { Theme(ThemeType.SYSTEM) }
+    val theme: Flow<Theme> = getThemeUseCase()
 }

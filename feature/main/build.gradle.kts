@@ -34,7 +34,10 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:data-api"))
     implementation(project(":core:design-system"))
+    implementation(project(":core:domain"))
     implementation(project(":core:model"))
 
     implementation(libs.androidx.core.ktx)
