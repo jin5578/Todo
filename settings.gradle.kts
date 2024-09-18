@@ -29,5 +29,6 @@ include(
     ":core:design-system",
     ":core:domain",
     ":core:model",
+    ":core:navigation",
 )
 include(":feature:main")

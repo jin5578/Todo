@@ -30,9 +30,7 @@ class MainActivity : ComponentActivity() {
             val navigator = rememberMainNavigator()
 
             TodoTheme(theme) {
-                MainScreen(
-                    navigator
-                )
+                MainScreen(navigator)
             }
         }
     }
