@@ -12,27 +12,27 @@ fun NavController.navigateHome(navOptions: NavOptions) {
 }
 
 fun NavGraphBuilder.homeNavGraph(
-    navigateToCalendarScreen: () -> Unit,
-    navigateToSettingScreen: () -> Unit,
-    navigateToAddTaskScreen: () -> Unit,
-    navigateToCompletedTaskScreen: () -> Unit,
-    navigateToIncompleteTaskScreen: () -> Unit,
-    navigateToThisWeekTaskScreen: () -> Unit,
-    navigateToAllTaskScreen: () -> Unit,
-    navigateToEditTaskScreen: (Long) -> Unit,
+    navigateCalendar: () -> Unit,
+    navigateSetting: () -> Unit,
+    navigateAddTask: () -> Unit,
+    navigateCompletedTask: () -> Unit,
+    navigateIncompleteTask: () -> Unit,
+    navigateThisWeekTask: () -> Unit,
+    navigateAllTask: () -> Unit,
+    navigateEditTask: (Long) -> Unit,
     onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit
 ) {
     composable<Route.Home> {
         HomeRoute(
-            navigateToCalendarScreen = navigateToCalendarScreen,
-            navigateToSettingScreen = navigateToSettingScreen,
-            navigateToAddTaskScreen = navigateToAddTaskScreen,
-            navigateToCompletedTaskScreen = navigateToCompletedTaskScreen,
-            navigateToIncompleteTaskScreen = navigateToIncompleteTaskScreen,
-            navigateToThisWeekTaskScreen = navigateToThisWeekTaskScreen,
-            navigateToAllTaskScreen = navigateToAllTaskScreen,
-            navigateToEditTaskScreen = navigateToEditTaskScreen,
+            navigateCalendar = navigateCalendar,
+            navigateSetting = navigateSetting,
+            navigateAddTask = navigateAddTask,
+            navigateCompletedTask = navigateCompletedTask,
+            navigateIncompleteTask = navigateIncompleteTask,
+            navigateThisWeekTask = navigateThisWeekTask,
+            navigateAllTask = navigateAllTask,
+            navigateEditTask = navigateEditTask,
             onShowErrorSnackbar = onShowErrorSnackbar,
             onShowMessageSnackBar = onShowMessageSnackBar,
         )

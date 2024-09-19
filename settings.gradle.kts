@@ -35,5 +35,6 @@ include(
 )
 include(
     ":feature:home",
-    ":feature:main"
+    ":feature:main",
+    ":feature:setting"
 )

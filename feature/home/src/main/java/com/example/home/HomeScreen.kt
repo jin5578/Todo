@@ -69,14 +69,14 @@ import java.time.LocalTime
 @Composable
 internal fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateToCalendarScreen: () -> Unit,
-    navigateToSettingScreen: () -> Unit,
-    navigateToAddTaskScreen: () -> Unit,
-    navigateToCompletedTaskScreen: () -> Unit,
-    navigateToIncompleteTaskScreen: () -> Unit,
-    navigateToThisWeekTaskScreen: () -> Unit,
-    navigateToAllTaskScreen: () -> Unit,
-    navigateToEditTaskScreen: (Long) -> Unit,
+    navigateCalendar: () -> Unit,
+    navigateSetting: () -> Unit,
+    navigateAddTask: () -> Unit,
+    navigateCompletedTask: () -> Unit,
+    navigateIncompleteTask: () -> Unit,
+    navigateThisWeekTask: () -> Unit,
+    navigateAllTask: () -> Unit,
+    navigateEditTask: (Long) -> Unit,
     onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
@@ -90,14 +90,14 @@ internal fun HomeRoute(
 
     HomeContent(
         uiState = uiState,
-        navigateToCalendarScreen = navigateToCalendarScreen,
-        navigateToSettingScreen = navigateToSettingScreen,
-        navigateToAddTaskScreen = navigateToAddTaskScreen,
-        navigateToCompletedTaskScreen = navigateToCompletedTaskScreen,
-        navigateToIncompleteTaskScreen = navigateToIncompleteTaskScreen,
-        navigateToThisWeekTaskScreen = navigateToThisWeekTaskScreen,
-        navigateToAllTaskScreen = navigateToAllTaskScreen,
-        navigateToEditTaskScreen = navigateToEditTaskScreen,
+        navigateCalendar = navigateCalendar,
+        navigateSetting = navigateSetting,
+        navigateAddTask = navigateAddTask,
+        navigateCompletedTask = navigateCompletedTask,
+        navigateIncompleteTask = navigateIncompleteTask,
+        navigateThisWeekTask = navigateThisWeekTask,
+        navigateAllTask = navigateAllTask,
+        navigateEditTask = navigateEditTask,
         onSortTaskChanged = viewModel::updateSortTask,
         onTaskDelete = viewModel::deleteTask,
         onTaskComplete = { taskId ->
@@ -113,14 +113,14 @@ internal fun HomeRoute(
 @Composable
 private fun HomeContent(
     uiState: HomeUiState,
-    navigateToCalendarScreen: () -> Unit,
-    navigateToSettingScreen: () -> Unit,
-    navigateToAddTaskScreen: () -> Unit,
-    navigateToCompletedTaskScreen: () -> Unit,
-    navigateToIncompleteTaskScreen: () -> Unit,
-    navigateToThisWeekTaskScreen: () -> Unit,
-    navigateToAllTaskScreen: () -> Unit,
-    navigateToEditTaskScreen: (Long) -> Unit,
+    navigateCalendar: () -> Unit,
+    navigateSetting: () -> Unit,
+    navigateAddTask: () -> Unit,
+    navigateCompletedTask: () -> Unit,
+    navigateIncompleteTask: () -> Unit,
+    navigateThisWeekTask: () -> Unit,
+    navigateAllTask: () -> Unit,
+    navigateEditTask: (Long) -> Unit,
     onSortTaskChanged: (SortTask) -> Unit,
     onTaskDelete: (Long) -> Unit,
     onTaskComplete: (Long) -> Unit,
@@ -139,14 +139,14 @@ private fun HomeContent(
                 sortTask = uiState.sortTask,
                 theme = uiState.theme,
                 buildVersion = uiState.buildVersion,
-                navigateToCalendarScreen = navigateToCalendarScreen,
-                navigateToSettingScreen = navigateToSettingScreen,
-                navigateToAddTaskScreen = navigateToAddTaskScreen,
-                navigateToCompletedTaskScreen = navigateToCompletedTaskScreen,
-                navigateToIncompleteTaskScreen = navigateToIncompleteTaskScreen,
-                navigateToThisWeekTaskScreen = navigateToThisWeekTaskScreen,
-                navigateToAllTaskScreen = navigateToAllTaskScreen,
-                navigateToEditTaskScreen = navigateToEditTaskScreen,
+                navigateCalendar = navigateCalendar,
+                navigateSetting = navigateSetting,
+                navigateAddTask = navigateAddTask,
+                navigateCompletedTask = navigateCompletedTask,
+                navigateIncompleteTask = navigateIncompleteTask,
+                navigateThisWeekTask = navigateThisWeekTask,
+                navigateAllTask = navigateAllTask,
+                navigateEditTask = navigateEditTask,
                 onSortTaskChanged = onSortTaskChanged,
                 onTaskDelete = onTaskDelete,
                 onTaskComplete = onTaskComplete,
@@ -165,14 +165,14 @@ private fun HomeScreen(
     sortTask: SortTask,
     theme: Theme,
     buildVersion: String,
-    navigateToCalendarScreen: () -> Unit,
-    navigateToSettingScreen: () -> Unit,
-    navigateToAddTaskScreen: () -> Unit,
-    navigateToCompletedTaskScreen: () -> Unit,
-    navigateToIncompleteTaskScreen: () -> Unit,
-    navigateToThisWeekTaskScreen: () -> Unit,
-    navigateToAllTaskScreen: () -> Unit,
-    navigateToEditTaskScreen: (Long) -> Unit,
+    navigateCalendar: () -> Unit,
+    navigateSetting: () -> Unit,
+    navigateAddTask: () -> Unit,
+    navigateCompletedTask: () -> Unit,
+    navigateIncompleteTask: () -> Unit,
+    navigateThisWeekTask: () -> Unit,
+    navigateAllTask: () -> Unit,
+    navigateEditTask: (Long) -> Unit,
     onSortTaskChanged: (SortTask) -> Unit,
     onTaskDelete: (Long) -> Unit,
     onTaskComplete: (Long) -> Unit,
@@ -213,7 +213,7 @@ private fun HomeScreen(
                 },
                 actions = {
                     IconButton(
-                        onClick = navigateToCalendarScreen,
+                        onClick = navigateCalendar,
                     ) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
@@ -221,7 +221,7 @@ private fun HomeScreen(
                         )
                     }
                     IconButton(
-                        onClick = navigateToSettingScreen,
+                        onClick = navigateSetting,
                     ) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.svg_setting),
@@ -235,7 +235,7 @@ private fun HomeScreen(
             FloatingActionButton(
                 containerColor = Blue,
                 contentColor = MaterialTheme.colorScheme.secondary,
-                onClick = navigateToAddTaskScreen,
+                onClick = navigateAddTask,
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -274,7 +274,7 @@ private fun HomeScreen(
                     icon = R.drawable.svg_verify,
                     content = "${completedTasks.size} Tasks",
                     backgroundColor = PeachOrange,
-                    onClick = navigateToCompletedTaskScreen,
+                    onClick = navigateCompletedTask,
                 )
                 TaskInfoCard(
                     modifier = Modifier.weight(1f)
@@ -284,7 +284,7 @@ private fun HomeScreen(
                     title = stringResource(R.string.incomplete),
                     content = "${incompleteTasks.size} Tasks",
                     backgroundColor = BurntSienna,
-                    onClick = navigateToIncompleteTaskScreen,
+                    onClick = navigateIncompleteTask,
                 )
             }
 
@@ -305,7 +305,7 @@ private fun HomeScreen(
                     title = stringResource(R.string.this_week),
                     content = "${completedTasks.size} Tasks",
                     backgroundColor = RoseTaupe,
-                    onClick = navigateToThisWeekTaskScreen,
+                    onClick = navigateThisWeekTask,
                 )
                 TaskInfoCard(
                     modifier = Modifier.weight(1f)
@@ -315,7 +315,7 @@ private fun HomeScreen(
                     title = stringResource(R.string.all),
                     content = "${incompleteTasks.size} Tasks",
                     backgroundColor = CoralSand,
-                    onClick = navigateToAllTaskScreen,
+                    onClick = navigateAllTask,
                 )
             }
 
@@ -403,7 +403,7 @@ private fun HomeScreen(
                                 TaskCard(
                                     task = task,
                                     animDelay = index * 100,
-                                    onTaskEdit = { taskId -> navigateToEditTaskScreen(taskId) },
+                                    onTaskEdit = { taskId -> navigateEditTask(taskId) },
                                     onTaskComplete = { taskId -> onTaskComplete(taskId) },
                                     onTaskDelete = { taskId -> onTaskDelete(taskId) },
                                 )
@@ -440,14 +440,14 @@ fun HomeScreenPreview() {
             sortTask = SortTask.BY_START_TIME_ASCENDING,
             theme = Theme(ThemeType.LIGHT),
             buildVersion = "1.0.0",
-            navigateToCalendarScreen = {},
-            navigateToSettingScreen = {},
-            navigateToAddTaskScreen = {},
-            navigateToCompletedTaskScreen = {},
-            navigateToIncompleteTaskScreen = {},
-            navigateToThisWeekTaskScreen = {},
-            navigateToAllTaskScreen = {},
-            navigateToEditTaskScreen = {},
+            navigateCalendar = {},
+            navigateSetting = {},
+            navigateAddTask = {},
+            navigateCompletedTask = {},
+            navigateIncompleteTask = {},
+            navigateThisWeekTask = {},
+            navigateAllTask = {},
+            navigateEditTask = {},
             onSortTaskChanged = {},
             onTaskDelete = {},
             onTaskComplete = {},

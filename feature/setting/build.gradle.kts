@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.main"
+    namespace = "com.example.setting"
     compileSdk = 34
 
     defaultConfig {
@@ -34,20 +34,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:data-api"))
+    implementation(project(":core:model"))
     implementation(project(":core:design-system"))
     implementation(project(":core:domain"))
-    implementation(project(":core:model"))
     implementation(project(":core:navigation"))
 
-    implementation(project(":feature:home"))
-    implementation(project(":feature:setting"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
 
@@ -59,16 +50,10 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     kspAndroidTest(libs.hilt.android.compiler)
 
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.androidx.compose.navigation)
-    androidTestImplementation(libs.androidx.compose.navigation.test)
-
-    implementation(libs.kotlinx.immutable)
-    androidTestImplementation(libs.hilt.android.testing)
-
     implementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)
     androidTestImplementation(libs.androidx.test.ext)
@@ -76,4 +61,11 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.testManifest)
+
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.androidx.compose.navigation)
+    androidTestImplementation(libs.androidx.compose.navigation.test)
+
+    implementation(libs.kotlinx.immutable)
+    implementation(libs.compose.shimmer)
 }

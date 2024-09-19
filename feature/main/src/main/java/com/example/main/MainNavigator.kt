@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.navigation.Route
+import com.example.setting.navigation.navigateSetting
 
 internal class MainNavigator(
     val navController: NavHostController
@@ -16,6 +17,10 @@ internal class MainNavigator(
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
     val startDestination = Route.Home
+
+    fun navigateSetting() {
+        navController.navigateSetting()
+    }
 
     private fun popBackStack() {
         navController.popBackStack()
