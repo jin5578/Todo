@@ -26,6 +26,7 @@ internal fun MainNavHost(
         ) {
             homeNavGraph(
                 navigateToCalendarScreen = {},
+                navigateToSettingScreen = {},
                 navigateToAddTaskScreen = {},
                 navigateToCompletedTaskScreen = {},
                 navigateToIncompleteTaskScreen = {},

@@ -29,7 +29,7 @@ import com.example.home.R
 internal fun TaskInfoCard(
     modifier: Modifier,
     title: String,
-    icon: Int,
+    icon: Int? = null,
     content: String,
     backgroundColor: Color,
     onClick: () -> Unit,
@@ -57,14 +57,16 @@ internal fun TaskInfoCard(
             Spacer(modifier = Modifier.height(4.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Icon(
-                    modifier = Modifier.size(20.dp),
-                    contentDescription = null,
-                    painter = painterResource(id = icon),
-                    tint = Black500,
-                )
+                if (icon != null) {
+                    Icon(
+                        modifier = Modifier.size(14.dp),
+                        contentDescription = null,
+                        painter = painterResource(id = icon),
+                        tint = Black500,
+                    )
+                }
                 Text(
                     text = content,
                     style = TodoTheme.typography.infoDescTextStyle,
@@ -81,7 +83,7 @@ private fun TaskInfoCardPreview() {
     TaskInfoCard(
         modifier = Modifier,
         title = "Completed",
-        icon = R.drawable.svg_task_list,
+        icon = R.drawable.svg_verify,
         content = "2 Tasks",
         backgroundColor = Blue,
         onClick = { }

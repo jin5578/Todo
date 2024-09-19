@@ -13,6 +13,7 @@ fun NavController.navigateHome(navOptions: NavOptions) {
 
 fun NavGraphBuilder.homeNavGraph(
     navigateToCalendarScreen: () -> Unit,
+    navigateToSettingScreen: () -> Unit,
     navigateToAddTaskScreen: () -> Unit,
     navigateToCompletedTaskScreen: () -> Unit,
     navigateToIncompleteTaskScreen: () -> Unit,
@@ -25,6 +26,7 @@ fun NavGraphBuilder.homeNavGraph(
     composable<Route.Home> {
         HomeRoute(
             navigateToCalendarScreen = navigateToCalendarScreen,
+            navigateToSettingScreen = navigateToSettingScreen,
             navigateToAddTaskScreen = navigateToAddTaskScreen,
             navigateToCompletedTaskScreen = navigateToCompletedTaskScreen,
             navigateToIncompleteTaskScreen = navigateToIncompleteTaskScreen,

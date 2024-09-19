@@ -15,34 +15,29 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.FilterList
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -56,7 +51,6 @@ import com.example.design_system.theme.RoseTaupe
 import com.example.design_system.theme.TodoTheme
 import com.example.home.component.EmptyTask
 import com.example.home.component.HomeLoading
-import com.example.home.component.NavigationDrawer
 import com.example.home.component.SwipeActionBox
 import com.example.home.component.TaskCard
 import com.example.home.component.TaskInfoCard
@@ -76,6 +70,7 @@ import java.time.LocalTime
 internal fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
     navigateToCalendarScreen: () -> Unit,
+    navigateToSettingScreen: () -> Unit,
     navigateToAddTaskScreen: () -> Unit,
     navigateToCompletedTaskScreen: () -> Unit,
     navigateToIncompleteTaskScreen: () -> Unit,
@@ -96,6 +91,7 @@ internal fun HomeRoute(
     HomeContent(
         uiState = uiState,
         navigateToCalendarScreen = navigateToCalendarScreen,
+        navigateToSettingScreen = navigateToSettingScreen,
         navigateToAddTaskScreen = navigateToAddTaskScreen,
         navigateToCompletedTaskScreen = navigateToCompletedTaskScreen,
         navigateToIncompleteTaskScreen = navigateToIncompleteTaskScreen,
@@ -118,6 +114,7 @@ internal fun HomeRoute(
 private fun HomeContent(
     uiState: HomeUiState,
     navigateToCalendarScreen: () -> Unit,
+    navigateToSettingScreen: () -> Unit,
     navigateToAddTaskScreen: () -> Unit,
     navigateToCompletedTaskScreen: () -> Unit,
     navigateToIncompleteTaskScreen: () -> Unit,
@@ -143,6 +140,7 @@ private fun HomeContent(
                 theme = uiState.theme,
                 buildVersion = uiState.buildVersion,
                 navigateToCalendarScreen = navigateToCalendarScreen,
+                navigateToSettingScreen = navigateToSettingScreen,
                 navigateToAddTaskScreen = navigateToAddTaskScreen,
                 navigateToCompletedTaskScreen = navigateToCompletedTaskScreen,
                 navigateToIncompleteTaskScreen = navigateToIncompleteTaskScreen,
@@ -168,6 +166,7 @@ private fun HomeScreen(
     theme: Theme,
     buildVersion: String,
     navigateToCalendarScreen: () -> Unit,
+    navigateToSettingScreen: () -> Unit,
     navigateToAddTaskScreen: () -> Unit,
     navigateToCompletedTaskScreen: () -> Unit,
     navigateToIncompleteTaskScreen: () -> Unit,
@@ -200,238 +199,217 @@ private fun HomeScreen(
 
     var isShowSortTaskDialog by remember { mutableStateOf(false) }
 
-    val scope = rememberCoroutineScope()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            ModalDrawerSheet(drawerContainerColor = MaterialTheme.colorScheme.primary) {
-                NavigationDrawer(buildVersion = buildVersion)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Transparent
+                ),
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.app_name),
+                        style = TodoTheme.typography.headlineLarge
+                    )
+                },
+                actions = {
+                    IconButton(
+                        onClick = navigateToCalendarScreen,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
+                            contentDescription = null
+                        )
+                    }
+                    IconButton(
+                        onClick = navigateToSettingScreen,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(R.drawable.svg_setting),
+                            contentDescription = null
+                        )
+                    }
+                }
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                containerColor = Blue,
+                contentColor = MaterialTheme.colorScheme.secondary,
+                onClick = navigateToAddTaskScreen,
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null
+                )
             }
         }
-    ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Color.Transparent
+    ) { innerPadding ->
+        if (isShowSortTaskDialog) {
+            SortTaskDialog(
+                initSortTask = sortTask,
+                onCloseClick = { isShowSortTaskDialog = false },
+                onSelectClick = {
+                    onSortTaskChanged(it)
+                    isShowSortTaskDialog = false
+                }
+            )
+        }
+
+        Column(modifier = Modifier.padding(innerPadding)) {
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 8.dp
                     ),
-                    title = {
-                        Text(
-                            text = stringResource(id = R.string.app_name),
-                            style = TodoTheme.typography.headlineLarge
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TaskInfoCard(
+                    modifier = Modifier.weight(1f)
+                        .graphicsLayer {
+                            translationX = leftTranslate.value
+                        },
+                    title = stringResource(R.string.completed),
+                    icon = R.drawable.svg_verify,
+                    content = "${completedTasks.size} Tasks",
+                    backgroundColor = PeachOrange,
+                    onClick = navigateToCompletedTaskScreen,
+                )
+                TaskInfoCard(
+                    modifier = Modifier.weight(1f)
+                        .graphicsLayer {
+                            translationX = rightTranslate.value
+                        },
+                    title = stringResource(R.string.incomplete),
+                    content = "${incompleteTasks.size} Tasks",
+                    backgroundColor = BurntSienna,
+                    onClick = navigateToIncompleteTaskScreen,
+                )
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 8.dp
+                    ),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TaskInfoCard(
+                    modifier = Modifier.weight(1f)
+                        .graphicsLayer {
+                            translationX = leftTranslate.value
+                        },
+                    title = stringResource(R.string.this_week),
+                    content = "${completedTasks.size} Tasks",
+                    backgroundColor = RoseTaupe,
+                    onClick = navigateToThisWeekTaskScreen,
+                )
+                TaskInfoCard(
+                    modifier = Modifier.weight(1f)
+                        .graphicsLayer {
+                            translationX = rightTranslate.value
+                        },
+                    title = stringResource(R.string.all),
+                    content = "${incompleteTasks.size} Tasks",
+                    backgroundColor = CoralSand,
+                    onClick = navigateToAllTaskScreen,
+                )
+            }
+
+            if (incompleteTasks.isEmpty()) {
+                EmptyTask()
+            } else {
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        modifier = Modifier.padding(16.dp),
+                        text = stringResource(R.string.today_tasks),
+                        style = TodoTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    )
+
+                    IconButton(onClick = { isShowSortTaskDialog = true }) {
+                        Icon(
+                            imageVector = Icons.Default.FilterList,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimary
                         )
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            scope.launch {
-                                drawerState.apply {
-                                    if (isClosed) open() else close()
+                    }
+                }
+
+                val sortedTasks: List<Task> = remember(incompleteTasks, sortTask) {
+                    incompleteTasks.sortedWith(
+                        compareBy {
+                            when (sortTask) {
+                                SortTask.BY_CREATE_TIME_ASCENDING -> {
+                                    it.id
+                                }
+
+                                SortTask.BY_CREATE_TIME_DESCENDING -> {
+                                    -it.id
+                                }
+
+                                SortTask.BY_PRIORITY_ASCENDING -> {
+                                    it.priority
+                                }
+
+                                SortTask.BY_PRIORITY_DESCENDING -> {
+                                    -it.priority
+                                }
+
+                                SortTask.BY_START_TIME_ASCENDING -> {
+                                    it.startTime.toSecondOfDay()
+                                }
+
+                                SortTask.BY_START_TIME_DESCENDING -> {
+                                    -it.startTime.toSecondOfDay()
                                 }
                             }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Default.Menu,
-                                contentDescription = null
-                            )
                         }
-                    },
-                    actions = {
-                        IconButton(
-                            onClick = navigateToCalendarScreen,
+                    )
+                }
+
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                        .padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            bottom = 10.dp,
+                        )
+                ) {
+                    itemsIndexed(
+                        items = sortedTasks,
+                        key = { _, task ->
+                            task.id
+                        }
+                    ) { index, task ->
+                        Box(
+                            modifier = Modifier.animateItem(tween(500))
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.DateRange,
-                                contentDescription = null
-                            )
-                        }
-                    }
-                )
-            },
-            floatingActionButton = {
-                FloatingActionButton(
-                    containerColor = Blue,
-                    contentColor = MaterialTheme.colorScheme.secondary,
-                    onClick = navigateToAddTaskScreen,
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = null
-                    )
-                }
-            }
-        ) { innerPadding ->
-            if (isShowSortTaskDialog) {
-                SortTaskDialog(
-                    initSortTask = sortTask,
-                    onCloseClick = { isShowSortTaskDialog = false },
-                    onSelectClick = {
-                        onSortTaskChanged(it)
-                        isShowSortTaskDialog = false
-                    }
-                )
-            }
-
-            Column(modifier = Modifier.padding(innerPadding)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(
-                            horizontal = 16.dp,
-                            vertical = 8.dp
-                        ),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    TaskInfoCard(
-                        modifier = Modifier.weight(1f)
-                            .graphicsLayer {
-                                translationX = leftTranslate.value
-                            },
-                        title = stringResource(R.string.completed),
-                        icon = R.drawable.svg_task_list,
-                        content = "${completedTasks.size} Tasks",
-                        backgroundColor = PeachOrange,
-                        onClick = navigateToCompletedTaskScreen,
-                    )
-                    TaskInfoCard(
-                        modifier = Modifier.weight(1f)
-                            .graphicsLayer {
-                                translationX = rightTranslate.value
-                            },
-                        title = stringResource(R.string.incomplete),
-                        icon = R.drawable.svg_task_list,
-                        content = "${incompleteTasks.size} Tasks",
-                        backgroundColor = BurntSienna,
-                        onClick = navigateToIncompleteTaskScreen,
-                    )
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(
-                            horizontal = 16.dp,
-                            vertical = 8.dp
-                        ),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    TaskInfoCard(
-                        modifier = Modifier.weight(1f)
-                            .graphicsLayer {
-                                translationX = leftTranslate.value
-                            },
-                        title = stringResource(R.string.this_week),
-                        icon = R.drawable.svg_task_list,
-                        content = "${completedTasks.size} Tasks",
-                        backgroundColor = RoseTaupe,
-                        onClick = navigateToThisWeekTaskScreen,
-                    )
-                    TaskInfoCard(
-                        modifier = Modifier.weight(1f)
-                            .graphicsLayer {
-                                translationX = rightTranslate.value
-                            },
-                        title = stringResource(R.string.all),
-                        icon = R.drawable.svg_task_list,
-                        content = "${incompleteTasks.size} Tasks",
-                        backgroundColor = CoralSand,
-                        onClick = navigateToAllTaskScreen,
-                    )
-                }
-
-                if (incompleteTasks.isEmpty()) {
-                    EmptyTask()
-                } else {
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
-                            .padding(horizontal = 8.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            modifier = Modifier.padding(16.dp),
-                            text = stringResource(R.string.today_tasks),
-                            style = TodoTheme.typography.headlineMedium,
-                            color = MaterialTheme.colorScheme.onPrimary,
-                        )
-
-                        IconButton(onClick = { isShowSortTaskDialog = true }) {
-                            Icon(
-                                imageVector = Icons.Default.FilterList,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onPrimary
-                            )
-                        }
-                    }
-
-                    val sortedTasks: List<Task> = remember(incompleteTasks, sortTask) {
-                        incompleteTasks.sortedWith(
-                            compareBy {
-                                when (sortTask) {
-                                    SortTask.BY_CREATE_TIME_ASCENDING -> {
-                                        it.id
-                                    }
-
-                                    SortTask.BY_CREATE_TIME_DESCENDING -> {
-                                        -it.id
-                                    }
-
-                                    SortTask.BY_PRIORITY_ASCENDING -> {
-                                        it.priority
-                                    }
-
-                                    SortTask.BY_PRIORITY_DESCENDING -> {
-                                        -it.priority
-                                    }
-
-                                    SortTask.BY_START_TIME_ASCENDING -> {
-                                        it.startTime.toSecondOfDay()
-                                    }
-
-                                    SortTask.BY_START_TIME_DESCENDING -> {
-                                        -it.startTime.toSecondOfDay()
-                                    }
+                            SwipeActionBox(
+                                item = task,
+                                onDeleteAction = {
+                                    onTaskDelete(it.id)
+                                    onShowMessageSnackBar("Task Deleted")
                                 }
-                            }
-                        )
-                    }
-
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize()
-                            .padding(
-                                start = 16.dp,
-                                end = 16.dp,
-                                bottom = 10.dp,
-                            )
-                    ) {
-                        itemsIndexed(
-                            items = sortedTasks,
-                            key = { _, task ->
-                                task.id
-                            }
-                        ) { index, task ->
-                            Box(
-                                modifier = Modifier.animateItem(tween(500))
                             ) {
-                                SwipeActionBox(
-                                    item = task,
-                                    onDeleteAction = {
-                                        onTaskDelete(it.id)
-                                        onShowMessageSnackBar("Task Deleted")
-                                    }
-                                ) {
-                                    TaskCard(
-                                        task = task,
-                                        animDelay = index * 100,
-                                        onTaskEdit = { taskId -> navigateToEditTaskScreen(taskId) },
-                                        onTaskComplete = { taskId -> onTaskComplete(taskId) },
-                                        onTaskDelete = { taskId -> onTaskDelete(taskId) },
-                                    )
-                                }
+                                TaskCard(
+                                    task = task,
+                                    animDelay = index * 100,
+                                    onTaskEdit = { taskId -> navigateToEditTaskScreen(taskId) },
+                                    onTaskComplete = { taskId -> onTaskComplete(taskId) },
+                                    onTaskDelete = { taskId -> onTaskDelete(taskId) },
+                                )
                             }
-                            Spacer(modifier = Modifier.height(10.dp))
                         }
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }
@@ -463,6 +441,7 @@ fun HomeScreenPreview() {
             theme = Theme(ThemeType.LIGHT),
             buildVersion = "1.0.0",
             navigateToCalendarScreen = {},
+            navigateToSettingScreen = {},
             navigateToAddTaskScreen = {},
             navigateToCompletedTaskScreen = {},
             navigateToIncompleteTaskScreen = {},
