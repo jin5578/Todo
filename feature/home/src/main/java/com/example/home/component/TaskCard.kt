@@ -163,8 +163,8 @@ internal fun TaskCard(
                 }
                 if (task.date < LocalDate.now()) {
                     IconButton(
+                        modifier = Modifier.weight(0.1f),
                         onClick = { onTaskDelete(task.id) },
-                        modifier = Modifier.weight(0.1f)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,

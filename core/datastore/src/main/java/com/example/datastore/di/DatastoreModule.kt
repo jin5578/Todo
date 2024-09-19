@@ -15,14 +15,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatastoreModule {
-    private const val SETTING_DATASTORE_NAME = "SETTING_PREFERENCES"
-    private val Context.settingDataStore by preferencesDataStore(SETTING_DATASTORE_NAME)
+    private const val SYSTEM_DATASTORE_NAME = "SYSTEM_PREFERENCES"
+    private val Context.systemDataStore by preferencesDataStore(SYSTEM_DATASTORE_NAME)
 
     @Provides
     @Singleton
-    @Named("setting")
-    fun providesSettingDataStore(
+    @Named("system")
+    fun providesSystemDataStore(
         @ApplicationContext context: Context,
     ): DataStore<Preferences> =
-        context.settingDataStore
+        context.systemDataStore
 }

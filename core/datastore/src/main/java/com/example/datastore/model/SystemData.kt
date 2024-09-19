@@ -1,6 +1,6 @@
 package com.example.datastore.model
 
-data class SettingData(
+data class SystemData(
     val sleepTime: String,
     val sortTask: String,
     val theme: String,

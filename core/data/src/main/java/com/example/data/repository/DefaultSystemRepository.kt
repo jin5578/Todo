@@ -1,31 +1,33 @@
 package com.example.data.repository
 
-import com.example.data_api.repository.SettingRepository
-import com.example.datastore.datasource.SettingPreferencesDataSource
+import com.example.data_api.repository.SystemRepository
+import com.example.datastore.datasource.SystemPreferencesDataSource
 import com.example.model.SortTask
 import com.example.model.Theme
 import com.example.model.ThemeType
-import com.example.model.home.HomeSetting
+import com.example.model.TimePicker
+import com.example.model.home.HomeSystem
+import com.example.model.setting.SettingSystem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalTime
 import javax.inject.Inject
 
-internal class DefaultSettingRepository @Inject constructor(
-    private val settingDataSource: SettingPreferencesDataSource
-) : SettingRepository {
+internal class DefaultSystemRepository @Inject constructor(
+    private val systemDataSource: SystemPreferencesDataSource
+) : SystemRepository {
     override fun getTheme(): Flow<Theme> {
-        return settingDataSource.settingData.map {
+        return systemDataSource.systemData.map {
             it.theme.toTheme()
         }
     }
 
-    override fun getHomeSetting(): Flow<HomeSetting> {
-        return settingDataSource.settingData.map {
+    override fun getHomeSystem(): Flow<HomeSystem> {
+        return systemDataSource.systemData.map {
             val sleepTime = LocalTime.parse(it.sleepTime)
             val sortTask = it.sortTask.toSortTask()
             val theme = it.theme.toTheme()
-            HomeSetting(
+            HomeSystem(
                 sleepTime = sleepTime,
                 sortTask = sortTask,
                 theme = theme,
@@ -34,8 +36,26 @@ internal class DefaultSettingRepository @Inject constructor(
         }
     }
 
+    override fun getSettingSystem(): Flow<SettingSystem> {
+        return systemDataSource.systemData.map {
+            val theme = it.theme.toTheme()
+            val sleepTime = LocalTime.parse(it.sleepTime)
+            val timePicker = it.timePicker.toTimePicker()
+            SettingSystem(
+                theme = theme,
+                sleepTime = sleepTime,
+                timePicker = timePicker,
+                buildVersion = it.buildVersion
+            )
+        }
+    }
+
     override suspend fun updateSortTask(sortTask: SortTask) {
-        settingDataSource.updateSortTask(sortTask.type)
+        systemDataSource.updateSortTask(sortTask.type)
+    }
+
+    override suspend fun updateTheme(themeType: ThemeType) {
+        systemDataSource.updateTheme(themeType.themeName)
     }
 
     private fun String.toTheme() = when (this) {
@@ -52,5 +72,10 @@ internal class DefaultSettingRepository @Inject constructor(
         "Start Time (Latest at Top)" -> SortTask.BY_START_TIME_DESCENDING
         "Creation Time (Latest at Bottom)" -> SortTask.BY_CREATE_TIME_ASCENDING
         else -> SortTask.BY_CREATE_TIME_DESCENDING
+    }
+
+    private fun String.toTimePicker() = when (this) {
+        "scrollTimePicker" -> TimePicker.SCROLL_TIME_PICKER
+        else -> TimePicker.CLOCK_TIME_PICKER
     }
 }

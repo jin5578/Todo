@@ -212,17 +212,13 @@ private fun HomeScreen(
                     )
                 },
                 actions = {
-                    IconButton(
-                        onClick = navigateCalendar,
-                    ) {
+                    IconButton(onClick = navigateCalendar) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
                             contentDescription = null
                         )
                     }
-                    IconButton(
-                        onClick = navigateSetting,
-                    ) {
+                    IconButton(onClick = navigateSetting) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.svg_setting),
                             contentDescription = null

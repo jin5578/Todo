@@ -39,7 +39,12 @@ internal fun MainNavHost(
                 onShowErrorSnackbar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )
-            settingNavGraph()
+            settingNavGraph(
+                navigateInfo = {},
+                popBackStack = navigator::popBackStackIfNotHome,
+                onShowErrorSnackbar = onShowErrorSnackBar,
+                onShowMessageSnackBar = onShowMessageSnackBar,
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.home.component
+package com.example.setting.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.design_system.theme.TodoTheme
 
 @Composable
-internal fun HomeLoading(
+internal fun SettingLoading(
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -23,8 +23,8 @@ internal fun HomeLoading(
 
 @Preview
 @Composable
-private fun HomeLoadingPreview() {
+private fun SettingLoadingPreview() {
     TodoTheme {
-        HomeLoading()
+        SettingLoading()
     }
 }

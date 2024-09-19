@@ -1,11 +1,11 @@
 package com.example.data.di
 
-import com.example.data.repository.DefaultSettingRepository
+import com.example.data.repository.DefaultSystemRepository
 import com.example.data.repository.DefaultTaskRepository
-import com.example.data_api.repository.SettingRepository
+import com.example.data_api.repository.SystemRepository
 import com.example.data_api.repository.TaskRepository
 import com.example.database.datasource.TaskDatabaseDataSource
-import com.example.datastore.datasource.SettingPreferencesDataSource
+import com.example.datastore.datasource.SystemPreferencesDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,10 +17,10 @@ import javax.inject.Singleton
 internal object RepositoryModule {
     @Provides
     @Singleton
-    fun providesSettingRepository(
-        settingDataSource: SettingPreferencesDataSource,
-    ): SettingRepository =
-        DefaultSettingRepository(settingDataSource)
+    fun providesSystemRepository(
+        systemDataSource: SystemPreferencesDataSource,
+    ): SystemRepository =
+        DefaultSystemRepository(systemDataSource)
 
     @Provides
     @Singleton

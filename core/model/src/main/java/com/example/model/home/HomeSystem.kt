@@ -4,7 +4,7 @@ import com.example.model.SortTask
 import com.example.model.Theme
 import java.time.LocalTime
 
-data class HomeSetting(
+data class HomeSystem(
     val sleepTime: LocalTime,
     val sortTask: SortTask,
     val theme: Theme,

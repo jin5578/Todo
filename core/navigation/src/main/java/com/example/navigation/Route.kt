@@ -13,6 +13,9 @@ sealed interface Route {
     data object Setting : Route
 
     @Serializable
+    data object Info : Route
+
+    @Serializable
     data object AddTask : Route
 
     @Serializable

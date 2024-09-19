@@ -4,16 +4,16 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.example.datastore.model.SettingData
+import com.example.datastore.model.SystemData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalTime
 import javax.inject.Inject
 import javax.inject.Named
 
-class DefaultSettingPreferencesDataSource @Inject constructor(
-    @Named("setting") private val dataStore: DataStore<Preferences>,
-) : SettingPreferencesDataSource {
+class DefaultSystemPreferencesDataSource @Inject constructor(
+    @Named("system") private val dataStore: DataStore<Preferences>,
+) : SystemPreferencesDataSource {
     object PreferencesKey {
         val SLEEP_TIME_KEY = stringPreferencesKey("sleep_time_key")
         val SORT_TASK_KEY = stringPreferencesKey("sort_task_key")
@@ -22,8 +22,8 @@ class DefaultSettingPreferencesDataSource @Inject constructor(
         val BUILD_VERSION_KEY = stringPreferencesKey("build_version_key")
     }
 
-    override val settingData: Flow<SettingData> = dataStore.data.map { preferences ->
-        SettingData(
+    override val systemData: Flow<SystemData> = dataStore.data.map { preferences ->
+        SystemData(
             sleepTime = preferences[PreferencesKey.SLEEP_TIME_KEY] ?: DEFAULT_SLEEP_TIME,
             sortTask = preferences[PreferencesKey.SORT_TASK_KEY] ?: DEFAULT_SORT_TASK,
             theme = preferences[PreferencesKey.THEME_KEY] ?: DEFAULT_THEME,
@@ -35,6 +35,12 @@ class DefaultSettingPreferencesDataSource @Inject constructor(
     override suspend fun updateSortTask(sortTask: String) {
         dataStore.edit { preferences ->
             preferences[PreferencesKey.SORT_TASK_KEY] = sortTask
+        }
+    }
+
+    override suspend fun updateTheme(theme: String) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKey.THEME_KEY] = theme
         }
     }
 

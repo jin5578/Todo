@@ -48,15 +48,15 @@ class HomeViewModel @Inject constructor(
                     !task.isCompleted
                 }.toPersistentList()
 
-                val homeSetting = home.homeSetting
+                val homeSystem = home.homeSystem
 
                 HomeUiState.Success(
                     completedTasks = completedTasks,
                     incompleteTasks = incompleteTasks,
-                    sleepTime = homeSetting.sleepTime,
-                    sortTask = homeSetting.sortTask,
-                    theme = homeSetting.theme,
-                    buildVersion = homeSetting.buildVersion
+                    sleepTime = homeSystem.sleepTime,
+                    sortTask = homeSystem.sortTask,
+                    theme = homeSystem.theme,
+                    buildVersion = homeSystem.buildVersion
                 )
             }.catch { throwable ->
                 _errorFlow.emit(throwable)
