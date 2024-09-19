@@ -25,6 +25,13 @@ internal fun MainNavHost(
             startDestination = navigator.startDestination,
         ) {
             homeNavGraph(
+                navigateToCalendarScreen = {},
+                navigateToAddTaskScreen = {},
+                navigateToCompletedTaskScreen = {},
+                navigateToIncompleteTaskScreen = {},
+                navigateToThisWeekTaskScreen = {},
+                navigateToAllTaskScreen = {},
+                navigateToEditTaskScreen = {},
                 onShowErrorSnackbar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )

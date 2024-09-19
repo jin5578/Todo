@@ -25,11 +25,13 @@ include(":app")
 include(
     ":core:data",
     ":core:data-api",
+    ":core:database",
     ":core:datastore",
     ":core:design-system",
     ":core:domain",
     ":core:model",
     ":core:navigation",
+    ":core:utils",
 )
 include(
     ":feature:home",

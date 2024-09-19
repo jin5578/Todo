@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface SettingPreferencesDataSource {
     val settingData: Flow<SettingData>
+    suspend fun updateSortTask(sortTask: String)
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Todo</string>
+    <string name="buildVersion">v%1$s</string>
+    <string name="completed">Completed</string>
+    <string name="incomplete">Incomplete</string>
+    <string name="this_week">This week</string>
+    <string name="all">All</string>
+    <string name="no_tasks">No Tasks</string>
+    <string name="today_tasks">Today Tasks</string>
+</resources>

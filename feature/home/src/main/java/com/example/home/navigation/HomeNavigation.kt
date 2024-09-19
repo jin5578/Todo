@@ -12,11 +12,25 @@ fun NavController.navigateHome(navOptions: NavOptions) {
 }
 
 fun NavGraphBuilder.homeNavGraph(
+    navigateToCalendarScreen: () -> Unit,
+    navigateToAddTaskScreen: () -> Unit,
+    navigateToCompletedTaskScreen: () -> Unit,
+    navigateToIncompleteTaskScreen: () -> Unit,
+    navigateToThisWeekTaskScreen: () -> Unit,
+    navigateToAllTaskScreen: () -> Unit,
+    navigateToEditTaskScreen: (Long) -> Unit,
     onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit
 ) {
     composable<Route.Home> {
         HomeRoute(
+            navigateToCalendarScreen = navigateToCalendarScreen,
+            navigateToAddTaskScreen = navigateToAddTaskScreen,
+            navigateToCompletedTaskScreen = navigateToCompletedTaskScreen,
+            navigateToIncompleteTaskScreen = navigateToIncompleteTaskScreen,
+            navigateToThisWeekTaskScreen = navigateToThisWeekTaskScreen,
+            navigateToAllTaskScreen = navigateToAllTaskScreen,
+            navigateToEditTaskScreen = navigateToEditTaskScreen,
             onShowErrorSnackbar = onShowErrorSnackbar,
             onShowMessageSnackBar = onShowMessageSnackBar,
         )
