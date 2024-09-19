@@ -2,6 +2,7 @@ package com.example.home
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -43,11 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.design_system.component.SortTaskDialog
-import com.example.design_system.theme.Blue
-import com.example.design_system.theme.BurntSienna
-import com.example.design_system.theme.CoralSand
-import com.example.design_system.theme.PeachOrange
-import com.example.design_system.theme.RoseTaupe
 import com.example.design_system.theme.TodoTheme
 import com.example.home.component.EmptyTask
 import com.example.home.component.HomeLoading
@@ -208,20 +203,23 @@ private fun HomeScreen(
                 title = {
                     Text(
                         text = stringResource(id = R.string.app_name),
-                        style = TodoTheme.typography.headlineLarge
+                        style = TodoTheme.typography.headlineLarge,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 },
                 actions = {
                     IconButton(onClick = navigateCalendar) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                     IconButton(onClick = navigateSetting) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.svg_setting),
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -229,12 +227,12 @@ private fun HomeScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                containerColor = Blue,
-                contentColor = MaterialTheme.colorScheme.secondary,
+                containerColor = MaterialTheme.colorScheme.tertiary,
+                contentColor = MaterialTheme.colorScheme.surface,
                 onClick = navigateAddTask,
             ) {
                 Icon(
-                    imageVector = Icons.Default.Add,
+                    imageVector = ImageVector.vectorResource(R.drawable.svg_plus),
                     contentDescription = null
                 )
             }
@@ -251,7 +249,10 @@ private fun HomeScreen(
             )
         }
 
-        Column(modifier = Modifier.padding(innerPadding)) {
+        Column(
+            modifier = Modifier.padding(innerPadding)
+                .background(MaterialTheme.colorScheme.surface),
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth()
                     .padding(
@@ -269,7 +270,7 @@ private fun HomeScreen(
                     title = stringResource(R.string.completed),
                     icon = R.drawable.svg_verify,
                     content = "${completedTasks.size} Tasks",
-                    backgroundColor = PeachOrange,
+                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                     onClick = navigateCompletedTask,
                 )
                 TaskInfoCard(
@@ -279,7 +280,7 @@ private fun HomeScreen(
                         },
                     title = stringResource(R.string.incomplete),
                     content = "${incompleteTasks.size} Tasks",
-                    backgroundColor = BurntSienna,
+                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                     onClick = navigateIncompleteTask,
                 )
             }
@@ -300,7 +301,7 @@ private fun HomeScreen(
                         },
                     title = stringResource(R.string.this_week),
                     content = "${completedTasks.size} Tasks",
-                    backgroundColor = RoseTaupe,
+                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                     onClick = navigateThisWeekTask,
                 )
                 TaskInfoCard(
@@ -310,7 +311,7 @@ private fun HomeScreen(
                         },
                     title = stringResource(R.string.all),
                     content = "${incompleteTasks.size} Tasks",
-                    backgroundColor = CoralSand,
+                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                     onClick = navigateAllTask,
                 )
             }
@@ -328,14 +329,14 @@ private fun HomeScreen(
                         modifier = Modifier.padding(16.dp),
                         text = stringResource(R.string.today_tasks),
                         style = TodoTheme.typography.headlineMedium,
-                        color = MaterialTheme.colorScheme.onPrimary,
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
 
                     IconButton(onClick = { isShowSortTaskDialog = true }) {
                         Icon(
                             imageVector = Icons.Default.FilterList,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }

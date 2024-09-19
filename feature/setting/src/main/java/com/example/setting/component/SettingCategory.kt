@@ -44,7 +44,7 @@ internal fun SettingCategory(
             modifier = Modifier.padding(start = 8.dp),
             text = stringResource(title),
             style = TodoTheme.typography.infoDescTextStyle,
-            color = MaterialTheme.colorScheme.onSecondary
+            color = MaterialTheme.colorScheme.onSurface
         )
         Column(modifier = Modifier.clip(RoundedCornerShape(8.dp))) {
             category.forEachIndexed { index, item ->
@@ -54,7 +54,7 @@ internal fun SettingCategory(
                     onClick = item.onClick
                 )
                 if (index != category.lastIndex) {
-                    HorizontalDivider(color = MaterialTheme.colorScheme.primary)
+                    HorizontalDivider(color = MaterialTheme.colorScheme.surface)
                 }
             }
         }
@@ -69,7 +69,7 @@ private fun CategoryItem(
 ) {
     Row(modifier = Modifier.fillMaxWidth()
         .clickable { onClick() }
-        .background(MaterialTheme.colorScheme.secondary)
+        .background(MaterialTheme.colorScheme.surfaceContainer)
         .padding(
             horizontal = 16.dp,
             vertical = 12.dp
@@ -81,19 +81,19 @@ private fun CategoryItem(
             modifier = Modifier.size(20.dp),
             painter = painterResource(icon),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = MaterialTheme.colorScheme.onSurface
         )
         Text(
             modifier = Modifier.weight(1f),
             text = stringResource(title),
             style = TodoTheme.typography.settingItemTextStyle,
-            color = MaterialTheme.colorScheme.onPrimary
+            color = MaterialTheme.colorScheme.onSurface
         )
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_right_twin),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = MaterialTheme.colorScheme.onSurface
         )
     }
 }

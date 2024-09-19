@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -56,7 +57,6 @@ internal fun SettingRoute(
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val uiEffect by viewModel.uiEffect.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
 
@@ -140,6 +140,13 @@ private fun SettingScreen(
             onClick = {
                 showBottomSheet = BottomSheetType.THEME
             },
+        ),
+        CategoryItemUiState(
+            title = R.string.time_picker,
+            icon = R.drawable.svg_clock,
+            onClick = {
+                showBottomSheet = BottomSheetType.THEME
+            },
         )
     )
 
@@ -147,12 +154,13 @@ private fun SettingScreen(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
+                    containerColor = Color.Transparent,
                 ),
                 title = {
                     Text(
                         text = stringResource(id = R.string.settings),
-                        style = TodoTheme.typography.headlineLarge
+                        style = TodoTheme.typography.headlineLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 },
                 navigationIcon = {
@@ -160,7 +168,8 @@ private fun SettingScreen(
                         Icon(
                             modifier = Modifier.size(24.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_left),
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -171,7 +180,7 @@ private fun SettingScreen(
             ModalBottomSheet(
                 onDismissRequest = { showBottomSheet = BottomSheetType.IDLE },
                 sheetState = bottomSheetState,
-                containerColor = MaterialTheme.colorScheme.secondary,
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
             ) {
                 Box() {
                     when (showBottomSheet) {

@@ -36,7 +36,7 @@ internal fun EmptyTask() {
             Text(
                 text = stringResource(R.string.no_tasks),
                 style = TodoTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
@@ -45,5 +45,7 @@ internal fun EmptyTask() {
 @Preview
 @Composable
 private fun EmptyTaskPreview() {
-    EmptyTask()
+    TodoTheme {
+        EmptyTask()
+    }
 }

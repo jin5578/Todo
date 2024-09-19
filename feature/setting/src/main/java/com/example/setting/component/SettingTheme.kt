@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,18 +25,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.design_system.theme.DarkBackgroundL1
-import com.example.design_system.theme.DarkOn
-import com.example.design_system.theme.DarkPrimary
-import com.example.design_system.theme.LightBackgroundL1
-import com.example.design_system.theme.LightOn
-import com.example.design_system.theme.LightPrimary
 import com.example.design_system.theme.TodoTheme
-import com.example.design_system.theme.TwilightBackgroundL1
-import com.example.design_system.theme.TwilightOn
-import com.example.design_system.theme.TwilightPrimary
+import com.example.design_system.theme.onSurfaceDark
+import com.example.design_system.theme.onSurfaceLight
+import com.example.design_system.theme.primaryDark
+import com.example.design_system.theme.primaryLight
+import com.example.design_system.theme.surfaceDark
+import com.example.design_system.theme.surfaceLight
 import com.example.model.ThemeType
+import com.example.setting.R
 import com.example.setting.model.ThemeColor
 
 @Composable
@@ -44,47 +45,54 @@ internal fun SettingTheme(
 ) {
     var selectedTheme by remember { mutableStateOf(initTheme) }
 
+    val isSystemInDarkTheme = isSystemInDarkTheme()
+
     val themeColors = listOf(
         ThemeColor(
-            backgroundColor = LightBackgroundL1,
-            textColor = LightOn,
-            dividerColor = LightPrimary
+            backgroundColor = if (isSystemInDarkTheme) surfaceDark else surfaceLight,
+            textColor = if (isSystemInDarkTheme) onSurfaceDark else onSurfaceLight,
+            dividerColor = if (isSystemInDarkTheme) primaryDark else primaryLight,
         ),
         ThemeColor(
-            backgroundColor = LightBackgroundL1,
-            textColor = LightOn,
-            dividerColor = LightPrimary
+            backgroundColor = surfaceLight,
+            textColor = onSurfaceLight,
+            dividerColor = primaryLight
         ),
         ThemeColor(
-            backgroundColor = TwilightBackgroundL1,
-            textColor = TwilightOn,
-            dividerColor = TwilightPrimary
-        ),
-        ThemeColor(
-            backgroundColor = DarkBackgroundL1,
-            textColor = DarkOn,
-            dividerColor = DarkPrimary
+            backgroundColor = surfaceDark,
+            textColor = onSurfaceDark,
+            dividerColor = primaryDark
         ),
     )
 
-    Row(
+    Column(
         modifier = Modifier.fillMaxWidth()
             .padding(
                 start = 20.dp,
                 end = 20.dp,
                 bottom = 30.dp
             ),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
-        ThemeType.entries.forEachIndexed { index, type ->
-            ThemeItem(
-                modifier = Modifier.weight(1f),
-                title = type.themeName,
-                themeColor = themeColors[index],
-                isSelected = selectedTheme == type,
-            ) {
-                selectedTheme = type
-                onSelect(type)
+        Text(
+            text = stringResource(R.string.choose_theme_style),
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.onSurface,
+        )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            ThemeType.entries.forEachIndexed { index, type ->
+                ThemeItem(
+                    modifier = Modifier.weight(1f),
+                    title = type.themeName,
+                    themeColor = themeColors[index],
+                    isSelected = selectedTheme == type,
+                ) {
+                    selectedTheme = type
+                    onSelect(type)
+                }
             }
         }
     }

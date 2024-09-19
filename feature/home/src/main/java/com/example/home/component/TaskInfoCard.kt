@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,8 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.design_system.theme.Black500
-import com.example.design_system.theme.Blue
 import com.example.design_system.theme.TodoTheme
 import com.example.home.R
 
@@ -52,7 +51,7 @@ internal fun TaskInfoCard(
             Text(
                 text = title,
                 style = TodoTheme.typography.infoTextStyle,
-                color = Black500
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(4.dp))
             Row(
@@ -64,13 +63,13 @@ internal fun TaskInfoCard(
                         modifier = Modifier.size(14.dp),
                         contentDescription = null,
                         painter = painterResource(id = icon),
-                        tint = Black500,
+                        tint = MaterialTheme.colorScheme.onSurface,
                     )
                 }
                 Text(
                     text = content,
                     style = TodoTheme.typography.infoDescTextStyle,
-                    color = Black500
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
@@ -80,12 +79,14 @@ internal fun TaskInfoCard(
 @Preview
 @Composable
 private fun TaskInfoCardPreview() {
-    TaskInfoCard(
-        modifier = Modifier,
-        title = "Completed",
-        icon = R.drawable.svg_verify,
-        content = "2 Tasks",
-        backgroundColor = Blue,
-        onClick = { }
-    )
+    TodoTheme {
+        TaskInfoCard(
+            modifier = Modifier,
+            title = "Completed",
+            icon = R.drawable.svg_verify,
+            content = "2 Tasks",
+            backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+            onClick = { }
+        )
+    }
 }

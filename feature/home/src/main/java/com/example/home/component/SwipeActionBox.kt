@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
@@ -28,17 +29,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.example.design_system.theme.Blue500
-import com.example.design_system.theme.Red
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun <T> SwipeActionBox(
     item: T,
-    backgroundColor: Color = Red,
+    backgroundColor: Color = MaterialTheme.colorScheme.error,
     icon: ImageVector = Icons.Default.Delete,
-    iconTint: Color = Blue500,
+    iconTint: Color = MaterialTheme.colorScheme.surface,
     animationDuration: Int = 300,
     onDeleteAction: (T) -> Unit,
     content: @Composable (T) -> Unit

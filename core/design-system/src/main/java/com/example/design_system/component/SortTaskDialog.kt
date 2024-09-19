@@ -22,7 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.design_system.R
-import com.example.design_system.theme.Blue
 import com.example.design_system.theme.TodoTheme
 import com.example.model.SortTask
 
@@ -72,7 +71,7 @@ fun SortTaskDialog(
                     .align(Alignment.End),
                 text = stringResource(R.string.select),
                 style = TodoTheme.typography.headlineSmall,
-                color = Blue
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }
@@ -91,13 +90,13 @@ private fun CustomRadioButton(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         RadioButton(
-            colors = RadioButtonDefaults.colors(selectedColor = Blue),
+            colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary),
             selected = isSelected,
             onClick = { onClick() })
         Text(
             text = label,
             style = TodoTheme.typography.taskTextStyle,
-            color = MaterialTheme.colorScheme.onPrimary
+            color = MaterialTheme.colorScheme.onPrimaryContainer
         )
     }
 }

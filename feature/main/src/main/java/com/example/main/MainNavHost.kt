@@ -19,7 +19,7 @@ internal fun MainNavHost(
 ) {
     Box(
         modifier = modifier.fillMaxSize()
-            .background(MaterialTheme.colorScheme.surfaceDim)
+            .background(MaterialTheme.colorScheme.surface)
     ) {
         NavHost(
             navController = navigator.navController,

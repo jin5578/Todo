@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,8 +32,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.design_system.theme.DarkGreen
-import com.example.design_system.theme.LightGreen
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
 import com.example.home.R
@@ -85,7 +82,7 @@ internal fun TaskCard(
         Box(
             modifier = Modifier.fillMaxWidth()
                 .background(
-                    MaterialTheme.colorScheme.secondary,
+                    MaterialTheme.colorScheme.surfaceDim,
                     RoundedCornerShape(
                         topEnd = 8.dp,
                         bottomEnd = 8.dp
@@ -113,14 +110,14 @@ internal fun TaskCard(
                             modifier = Modifier.size(20.dp),
                             painter = painterResource(id = R.drawable.svg_check_circle),
                             contentDescription = null,
-                            tint = if (isSystemInDarkTheme()) LightGreen else DarkGreen
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     } else {
                         Box(
                             modifier = Modifier.size(20.dp)
                                 .border(
                                     width = 2.dp,
-                                    color = MaterialTheme.colorScheme.onSecondary,
+                                    color = MaterialTheme.colorScheme.primary,
                                     shape = CircleShape
                                 ),
                             contentAlignment = Alignment.Center,
@@ -138,7 +135,7 @@ internal fun TaskCard(
                             .basicMarquee(),
                         text = task.title,
                         style = TodoTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onPrimary
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Row(
@@ -149,7 +146,7 @@ internal fun TaskCard(
                             modifier = Modifier.size(15.dp),
                             painter = painterResource(id = R.drawable.svg_clock),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSecondary
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
                             text = getTaskTotalTime(
@@ -157,7 +154,7 @@ internal fun TaskCard(
                                 task.endTime
                             ),
                             style = TodoTheme.typography.taskDescTextStyle,
-                            color = MaterialTheme.colorScheme.onSecondary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -168,7 +165,7 @@ internal fun TaskCard(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            tint = MaterialTheme.colorScheme.onSecondary,
+                            tint = MaterialTheme.colorScheme.primary,
                             contentDescription = null
                         )
                     }

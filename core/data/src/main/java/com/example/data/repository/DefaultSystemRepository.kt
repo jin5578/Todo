@@ -61,7 +61,6 @@ internal class DefaultSystemRepository @Inject constructor(
     private fun String.toTheme() = when (this) {
         "system" -> Theme(type = ThemeType.SYSTEM)
         "light" -> Theme(type = ThemeType.LIGHT)
-        "twilight" -> Theme(type = ThemeType.TWILIGHT)
         else -> Theme(type = ThemeType.DARK)
     }
 

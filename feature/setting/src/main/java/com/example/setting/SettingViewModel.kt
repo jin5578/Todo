@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.GetSettingDataUseCase
 import com.example.domain.usecase.UpdateThemeUseCase
 import com.example.model.ThemeType
-import com.example.setting.model.SettingUiEffect
 import com.example.setting.model.SettingUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -28,10 +27,6 @@ class SettingViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<SettingUiState> =
         MutableStateFlow(SettingUiState.Loading)
     val uiState = _uiState.asStateFlow()
-
-    private val _uiEffect: MutableStateFlow<SettingUiEffect> =
-        MutableStateFlow(SettingUiEffect.Idle)
-    val uiEffect = _uiEffect.asStateFlow()
 
     init {
         fetchSetting()
