@@ -435,7 +435,7 @@ fun HomeScreenPreview() {
             incompleteTasks = persistentListOf(),
             sleepTime = LocalTime.now(),
             sortTask = SortTask.BY_START_TIME_ASCENDING,
-            theme = Theme(ThemeType.LIGHT),
+            theme = Theme(ThemeType.SUN_RISE),
             buildVersion = "1.0.0",
             navigateCalendar = {},
             navigateSetting = {},

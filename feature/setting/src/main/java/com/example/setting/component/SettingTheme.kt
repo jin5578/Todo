@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,12 +30,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.design_system.theme.TodoTheme
-import com.example.design_system.theme.onSurfaceDark
-import com.example.design_system.theme.onSurfaceLight
-import com.example.design_system.theme.primaryDark
-import com.example.design_system.theme.primaryLight
-import com.example.design_system.theme.surfaceDark
-import com.example.design_system.theme.surfaceLight
+import com.example.design_system.theme.onSurfaceCharcoalBlack
+import com.example.design_system.theme.onSurfaceDeepForestGreen
+import com.example.design_system.theme.onSurfaceMidnightBlue
+import com.example.design_system.theme.onSurfaceMistGray
+import com.example.design_system.theme.onSurfaceSkyBlue
+import com.example.design_system.theme.onSurfaceSunRise
+import com.example.design_system.theme.primaryCharcoalBlack
+import com.example.design_system.theme.primaryDeepForestGreen
+import com.example.design_system.theme.primaryMidnightBlue
+import com.example.design_system.theme.primaryMistGray
+import com.example.design_system.theme.primarySkyBlue
+import com.example.design_system.theme.primarySunRise
+import com.example.design_system.theme.surfaceCharcoalBlack
+import com.example.design_system.theme.surfaceDeepForestGreen
+import com.example.design_system.theme.surfaceMidnightBlue
+import com.example.design_system.theme.surfaceMistGray
+import com.example.design_system.theme.surfaceSkyBlue
+import com.example.design_system.theme.surfaceSunRise
 import com.example.model.ThemeType
 import com.example.setting.R
 import com.example.setting.model.ThemeColor
@@ -43,33 +57,53 @@ internal fun SettingTheme(
     initTheme: ThemeType,
     onSelect: (ThemeType) -> Unit,
 ) {
+    val scrollState = rememberScrollState()
+
     var selectedTheme by remember { mutableStateOf(initTheme) }
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
 
     val themeColors = listOf(
         ThemeColor(
-            backgroundColor = if (isSystemInDarkTheme) surfaceDark else surfaceLight,
-            textColor = if (isSystemInDarkTheme) onSurfaceDark else onSurfaceLight,
-            dividerColor = if (isSystemInDarkTheme) primaryDark else primaryLight,
+            backgroundColor = if (isSystemInDarkTheme) surfaceMidnightBlue else surfaceSunRise,
+            textColor = if (isSystemInDarkTheme) onSurfaceMidnightBlue else onSurfaceSunRise,
+            dividerColor = if (isSystemInDarkTheme) primaryMidnightBlue else primarySunRise,
         ),
         ThemeColor(
-            backgroundColor = surfaceLight,
-            textColor = onSurfaceLight,
-            dividerColor = primaryLight
+            backgroundColor = surfaceSunRise,
+            textColor = onSurfaceSunRise,
+            dividerColor = primarySunRise,
         ),
         ThemeColor(
-            backgroundColor = surfaceDark,
-            textColor = onSurfaceDark,
-            dividerColor = primaryDark
+            backgroundColor = surfaceSkyBlue,
+            textColor = onSurfaceSkyBlue,
+            dividerColor = primarySkyBlue,
+        ),
+        ThemeColor(
+            backgroundColor = surfaceMistGray,
+            textColor = onSurfaceMistGray,
+            dividerColor = primaryMistGray,
+        ),
+        ThemeColor(
+            backgroundColor = surfaceMidnightBlue,
+            textColor = onSurfaceMidnightBlue,
+            dividerColor = primaryMidnightBlue,
+        ),
+        ThemeColor(
+            backgroundColor = surfaceCharcoalBlack,
+            textColor = onSurfaceCharcoalBlack,
+            dividerColor = primaryCharcoalBlack,
+        ),
+        ThemeColor(
+            backgroundColor = surfaceDeepForestGreen,
+            textColor = onSurfaceDeepForestGreen,
+            dividerColor = primaryDeepForestGreen,
         ),
     )
 
     Column(
         modifier = Modifier.fillMaxWidth()
             .padding(
-                start = 20.dp,
-                end = 20.dp,
                 bottom = 30.dp
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -81,11 +115,11 @@ internal fun SettingTheme(
             color = MaterialTheme.colorScheme.onSurface,
         )
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.horizontalScroll(scrollState).padding(horizontal = 20.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             ThemeType.entries.forEachIndexed { index, type ->
                 ThemeItem(
-                    modifier = Modifier.weight(1f),
                     title = type.themeName,
                     themeColor = themeColors[index],
                     isSelected = selectedTheme == type,
@@ -100,7 +134,7 @@ internal fun SettingTheme(
 
 @Composable
 private fun ThemeItem(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     title: String,
     themeColor: ThemeColor,
     isSelected: Boolean,
@@ -123,7 +157,7 @@ private fun ThemeItem(
                 style = TodoTheme.typography.headlineSmall,
                 color = themeColor.textColor,
                 modifier = Modifier.padding(
-                    horizontal = 4.dp,
+                    horizontal = 24.dp,
                     vertical = 16.dp
                 )
             )

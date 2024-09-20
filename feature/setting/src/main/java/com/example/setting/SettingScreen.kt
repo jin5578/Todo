@@ -244,7 +244,7 @@ private fun SettingScreenPreview() {
         )
 
         SettingScreen(
-            theme = Theme(ThemeType.DARK),
+            theme = Theme(ThemeType.SUN_RISE),
             navigateInfo = {},
             popBackStack = {},
             openUrl = {},

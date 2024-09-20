@@ -60,8 +60,12 @@ internal class DefaultSystemRepository @Inject constructor(
 
     private fun String.toTheme() = when (this) {
         "system" -> Theme(type = ThemeType.SYSTEM)
-        "light" -> Theme(type = ThemeType.LIGHT)
-        else -> Theme(type = ThemeType.DARK)
+        "sunRise" -> Theme(type = ThemeType.SUN_RISE)
+        "skyBlue" -> Theme(type = ThemeType.SKY_BLUE)
+        "mistGray" -> Theme(type = ThemeType.MIST_GRAY)
+        "midnightBlue" -> Theme(type = ThemeType.MIDNIGHT_BLUE)
+        "charcoalBlack" -> Theme(type = ThemeType.CHARCOAL_BLACK)
+        else -> Theme(type = ThemeType.DEEP_FOREST_GREEN)
     }
 
     private fun String.toSortTask() = when (this) {
