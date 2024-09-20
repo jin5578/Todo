@@ -7,8 +7,10 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.add_task.navigation.navigateAddTask
 import com.example.navigation.Route
 import com.example.setting.navigation.navigateSetting
+import java.time.LocalDate
 
 internal class MainNavigator(
     val navController: NavHostController
@@ -20,6 +22,10 @@ internal class MainNavigator(
 
     fun navigateSetting() {
         navController.navigateSetting()
+    }
+
+    fun navigateAddTask(date: LocalDate = LocalDate.now()) {
+        navController.navigateAddTask(date)
     }
 
     private fun popBackStack() {

@@ -16,7 +16,9 @@ sealed interface Route {
     data object Info : Route
 
     @Serializable
-    data object AddTask : Route
+    data class AddTask(
+        val date: String
+    ) : Route
 
     @Serializable
     data object CompletedTask : Route
