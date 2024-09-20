@@ -6,6 +6,7 @@ import com.example.database.datasource.TaskDatabaseDataSource
 import com.example.model.Task
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.time.LocalDate
 import javax.inject.Inject
 
 internal class DefaultTaskRepository @Inject constructor(
@@ -17,6 +18,10 @@ internal class DefaultTaskRepository @Inject constructor(
                 entity.toTask()
             }
         }
+    }
+
+    override fun getTaskCountByDate(date: LocalDate): Flow<Int> {
+        return taskDataSource.getTaskCountByDate(date)
     }
 
     override suspend fun getTaskById(taskId: Long): Task {

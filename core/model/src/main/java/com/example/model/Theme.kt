@@ -1,13 +1,13 @@
 package com.example.model
 
 enum class ThemeType(val themeName: String) {
-    SYSTEM("system"),
-    SUN_RISE("sunRise"),
-    SKY_BLUE("skyBlue"),
-    MIST_GRAY("mistGray"),
-    MIDNIGHT_BLUE("midnightBlue"),
-    CHARCOAL_BLACK("charcoalBlack"),
-    DEEP_FOREST_GREEN("deepForestGreen"),
+    SYSTEM("System"),
+    SUN_RISE("SunRise"),
+    SKY_BLUE("SkyBlue"),
+    MIST_GRAY("MistGray"),
+    MIDNIGHT_BLUE("MidnightBlue"),
+    CHARCOAL_BLACK("CharcoalBlack"),
+    DEEP_FOREST_GREEN("DeepForestGreen"),
 }
 
 data class Theme(

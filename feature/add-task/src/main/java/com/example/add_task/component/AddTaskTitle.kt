@@ -1,0 +1,98 @@
+package com.example.add_task.component
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.add_task.R
+import com.example.design_system.theme.TodoTheme
+import com.example.design_system.theme.priorityColors
+
+@Composable
+internal fun AddTaskTitle(
+    modifier: Modifier = Modifier,
+    focusRequester: FocusRequester,
+    backgroundColor: Color,
+    taskText: String,
+    onValueChange: (String) -> Unit,
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.title),
+            style = TodoTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        Box(
+            modifier = Modifier.fillMaxWidth()
+                .background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            TextField(
+                modifier = Modifier.fillMaxWidth()
+                    .focusRequester(focusRequester)
+                    .padding(horizontal = 8.dp),
+                value = taskText,
+                singleLine = true,
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = MaterialTheme.colorScheme.surfaceDim,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceDim,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledContainerColor = MaterialTheme.colorScheme.surfaceDim,
+                    cursorColor = MaterialTheme.colorScheme.primary,
+                ),
+                textStyle = TodoTheme.typography.taskTextStyle,
+                onValueChange = { onValueChange(it) },
+                placeholder = {
+                    Text(
+                        text = stringResource(id = R.string.please_enter_what_you_need_to_do),
+                        color = MaterialTheme.colorScheme.secondary,
+                        style = TodoTheme.typography.taskTextStyle
+                    )
+                },
+                shape = RoundedCornerShape(8.dp),
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    imeAction = ImeAction.Done
+                )
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun AddTaskTitlePreview() {
+    TodoTheme {
+        AddTaskTitle(
+            focusRequester = FocusRequester(),
+            backgroundColor = priorityColors[0],
+            taskText = "Task",
+            onValueChange = {}
+
+        )
+    }
+}

@@ -6,6 +6,7 @@ import com.example.model.SortTask
 import com.example.model.Theme
 import com.example.model.ThemeType
 import com.example.model.TimePicker
+import com.example.model.addtask.AddTaskSystem
 import com.example.model.home.HomeSystem
 import com.example.model.setting.SettingSystem
 import kotlinx.coroutines.flow.Flow
@@ -50,6 +51,15 @@ internal class DefaultSystemRepository @Inject constructor(
         }
     }
 
+    override fun getAddTaskSystem(): Flow<AddTaskSystem> {
+        return systemDataSource.systemData.map {
+            val timePicker = it.timePicker.toTimePicker()
+            AddTaskSystem(
+                timePicker = timePicker
+            )
+        }
+    }
+
     override suspend fun updateSortTask(sortTask: SortTask) {
         systemDataSource.updateSortTask(sortTask.type)
     }
@@ -59,12 +69,12 @@ internal class DefaultSystemRepository @Inject constructor(
     }
 
     private fun String.toTheme() = when (this) {
-        "system" -> Theme(type = ThemeType.SYSTEM)
-        "sunRise" -> Theme(type = ThemeType.SUN_RISE)
-        "skyBlue" -> Theme(type = ThemeType.SKY_BLUE)
-        "mistGray" -> Theme(type = ThemeType.MIST_GRAY)
-        "midnightBlue" -> Theme(type = ThemeType.MIDNIGHT_BLUE)
-        "charcoalBlack" -> Theme(type = ThemeType.CHARCOAL_BLACK)
+        "System" -> Theme(type = ThemeType.SYSTEM)
+        "SunRise" -> Theme(type = ThemeType.SUN_RISE)
+        "SkyBlue" -> Theme(type = ThemeType.SKY_BLUE)
+        "MistGray" -> Theme(type = ThemeType.MIST_GRAY)
+        "MidnightBlue" -> Theme(type = ThemeType.MIDNIGHT_BLUE)
+        "CharcoalBlack" -> Theme(type = ThemeType.CHARCOAL_BLACK)
         else -> Theme(type = ThemeType.DEEP_FOREST_GREEN)
     }
 
@@ -78,7 +88,7 @@ internal class DefaultSystemRepository @Inject constructor(
     }
 
     private fun String.toTimePicker() = when (this) {
-        "scrollTimePicker" -> TimePicker.SCROLL_TIME_PICKER
+        "ScrollTimePicker" -> TimePicker.SCROLL_TIME_PICKER
         else -> TimePicker.CLOCK_TIME_PICKER
     }
 }

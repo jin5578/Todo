@@ -113,8 +113,6 @@ private fun SettingScreen(
     onThemeChanged: (ThemeType) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
-    val context = LocalContext.current
-
     val scrollState = rememberScrollState()
 
     val bottomSheetState = rememberModalBottomSheetState()
@@ -175,7 +173,7 @@ private fun SettingScreen(
                 }
             )
         }
-    ) { innerPadding ->
+    ) { paddingValues ->
         if (showBottomSheet != BottomSheetType.IDLE) {
             ModalBottomSheet(
                 onDismissRequest = { showBottomSheet = BottomSheetType.IDLE },
@@ -198,7 +196,7 @@ private fun SettingScreen(
         }
         Column(
             modifier = Modifier.fillMaxSize()
-                .padding(innerPadding),
+                .padding(paddingValues),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -223,26 +221,6 @@ private fun SettingScreen(
 @Composable
 private fun SettingScreenPreview() {
     TodoTheme {
-        val infoCategory = persistentListOf(
-            CategoryItemUiState(
-                title = R.string.about,
-                icon = R.drawable.svg_information,
-                onClick = {}
-            ),
-            CategoryItemUiState(
-                title = R.string.github,
-                icon = R.drawable.svg_github,
-                onClick = {}
-            )
-        )
-        val systemCategory = persistentListOf(
-            CategoryItemUiState(
-                title = R.string.theme,
-                icon = R.drawable.svg_theme,
-                onClick = {},
-            )
-        )
-
         SettingScreen(
             theme = Theme(ThemeType.SUN_RISE),
             navigateInfo = {},

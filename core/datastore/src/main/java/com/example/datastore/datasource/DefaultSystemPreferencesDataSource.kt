@@ -47,8 +47,8 @@ class DefaultSystemPreferencesDataSource @Inject constructor(
     companion object {
         private val DEFAULT_SLEEP_TIME = LocalTime.of(23, 59).toString()
         private const val DEFAULT_SORT_TASK = "Creation Time (Latest at Top)"
-        private const val DEFAULT_THEME = "system"
-        private const val DEFAULT_TIME_PICKER = "clockTimePicker"
+        private const val DEFAULT_THEME = "System"
+        private const val DEFAULT_TIME_PICKER = "ClockTimePicker"
         private const val DEFAULT_BUILD_VERSION = "1.0.0"
     }
 }

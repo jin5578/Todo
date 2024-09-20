@@ -237,7 +237,7 @@ private fun HomeScreen(
                 )
             }
         }
-    ) { innerPadding ->
+    ) { paddingValues ->
         if (isShowSortTaskDialog) {
             SortTaskDialog(
                 initSortTask = sortTask,
@@ -250,7 +250,7 @@ private fun HomeScreen(
         }
 
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(paddingValues)
                 .background(MaterialTheme.colorScheme.surface),
         ) {
             Row(
