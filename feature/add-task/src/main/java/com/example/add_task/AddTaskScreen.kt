@@ -1,5 +1,6 @@
 package com.example.add_task
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,12 +38,11 @@ import com.example.add_task.component.AddTaskDate
 import com.example.add_task.component.AddTaskLoading
 import com.example.add_task.component.AddTaskTitle
 import com.example.add_task.model.AddTaskUiState
-import com.example.add_task.model.DateOptionUiState
+import com.example.design_system.component.DatePickerDialog
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
 import com.example.model.Priority
 import com.example.model.TimePicker
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
 import java.time.LocalDate
@@ -142,7 +142,13 @@ private fun AddTaskScreen(
         }
     ) { paddingValues ->
         if (isShowDatePickerDialog) {
-
+            DatePickerDialog(
+                defaultDay = taskDate,
+                onClose = { day ->
+                    taskDate = day
+                    isShowDatePickerDialog = false
+                }
+            )
         }
 
         LaunchedEffect(
@@ -156,7 +162,8 @@ private fun AddTaskScreen(
         Column(
             modifier = Modifier.fillMaxSize()
                 .padding(paddingValues)
-                .verticalScroll(scrollState),
+                .verticalScroll(scrollState)
+                .background(MaterialTheme.colorScheme.surface),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {

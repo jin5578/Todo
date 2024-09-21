@@ -2,4 +2,5 @@
 <resources>
     <string name="sort_tasks_by">Sort Tasks by</string>
     <string name="select">Select</string>
+    <string name="calendar">Calendar</string>
 </resources>

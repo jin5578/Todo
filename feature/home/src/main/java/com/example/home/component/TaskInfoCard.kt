@@ -51,7 +51,7 @@ internal fun TaskInfoCard(
             Text(
                 text = title,
                 style = TodoTheme.typography.infoTextStyle,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Spacer(modifier = Modifier.height(4.dp))
             Row(
@@ -63,13 +63,13 @@ internal fun TaskInfoCard(
                         modifier = Modifier.size(14.dp),
                         contentDescription = null,
                         painter = painterResource(id = icon),
-                        tint = MaterialTheme.colorScheme.onSurface,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
                 Text(
                     text = content,
                     style = TodoTheme.typography.infoDescTextStyle,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
         }
@@ -85,7 +85,7 @@ private fun TaskInfoCardPreview() {
             title = "Completed",
             icon = R.drawable.svg_verify,
             content = "2 Tasks",
-            backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+            backgroundColor = MaterialTheme.colorScheme.primaryContainer,
             onClick = { }
         )
     }

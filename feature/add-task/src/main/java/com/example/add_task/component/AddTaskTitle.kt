@@ -57,19 +57,20 @@ internal fun AddTaskTitle(
                 value = taskText,
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surfaceDim,
+                    focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                     focusedIndicatorColor = Color.Transparent,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceDim,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                     unfocusedIndicatorColor = Color.Transparent,
-                    disabledContainerColor = MaterialTheme.colorScheme.surfaceDim,
-                    cursorColor = MaterialTheme.colorScheme.primary,
+                    disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    focusedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    cursorColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 ),
                 textStyle = TodoTheme.typography.taskTextStyle,
                 onValueChange = { onValueChange(it) },
                 placeholder = {
                     Text(
                         text = stringResource(id = R.string.please_enter_what_you_need_to_do),
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
                         style = TodoTheme.typography.taskTextStyle
                     )
                 },

@@ -30,11 +30,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.design_system.theme.TodoTheme
-import com.example.design_system.theme.onSurfaceCharcoalBlack
-import com.example.design_system.theme.onSurfaceDeepForestGreen
+import com.example.design_system.theme.onPrimaryCharcoalBlack
+import com.example.design_system.theme.onPrimaryDeepForestGreen
+import com.example.design_system.theme.onPrimaryMidnightBlue
+import com.example.design_system.theme.onPrimaryMistGray
+import com.example.design_system.theme.onPrimarySkyBlue
+import com.example.design_system.theme.onPrimarySunRise
 import com.example.design_system.theme.onSurfaceMidnightBlue
-import com.example.design_system.theme.onSurfaceMistGray
-import com.example.design_system.theme.onSurfaceSkyBlue
 import com.example.design_system.theme.onSurfaceSunRise
 import com.example.design_system.theme.primaryCharcoalBlack
 import com.example.design_system.theme.primaryDeepForestGreen
@@ -42,11 +44,7 @@ import com.example.design_system.theme.primaryMidnightBlue
 import com.example.design_system.theme.primaryMistGray
 import com.example.design_system.theme.primarySkyBlue
 import com.example.design_system.theme.primarySunRise
-import com.example.design_system.theme.surfaceCharcoalBlack
-import com.example.design_system.theme.surfaceDeepForestGreen
 import com.example.design_system.theme.surfaceMidnightBlue
-import com.example.design_system.theme.surfaceMistGray
-import com.example.design_system.theme.surfaceSkyBlue
 import com.example.design_system.theme.surfaceSunRise
 import com.example.model.ThemeType
 import com.example.setting.R
@@ -70,33 +68,33 @@ internal fun SettingTheme(
             dividerColor = if (isSystemInDarkTheme) primaryMidnightBlue else primarySunRise,
         ),
         ThemeColor(
-            backgroundColor = surfaceSunRise,
-            textColor = onSurfaceSunRise,
+            backgroundColor = primarySunRise,
+            textColor = onPrimarySunRise,
             dividerColor = primarySunRise,
         ),
         ThemeColor(
-            backgroundColor = surfaceSkyBlue,
-            textColor = onSurfaceSkyBlue,
+            backgroundColor = primarySkyBlue,
+            textColor = onPrimarySkyBlue,
             dividerColor = primarySkyBlue,
         ),
         ThemeColor(
-            backgroundColor = surfaceMistGray,
-            textColor = onSurfaceMistGray,
+            backgroundColor = primaryMistGray,
+            textColor = onPrimaryMistGray,
             dividerColor = primaryMistGray,
         ),
         ThemeColor(
-            backgroundColor = surfaceMidnightBlue,
-            textColor = onSurfaceMidnightBlue,
+            backgroundColor = primaryMidnightBlue,
+            textColor = onPrimaryMidnightBlue,
             dividerColor = primaryMidnightBlue,
         ),
         ThemeColor(
-            backgroundColor = surfaceCharcoalBlack,
-            textColor = onSurfaceCharcoalBlack,
+            backgroundColor = primaryCharcoalBlack,
+            textColor = onPrimaryCharcoalBlack,
             dividerColor = primaryCharcoalBlack,
         ),
         ThemeColor(
-            backgroundColor = surfaceDeepForestGreen,
-            textColor = onSurfaceDeepForestGreen,
+            backgroundColor = primaryDeepForestGreen,
+            textColor = onPrimaryDeepForestGreen,
             dividerColor = primaryDeepForestGreen,
         ),
     )
@@ -112,7 +110,7 @@ internal fun SettingTheme(
         Text(
             text = stringResource(R.string.choose_theme_style),
             style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
         )
         Row(
             modifier = Modifier.horizontalScroll(scrollState).padding(horizontal = 20.dp),

@@ -82,7 +82,7 @@ internal fun TaskCard(
         Box(
             modifier = Modifier.fillMaxWidth()
                 .background(
-                    MaterialTheme.colorScheme.surfaceDim,
+                    MaterialTheme.colorScheme.primary,
                     RoundedCornerShape(
                         topEnd = 8.dp,
                         bottomEnd = 8.dp
@@ -110,14 +110,14 @@ internal fun TaskCard(
                             modifier = Modifier.size(20.dp),
                             painter = painterResource(id = R.drawable.svg_check_circle),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primaryContainer
                         )
                     } else {
                         Box(
                             modifier = Modifier.size(20.dp)
                                 .border(
                                     width = 2.dp,
-                                    color = MaterialTheme.colorScheme.primary,
+                                    color = MaterialTheme.colorScheme.primaryContainer,
                                     shape = CircleShape
                                 ),
                             contentAlignment = Alignment.Center,
@@ -135,7 +135,7 @@ internal fun TaskCard(
                             .basicMarquee(),
                         text = task.title,
                         style = TodoTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Row(
@@ -146,7 +146,7 @@ internal fun TaskCard(
                             modifier = Modifier.size(15.dp),
                             painter = painterResource(id = R.drawable.svg_clock),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurface
+                            tint = MaterialTheme.colorScheme.onPrimary
                         )
                         Text(
                             text = getTaskTotalTime(
@@ -154,7 +154,7 @@ internal fun TaskCard(
                                 task.endTime
                             ),
                             style = TodoTheme.typography.taskDescTextStyle,
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }
@@ -165,7 +165,7 @@ internal fun TaskCard(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = MaterialTheme.colorScheme.onPrimary,
                             contentDescription = null
                         )
                     }

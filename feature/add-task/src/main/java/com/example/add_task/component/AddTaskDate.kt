@@ -27,12 +27,12 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.add_task.R
 import com.example.add_task.model.DateOptionUiState
 import com.example.design_system.theme.TodoTheme
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -93,7 +93,8 @@ internal fun AddTaskDate(
                 )
                 Text(
                     text = date.format(dateFormat),
-                    style = TodoTheme.typography.infoDescTextStyle
+                    style = TodoTheme.typography.infoDescTextStyle,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
@@ -102,7 +103,7 @@ internal fun AddTaskDate(
             modifier = Modifier.fillMaxWidth()
                 .border(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                     shape = RoundedCornerShape(8.dp)
                 ),
             horizontalArrangement = Arrangement.Center,
@@ -165,8 +166,11 @@ private fun AddTaskDateItem(
     ) {
         Text(
             text = stringResource(title),
-            color = MaterialTheme.colorScheme.onSurface,
-            style = TodoTheme.typography.infoDescTextStyle,
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            style = if (isSelected)
+                TodoTheme.typography.infoDescTextStyle.copy(fontWeight = FontWeight.Bold)
+            else
+                TodoTheme.typography.infoDescTextStyle,
         )
     }
 }

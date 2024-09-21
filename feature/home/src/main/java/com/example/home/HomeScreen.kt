@@ -2,7 +2,6 @@ package com.example.home
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -250,8 +249,7 @@ private fun HomeScreen(
         }
 
         Column(
-            modifier = Modifier.padding(paddingValues)
-                .background(MaterialTheme.colorScheme.surface),
+            modifier = Modifier.padding(paddingValues),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth()
@@ -270,7 +268,7 @@ private fun HomeScreen(
                     title = stringResource(R.string.completed),
                     icon = R.drawable.svg_verify,
                     content = "${completedTasks.size} Tasks",
-                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateCompletedTask,
                 )
                 TaskInfoCard(
@@ -280,7 +278,7 @@ private fun HomeScreen(
                         },
                     title = stringResource(R.string.incomplete),
                     content = "${incompleteTasks.size} Tasks",
-                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateIncompleteTask,
                 )
             }
@@ -301,7 +299,7 @@ private fun HomeScreen(
                         },
                     title = stringResource(R.string.this_week),
                     content = "${completedTasks.size} Tasks",
-                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateThisWeekTask,
                 )
                 TaskInfoCard(
@@ -311,7 +309,7 @@ private fun HomeScreen(
                         },
                     title = stringResource(R.string.all),
                     content = "${incompleteTasks.size} Tasks",
-                    backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateAllTask,
                 )
             }
@@ -329,14 +327,14 @@ private fun HomeScreen(
                         modifier = Modifier.padding(16.dp),
                         text = stringResource(R.string.today_tasks),
                         style = TodoTheme.typography.headlineMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = MaterialTheme.colorScheme.primary,
                     )
 
                     IconButton(onClick = { isShowSortTaskDialog = true }) {
                         Icon(
                             imageVector = Icons.Default.FilterList,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurface
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 }

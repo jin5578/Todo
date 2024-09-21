@@ -37,7 +37,7 @@ internal fun <T> SwipeActionBox(
     item: T,
     backgroundColor: Color = MaterialTheme.colorScheme.error,
     icon: ImageVector = Icons.Default.Delete,
-    iconTint: Color = MaterialTheme.colorScheme.surface,
+    iconTint: Color = MaterialTheme.colorScheme.onError,
     animationDuration: Int = 300,
     onDeleteAction: (T) -> Unit,
     content: @Composable (T) -> Unit

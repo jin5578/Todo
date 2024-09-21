@@ -69,7 +69,7 @@ private fun CategoryItem(
 ) {
     Row(modifier = Modifier.fillMaxWidth()
         .clickable { onClick() }
-        .background(MaterialTheme.colorScheme.surfaceContainer)
+        .background(MaterialTheme.colorScheme.secondaryContainer)
         .padding(
             horizontal = 16.dp,
             vertical = 12.dp
@@ -81,19 +81,19 @@ private fun CategoryItem(
             modifier = Modifier.size(20.dp),
             painter = painterResource(icon),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurface
+            tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Text(
             modifier = Modifier.weight(1f),
             text = stringResource(title),
             style = TodoTheme.typography.settingItemTextStyle,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_right_twin),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurface
+            tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }
 }

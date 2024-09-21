@@ -36,7 +36,7 @@ internal fun EmptyTask() {
             Text(
                 text = stringResource(R.string.no_tasks),
                 style = TodoTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }

@@ -226,12 +226,12 @@ val surfaceContainerDeepForestGreen = Color(0xFF222017)
 val surfaceContainerHighDeepForestGreen = Color(0xFF2D2A21)
 val surfaceContainerHighestDeepForestGreen = Color(0xFF38352B)
 
-val SlateGray = Color(0xFF708090)
-val SkyBlue = Color(0xFF87CEEB)
-val VividRed = Color(0xFFFF0000)
+val Red = Color(0xFFFF0000)
+val Yellow = Color(0xFFFFFF00)
+val Green = Color(0xFF008000)
 
 val priorityColors = listOf(
-    SlateGray,
-    SkyBlue,
-    VividRed,
+    Green,
+    Yellow,
+    Red,
 )
