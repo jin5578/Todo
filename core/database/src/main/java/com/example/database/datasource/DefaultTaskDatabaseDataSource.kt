@@ -3,7 +3,6 @@ package com.example.database.datasource
 import com.example.database.TaskDatabase
 import com.example.database.TaskEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import javax.inject.Inject
@@ -21,6 +20,10 @@ class DefaultTaskDatabaseDataSource @Inject constructor(
 
     override suspend fun getTaskById(taskId: Long): TaskEntity {
         return taskDatabase.taskDao().getTaskById(taskId)
+    }
+
+    override suspend fun insertTask(taskEntity: TaskEntity) {
+        return taskDatabase.taskDao().insertTask(taskEntity)
     }
 
     override suspend fun updateTask(taskEntity: TaskEntity) {

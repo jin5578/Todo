@@ -30,6 +30,8 @@ data class TaskEntity(
     val endTime: LocalTime = LocalTime.now(),
     @ColumnInfo(name = "date")
     val date: LocalDate = LocalDate.now(),
+    @ColumnInfo(name = "memo")
+    val memo: String = "",
     @ColumnInfo(name = "priority")
     val priority: Int = 0,
 )

@@ -425,6 +425,7 @@ fun HomeScreenPreview() {
                 startTime = LocalTime.now(),
                 endTime = LocalTime.now(),
                 date = LocalDate.now(),
+                memo = "memo",
                 priority = 1
             )
         )

@@ -8,6 +8,7 @@ interface TaskRepository {
     fun getTodayTasks(): Flow<List<Task>>
     fun getTaskCountByDate(date: LocalDate): Flow<Int>
     suspend fun getTaskById(taskId: Long): Task
+    suspend fun insertTask(task: Task)
     suspend fun updateTask(task: Task)
     suspend fun deleteTask(task: Task)
 }

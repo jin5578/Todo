@@ -31,7 +31,7 @@ internal fun AddTaskTitle(
     modifier: Modifier = Modifier,
     focusRequester: FocusRequester,
     backgroundColor: Color,
-    taskText: String,
+    taskTitle: String,
     onValueChange: (String) -> Unit,
 ) {
     Column(
@@ -54,7 +54,7 @@ internal fun AddTaskTitle(
                 modifier = Modifier.fillMaxWidth()
                     .focusRequester(focusRequester)
                     .padding(horizontal = 8.dp),
-                value = taskText,
+                value = taskTitle,
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -91,9 +91,8 @@ private fun AddTaskTitlePreview() {
         AddTaskTitle(
             focusRequester = FocusRequester(),
             backgroundColor = priorityColors[0],
-            taskText = "Task",
+            taskTitle = "Task",
             onValueChange = {}
-
         )
     }
 }

@@ -1,7 +1,5 @@
 package com.example.design_system.component
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,7 +44,8 @@ import java.util.Locale
 @Composable
 fun DatePickerDialog(
     defaultDay: LocalDate = LocalDate.now(),
-    onClose: (LocalDate) -> Unit
+    onClose: (LocalDate) -> Unit,
+    onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val scope = rememberCoroutineScope()
 
@@ -73,25 +72,24 @@ fun DatePickerDialog(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
             )
         ) {
             Column {
                 Row(
                     modifier = Modifier.fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surface)
                         .padding(16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = stringResource(R.string.calendar),
                         style = TodoTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
                     )
                     Text(
                         text = selectedDay.format(dateFormat),
                         style = TodoTheme.typography.infoDescTextStyle,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
                     )
                 }
                 Column(
@@ -107,7 +105,6 @@ fun DatePickerDialog(
                         Locale.US
                     )
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -126,12 +123,12 @@ fun DatePickerDialog(
                                 },
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar_arrow_left),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurface
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                         Text(
                             text = title,
                             style = TodoTheme.typography.headlineMedium,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
                         )
                         Icon(
                             modifier = Modifier.size(32.dp)
@@ -148,15 +145,36 @@ fun DatePickerDialog(
                                 },
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar_arrow_right),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurface
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     }
-                    /*HorizontalCalendar(
+                    HorizontalCalendar(
                         state = calendarState,
                         dayContent = { day ->
-
+                            MonthDay(
+                                day = day,
+                                isSelected = selectedDay == day.date,
+                                onClick = { selectedDay = it },
+                                onShowMessageSnackBar = onShowMessageSnackBar,
+                            )
                         },
-                    )*/
+                        monthHeader = { month ->
+                            val daysOfWeek = month.weekDays.first().map {
+                                it.date.dayOfWeek
+                            }
+                            DaysOfWeek(daysOfWeek)
+                        }
+                    )
+                    Text(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                            .align(Alignment.End)
+                            .clickable {
+                                onClose(selectedDay)
+                            },
+                        text = stringResource(R.string.done),
+                        style = TodoTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
                 }
             }
         }
@@ -169,7 +187,8 @@ private fun DatePickerDialogPreview() {
     TodoTheme {
         DatePickerDialog(
             defaultDay = LocalDate.now(),
-            onClose = {}
+            onClose = {},
+            onShowMessageSnackBar = {},
         )
     }
 }

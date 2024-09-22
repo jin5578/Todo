@@ -187,6 +187,7 @@ private fun TaskCardPreview() {
             startTime = LocalTime.now(),
             endTime = LocalTime.now(),
             date = LocalDate.now(),
+            memo = "memo",
             priority = 2
         )
         TaskCard(

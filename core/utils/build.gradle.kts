@@ -30,6 +30,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:model"))
+
     implementation(libs.inject)
 
     implementation(libs.coroutines.android)

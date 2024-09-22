@@ -2,8 +2,11 @@ package com.example.add_task
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.add_task.model.AddTaskUiEffect
 import com.example.add_task.model.AddTaskUiState
 import com.example.domain.usecase.GetAddTaskDataUseCase
+import com.example.domain.usecase.InsertTaskUseCase
+import com.example.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
-    private val getAddTaskDataUseCase: GetAddTaskDataUseCase
+    private val getAddTaskDataUseCase: GetAddTaskDataUseCase,
+    private val insertTaskUseCase: InsertTaskUseCase,
 ) : ViewModel() {
     private val _errorFlow: MutableSharedFlow<Throwable> = MutableSharedFlow<Throwable>()
     val errorFlow = _errorFlow.asSharedFlow()
@@ -25,6 +29,10 @@ class AddTaskViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<AddTaskUiState> =
         MutableStateFlow(AddTaskUiState.Loading)
     val uiState = _uiState.asStateFlow()
+
+    private val _uiEffect: MutableStateFlow<AddTaskUiEffect> =
+        MutableStateFlow(AddTaskUiEffect.Idle)
+    val uiEffect = _uiEffect.asStateFlow()
 
     fun fetchAddTask(date: LocalDate) {
         viewModelScope.launch {
@@ -40,5 +48,17 @@ class AddTaskViewModel @Inject constructor(
                 _uiState.value = it
             }
         }
+    }
+
+    fun insertTask(task: Task) {
+        viewModelScope.launch {
+            insertTaskUseCase(task)
+            _uiEffect.value =
+                AddTaskUiEffect.SuccessInsertTask(SUCCESSFULLY_ADDED_THE_SCHEDULE)
+        }
+    }
+
+    companion object {
+        private const val SUCCESSFULLY_ADDED_THE_SCHEDULE = "Successfully added the schedule"
     }
 }

@@ -39,8 +39,7 @@ fun SortTaskDialog(
         Card(
             modifier = Modifier.fillMaxWidth(1f),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
             )
         ) {
             Text(
@@ -52,6 +51,7 @@ fun SortTaskDialog(
                 ),
                 text = stringResource(R.string.sort_tasks_by),
                 style = TodoTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
             )
 
             SortTask.entries.forEach {
@@ -71,7 +71,7 @@ fun SortTaskDialog(
                     .align(Alignment.End),
                 text = stringResource(R.string.select),
                 style = TodoTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.onSecondaryContainer
             )
         }
     }
@@ -90,13 +90,13 @@ private fun CustomRadioButton(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         RadioButton(
-            colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary),
+            colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.onSecondaryContainer),
             selected = isSelected,
             onClick = { onClick() })
         Text(
             text = label,
             style = TodoTheme.typography.taskTextStyle,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            color = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }
 }

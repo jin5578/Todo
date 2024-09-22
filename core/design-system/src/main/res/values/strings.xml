@@ -3,4 +3,6 @@
     <string name="sort_tasks_by">Sort Tasks by</string>
     <string name="select">Select</string>
     <string name="calendar">Calendar</string>
+    <string name="done">Done</string>
+    <string name="past_dates_can_not_be_selected">Past dates cannot be selected.</string>
 </resources>

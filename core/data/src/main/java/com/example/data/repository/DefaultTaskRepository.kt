@@ -28,6 +28,11 @@ internal class DefaultTaskRepository @Inject constructor(
         return taskDataSource.getTaskById(taskId).toTask()
     }
 
+    override suspend fun insertTask(task: Task) {
+        val entity = task.toTaskEntity()
+        return taskDataSource.insertTask(entity)
+    }
+
     override suspend fun updateTask(task: Task) {
         val entity = task.toTaskEntity()
         taskDataSource.updateTask(entity)
@@ -46,6 +51,7 @@ internal class DefaultTaskRepository @Inject constructor(
         startTime = this.startTime,
         endTime = this.endTime,
         date = this.date,
+        memo = this.memo,
         priority = this.priority
     )
 
@@ -57,6 +63,7 @@ internal class DefaultTaskRepository @Inject constructor(
         startTime = this.startTime,
         endTime = this.endTime,
         date = this.date,
+        memo = this.memo,
         priority = this.priority
     )
 }

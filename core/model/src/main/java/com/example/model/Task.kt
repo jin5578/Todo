@@ -11,5 +11,6 @@ data class Task(
     val startTime: LocalTime,
     val endTime: LocalTime,
     val date: LocalDate,
+    val memo: String,
     val priority: Int = 0,
 )
