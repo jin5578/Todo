@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.add_task.navigation.navigateAddTask
 import com.example.navigation.Route
 import com.example.setting.navigation.navigateSetting
+import com.example.tasks.navigation.navigateTasks
 import java.time.LocalDate
 
 internal class MainNavigator(
@@ -26,6 +27,10 @@ internal class MainNavigator(
 
     fun navigateAddTask(date: LocalDate = LocalDate.now()) {
         navController.navigateAddTask(date)
+    }
+
+    fun navigateTasks(title: String) {
+        navController.navigateTasks(title)
     }
 
     private fun popBackStack() {

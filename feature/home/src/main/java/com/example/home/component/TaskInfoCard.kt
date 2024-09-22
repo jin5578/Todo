@@ -31,13 +31,13 @@ internal fun TaskInfoCard(
     icon: Int? = null,
     content: String,
     backgroundColor: Color,
-    onClick: () -> Unit,
+    onClick: (String) -> Unit,
 ) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = backgroundColor),
-        onClick = onClick
+        onClick = { onClick(title) }
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()

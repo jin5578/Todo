@@ -21,16 +21,9 @@ sealed interface Route {
     ) : Route
 
     @Serializable
-    data object CompletedTask : Route
-
-    @Serializable
-    data object IncompleteTask : Route
-
-    @Serializable
-    data object ThisWeekTask : Route
-
-    @Serializable
-    data object AllTask : Route
+    data class Tasks(
+        val title: String
+    ) : Route
 
     @Serializable
     data object EditTask : Route

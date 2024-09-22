@@ -37,5 +37,6 @@ include(
     ":feature:add-task",
     ":feature:home",
     ":feature:main",
-    ":feature:setting"
+    ":feature:setting",
+    ":feature:tasks"
 )
