@@ -5,4 +5,5 @@
     <string name="calendar">Calendar</string>
     <string name="done">Done</string>
     <string name="past_dates_can_not_be_selected">Past dates cannot be selected.</string>
+    <string name="no_tasks">No Tasks</string>
 </resources>

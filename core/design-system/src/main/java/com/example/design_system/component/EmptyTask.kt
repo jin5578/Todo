@@ -1,4 +1,4 @@
-package com.example.home.component
+package com.example.design_system.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -15,13 +15,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
-import com.example.home.R
 
 @Composable
-internal fun EmptyTask() {
+fun EmptyTask(
+    modifier: Modifier = Modifier,
+) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(
