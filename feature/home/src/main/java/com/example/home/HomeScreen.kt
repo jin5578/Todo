@@ -42,9 +42,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.design_system.component.EmptyTask
+import com.example.design_system.component.Loading
 import com.example.design_system.component.SortTaskDialog
 import com.example.design_system.theme.TodoTheme
-import com.example.home.component.HomeLoading
 import com.example.home.component.SwipeActionBox
 import com.example.home.component.TaskCard
 import com.example.home.component.TaskInfoCard
@@ -122,7 +122,7 @@ private fun HomeContent(
 ) {
     when (uiState) {
         is HomeUiState.Loading -> {
-            HomeLoading()
+            Loading()
         }
 
         is HomeUiState.Success -> {

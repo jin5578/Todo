@@ -7,6 +7,7 @@ import java.time.LocalDate
 interface TaskRepository {
     fun getTodayTasks(): Flow<List<Task>>
     fun getTaskCountByDate(date: LocalDate): Flow<Int>
+    suspend fun getCompletedTasks(): List<Task>
     suspend fun getTaskById(taskId: Long): Task
     suspend fun insertTask(task: Task)
     suspend fun updateTask(task: Task)

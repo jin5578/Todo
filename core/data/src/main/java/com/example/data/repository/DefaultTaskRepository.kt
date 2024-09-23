@@ -24,6 +24,12 @@ internal class DefaultTaskRepository @Inject constructor(
         return taskDataSource.getTaskCountByDate(date)
     }
 
+    override suspend fun getCompletedTasks(): List<Task> {
+        return taskDataSource.getCompletedTasks().map { entity ->
+            entity.toTask()
+        }
+    }
+
     override suspend fun getTaskById(taskId: Long): Task {
         return taskDataSource.getTaskById(taskId).toTask()
     }

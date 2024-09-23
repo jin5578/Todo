@@ -23,7 +23,7 @@ class AddTaskViewModel @Inject constructor(
     private val getAddTaskDataUseCase: GetAddTaskDataUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
 ) : ViewModel() {
-    private val _errorFlow: MutableSharedFlow<Throwable> = MutableSharedFlow<Throwable>()
+    private val _errorFlow: MutableSharedFlow<Throwable> = MutableSharedFlow()
     val errorFlow = _errorFlow.asSharedFlow()
 
     private val _uiState: MutableStateFlow<AddTaskUiState> =

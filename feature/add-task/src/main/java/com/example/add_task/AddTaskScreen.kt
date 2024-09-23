@@ -31,14 +31,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.add_task.component.AddTaskDate
-import com.example.add_task.component.AddTaskLoading
 import com.example.add_task.component.AddTaskMemo
 import com.example.add_task.component.AddTaskPriority
 import com.example.add_task.component.AddTaskTime
@@ -46,6 +44,7 @@ import com.example.add_task.component.AddTaskTitle
 import com.example.add_task.model.AddTaskUiEffect
 import com.example.add_task.model.AddTaskUiState
 import com.example.design_system.component.DatePickerDialog
+import com.example.design_system.component.Loading
 import com.example.design_system.component.TimePickerDialog
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
@@ -69,8 +68,6 @@ internal fun AddTaskRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val uiEffect by viewModel.uiEffect.collectAsStateWithLifecycle()
-
-    val context = LocalContext.current
 
     LaunchedEffect(date) {
         viewModel.fetchAddTask(date)
@@ -107,7 +104,7 @@ private fun AddTaskContent(
 ) {
     when (uiState) {
         is AddTaskUiState.Loading -> {
-            AddTaskLoading()
+            Loading()
         }
 
         is AddTaskUiState.Success -> {

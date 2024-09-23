@@ -69,4 +69,6 @@ dependencies {
 
     implementation(libs.kotlinx.immutable)
     implementation(libs.compose.shimmer)
+
+    implementation(libs.timber)
 }

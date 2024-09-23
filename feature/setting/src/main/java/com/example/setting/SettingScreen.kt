@@ -35,11 +35,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.design_system.component.Loading
 import com.example.design_system.theme.TodoTheme
 import com.example.model.Theme
 import com.example.model.ThemeType
 import com.example.setting.component.SettingCategory
-import com.example.setting.component.SettingLoading
 import com.example.setting.component.SettingTheme
 import com.example.setting.model.BottomSheetType
 import com.example.setting.model.CategoryItemUiState
@@ -87,7 +87,7 @@ private fun SettingContent(
 ) {
     when (uiState) {
         is SettingUiState.Loading -> {
-            SettingLoading()
+            Loading()
         }
 
         is SettingUiState.Success -> {
