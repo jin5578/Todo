@@ -12,14 +12,16 @@ class GetAddTaskDataUseCase @Inject constructor(
     private val systemRepository: SystemRepository,
     private val taskRepository: TaskRepository,
 ) {
-    operator fun invoke(date: LocalDate): Flow<AddTask> = combine(
-        systemRepository.getAddTaskSystem(),
-        taskRepository.getTaskCountByDate(date)
-    ) { addTaskSystem, taskCount ->
-        AddTask(
-            date,
-            taskCount,
-            addTaskSystem
-        )
+    operator fun invoke(date: LocalDate): Flow<AddTask> {
+        return combine(
+            systemRepository.getAddTaskSystem(),
+            taskRepository.getTaskCountByDate(date),
+        ) { addTaskSystem, taskCount ->
+            AddTask(
+                date,
+                taskCount,
+                addTaskSystem
+            )
+        }
     }
 }

@@ -3,7 +3,6 @@ package com.example.database.datasource
 import com.example.database.TaskDatabase
 import com.example.database.TaskEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import javax.inject.Inject
@@ -11,25 +10,32 @@ import javax.inject.Inject
 class DefaultTaskDatabaseDataSource @Inject constructor(
     private val taskDatabase: TaskDatabase
 ) : TaskDatabaseDataSource {
-    override fun getTodayTasks(): Flow<List<TaskEntity>> {
-        return taskDatabase.taskDao().getTasksByDate(LocalDate.now().toString())
+    override fun getAllTask(): Flow<List<TaskEntity>> {
+        return taskDatabase.taskDao().getAllTask()
+    }
+
+    override fun getTasksByDate(date: LocalDate): Flow<List<TaskEntity>> {
+        return taskDatabase.taskDao().getTasksByDate(date.toString())
     }
 
     override fun getTaskCountByDate(date: LocalDate): Flow<Int> {
         return taskDatabase.taskDao().getTasksByDate(date.toString()).map { it.count() }
     }
 
-    override suspend fun getTasksByState(isCompleted: Boolean): List<TaskEntity> {
-        return taskDatabase.taskDao().getTasksByState(isCompleted)
-    }
-
-    override suspend fun getTasksByDateRange(from: LocalDate, to: LocalDate): List<TaskEntity> {
+    override fun getTasksByDateRange(
+        fromDate: LocalDate,
+        toDate: LocalDate
+    ): Flow<List<TaskEntity>> {
         return taskDatabase
             .taskDao()
             .getTasksByEpochDayRange(
-                from = from.toEpochDay(),
-                to = to.toEpochDay()
+                fromDate = fromDate.toEpochDay(),
+                toDate = toDate.toEpochDay()
             )
+    }
+
+    override fun getTasksByState(isCompleted: Boolean): Flow<List<TaskEntity>> {
+        return taskDatabase.taskDao().getTasksByState(isCompleted)
     }
 
     override suspend fun getTaskById(taskId: Long): TaskEntity {

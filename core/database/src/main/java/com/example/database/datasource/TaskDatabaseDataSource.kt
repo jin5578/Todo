@@ -5,10 +5,12 @@ import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
 interface TaskDatabaseDataSource {
-    fun getTodayTasks(): Flow<List<TaskEntity>>
+    fun getAllTask(): Flow<List<TaskEntity>>
+    fun getTasksByDate(date: LocalDate): Flow<List<TaskEntity>>
     fun getTaskCountByDate(date: LocalDate): Flow<Int>
-    suspend fun getTasksByState(isCompleted: Boolean): List<TaskEntity>
-    suspend fun getTasksByDateRange(from: LocalDate, to: LocalDate): List<TaskEntity>
+    fun getTasksByDateRange(fromDate: LocalDate, toDate: LocalDate): Flow<List<TaskEntity>>
+    fun getTasksByState(isCompleted: Boolean): Flow<List<TaskEntity>>
+
     suspend fun getTaskById(taskId: Long): TaskEntity
     suspend fun insertTask(taskEntity: TaskEntity)
     suspend fun updateTask(taskEntity: TaskEntity)

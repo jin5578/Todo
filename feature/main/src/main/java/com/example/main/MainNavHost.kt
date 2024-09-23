@@ -54,6 +54,7 @@ internal fun MainNavHost(
             )
             tasksNavGraph(
                 popBackStack = navigator::popBackStackIfNotHome,
+                navigateEditTask = {},
                 onShowErrorSnackbar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )

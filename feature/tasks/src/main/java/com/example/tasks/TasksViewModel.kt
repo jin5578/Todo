@@ -2,8 +2,12 @@ package com.example.tasks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecase.GetTasksByDateRange
-import com.example.domain.usecase.GetTasksByState
+import com.example.domain.usecase.DeleteTaskUseCase
+import com.example.domain.usecase.GetAllTaskUseCase
+import com.example.domain.usecase.GetTaskByIdUseCase
+import com.example.domain.usecase.GetTasksByDateRangeUseCase
+import com.example.domain.usecase.GetTasksByStateUseCase
+import com.example.domain.usecase.UpdateTaskUseCase
 import com.example.tasks.model.TasksUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toPersistentList
@@ -14,15 +18,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.time.DayOfWeek
 import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
 class TasksViewModel @Inject constructor(
-    private val getTasksByState: GetTasksByState,
-    private val getTasksByDateRange: GetTasksByDateRange,
+    private val getTasksByStateUseCase: GetTasksByStateUseCase,
+    private val getTasksByDateRangeUseCase: GetTasksByDateRangeUseCase,
+    private val getAllTaskUseCase: GetAllTaskUseCase,
+    private val getTaskByIdUseCase: GetTaskByIdUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase,
 ) : ViewModel() {
     private val _errorFlow: MutableSharedFlow<Throwable> = MutableSharedFlow()
     val errorFlow = _errorFlow.asSharedFlow()
@@ -33,34 +40,26 @@ class TasksViewModel @Inject constructor(
 
     fun fetchTasks(title: String) {
         when (title) {
-            "Completed" -> {
-                fetchTasksByState(true)
-            }
-
-            "Incomplete" -> {
-                fetchTasksByState(false)
-            }
-
+            "Completed" -> fetchTasksByState(true)
+            "Incomplete" -> fetchTasksByState(false)
             "This week" -> {
                 val currentDate = LocalDate.now()
                 val fromDate = currentDate.with(DayOfWeek.MONDAY)
                 val toDate = currentDate.with(DayOfWeek.SUNDAY)
 
                 fetchTasksByDateRange(
-                    from = fromDate,
-                    to = toDate
+                    fromDate = fromDate,
+                    toDate = toDate
                 )
             }
 
-            else -> {
-
-            }
+            else -> fetchAllTasks()
         }
     }
 
     private fun fetchTasksByState(isCompleted: Boolean) {
         viewModelScope.launch {
-            getTasksByState(isCompleted).map { tasks ->
+            getTasksByStateUseCase(isCompleted).map { tasks ->
                 TasksUiState.Success(
                     tasks = tasks.toPersistentList()
                 )
@@ -72,9 +71,9 @@ class TasksViewModel @Inject constructor(
         }
     }
 
-    private fun fetchTasksByDateRange(from: LocalDate, to: LocalDate) {
+    private fun fetchTasksByDateRange(fromDate: LocalDate, toDate: LocalDate) {
         viewModelScope.launch {
-            getTasksByDateRange(from = from, to = to).map { tasks ->
+            getTasksByDateRangeUseCase(fromDate = fromDate, toDate = toDate).map { tasks ->
                 TasksUiState.Success(
                     tasks = tasks.toPersistentList()
                 )
@@ -88,7 +87,32 @@ class TasksViewModel @Inject constructor(
 
     private fun fetchAllTasks() {
         viewModelScope.launch {
+            getAllTaskUseCase().map { tasks ->
+                TasksUiState.Success(
+                    tasks = tasks.toPersistentList()
+                )
+            }.catch { throwable ->
+                _errorFlow.emit(throwable)
+            }.collect {
+                _uiState.value = it
+            }
+        }
+    }
 
+    fun toggleTaskCompletion(
+        taskId: Long,
+        isCompleted: Boolean
+    ) {
+        viewModelScope.launch {
+            val task = getTaskByIdUseCase(taskId).copy(isCompleted = isCompleted)
+            updateTaskUseCase(task)
+        }
+    }
+
+    fun deleteTask(taskId: Long) {
+        viewModelScope.launch {
+            val task = getTaskByIdUseCase(taskId)
+            deleteTaskUseCase(task)
         }
     }
 }

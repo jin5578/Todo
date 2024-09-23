@@ -13,6 +13,7 @@ fun NavController.navigateTasks(title: String) {
 
 fun NavGraphBuilder.tasksNavGraph(
     popBackStack: () -> Unit,
+    navigateEditTask: (Long) -> Unit,
     onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
@@ -22,6 +23,7 @@ fun NavGraphBuilder.tasksNavGraph(
         TasksRoute(
             title = title,
             popBackStack = popBackStack,
+            navigateEditTask = navigateEditTask,
             onShowErrorSnackbar = onShowErrorSnackbar,
             onShowMessageSnackBar = onShowMessageSnackBar
         )

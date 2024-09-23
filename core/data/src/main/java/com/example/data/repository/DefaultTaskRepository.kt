@@ -12,8 +12,16 @@ import javax.inject.Inject
 internal class DefaultTaskRepository @Inject constructor(
     private val taskDataSource: TaskDatabaseDataSource,
 ) : TaskRepository {
-    override fun getTodayTasks(): Flow<List<Task>> {
-        return taskDataSource.getTodayTasks().map { entities ->
+    override fun getAllTask(): Flow<List<Task>> {
+        return taskDataSource.getAllTask().map { entities ->
+            entities.map { entity ->
+                entity.toTask()
+            }
+        }
+    }
+
+    override fun getTasksByDate(date: LocalDate): Flow<List<Task>> {
+        return taskDataSource.getTasksByDate(date).map { entities ->
             entities.map { entity ->
                 entity.toTask()
             }
@@ -24,15 +32,22 @@ internal class DefaultTaskRepository @Inject constructor(
         return taskDataSource.getTaskCountByDate(date)
     }
 
-    override suspend fun getTasksByState(isCompleted: Boolean): List<Task> {
-        return taskDataSource.getTasksByState(isCompleted).map { entity ->
-            entity.toTask()
+    override fun getTasksByDateRange(fromDate: LocalDate, toDate: LocalDate): Flow<List<Task>> {
+        return taskDataSource.getTasksByDateRange(
+            fromDate = fromDate,
+            toDate = toDate
+        ).map { entities ->
+            entities.map { entity ->
+                entity.toTask()
+            }
         }
     }
 
-    override suspend fun getTasksByDateRange(from: LocalDate, to: LocalDate): List<Task> {
-        return taskDataSource.getTasksByDateRange(from = from, to = to).map { entity ->
-            entity.toTask()
+    override fun getTasksByState(isCompleted: Boolean): Flow<List<Task>> {
+        return taskDataSource.getTasksByState(isCompleted).map { entities ->
+            entities.map { entity ->
+                entity.toTask()
+            }
         }
     }
 

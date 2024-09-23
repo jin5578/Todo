@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
+    implementation(project(":core:utils"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.splashscreen)

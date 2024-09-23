@@ -44,9 +44,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.design_system.component.EmptyTask
 import com.example.design_system.component.Loading
 import com.example.design_system.component.SortTaskDialog
+import com.example.design_system.component.TaskCard
 import com.example.design_system.theme.TodoTheme
 import com.example.home.component.SwipeActionBox
-import com.example.home.component.TaskCard
 import com.example.home.component.TaskInfoCard
 import com.example.home.model.HomeUiState
 import com.example.model.SortTask
@@ -94,10 +94,10 @@ internal fun HomeRoute(
         navigateEditTask = navigateEditTask,
         onSortTaskChanged = viewModel::updateSortTask,
         onTaskDelete = viewModel::deleteTask,
-        onTaskComplete = { taskId ->
+        onTaskToggleCompletion = { taskId, isChecked ->
             viewModel.toggleTaskCompletion(
                 taskId = taskId,
-                isCompleted = true
+                isCompleted = isChecked
             )
         },
         onShowMessageSnackBar = onShowMessageSnackBar,
@@ -117,7 +117,7 @@ private fun HomeContent(
     navigateEditTask: (Long) -> Unit,
     onSortTaskChanged: (SortTask) -> Unit,
     onTaskDelete: (Long) -> Unit,
-    onTaskComplete: (Long) -> Unit,
+    onTaskToggleCompletion: (Long, Boolean) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     when (uiState) {
@@ -143,7 +143,7 @@ private fun HomeContent(
                 navigateEditTask = navigateEditTask,
                 onSortTaskChanged = onSortTaskChanged,
                 onTaskDelete = onTaskDelete,
-                onTaskComplete = onTaskComplete,
+                onTaskToggleCompletion = onTaskToggleCompletion,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )
         }
@@ -169,7 +169,7 @@ private fun HomeScreen(
     navigateEditTask: (Long) -> Unit,
     onSortTaskChanged: (SortTask) -> Unit,
     onTaskDelete: (Long) -> Unit,
-    onTaskComplete: (Long) -> Unit,
+    onTaskToggleCompletion: (Long, Boolean) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val translateX = 600f
@@ -298,7 +298,6 @@ private fun HomeScreen(
                             translationX = leftTranslate.value
                         },
                     title = stringResource(R.string.this_week),
-                    content = "${completedTasks.size} Tasks",
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateThisWeekTask,
                 )
@@ -308,7 +307,6 @@ private fun HomeScreen(
                             translationX = rightTranslate.value
                         },
                     title = stringResource(R.string.all),
-                    content = "${incompleteTasks.size} Tasks",
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateAllTask,
                 )
@@ -384,7 +382,7 @@ private fun HomeScreen(
                         key = { _, task ->
                             task.id
                         }
-                    ) { index, task ->
+                    ) { _, task ->
                         Box(
                             modifier = Modifier.animateItem(tween(500))
                         ) {
@@ -397,9 +395,11 @@ private fun HomeScreen(
                             ) {
                                 TaskCard(
                                     task = task,
-                                    animDelay = index * 100,
+                                    isAvailableSwipe = true,
                                     onTaskEdit = { taskId -> navigateEditTask(taskId) },
-                                    onTaskComplete = { taskId -> onTaskComplete(taskId) },
+                                    onTaskToggleCompletion = { taskId, isCompleted ->
+                                        onTaskToggleCompletion(taskId, isCompleted)
+                                    },
                                     onTaskDelete = { taskId -> onTaskDelete(taskId) },
                                 )
                             }
@@ -446,7 +446,7 @@ fun HomeScreenPreview() {
             navigateEditTask = {},
             onSortTaskChanged = {},
             onTaskDelete = {},
-            onTaskComplete = {},
+            onTaskToggleCompletion = { _, _ -> },
             onShowMessageSnackBar = {},
         )
     }

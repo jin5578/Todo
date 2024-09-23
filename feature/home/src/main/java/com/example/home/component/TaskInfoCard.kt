@@ -29,7 +29,7 @@ internal fun TaskInfoCard(
     modifier: Modifier,
     title: String,
     icon: Int? = null,
-    content: String,
+    content: String? = null,
     backgroundColor: Color,
     onClick: (String) -> Unit,
 ) {
@@ -53,24 +53,28 @@ internal fun TaskInfoCard(
                 style = TodoTheme.typography.infoTextStyle,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                if (icon != null) {
-                    Icon(
-                        modifier = Modifier.size(14.dp),
-                        contentDescription = null,
-                        painter = painterResource(id = icon),
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                    )
+            if (icon != null || content != null) {
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    if (icon != null) {
+                        Icon(
+                            modifier = Modifier.size(14.dp),
+                            contentDescription = null,
+                            painter = painterResource(id = icon),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                    if (content != null) {
+                        Text(
+                            text = content,
+                            style = TodoTheme.typography.infoDescTextStyle,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
                 }
-                Text(
-                    text = content,
-                    style = TodoTheme.typography.infoDescTextStyle,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
             }
         }
     }

@@ -1,7 +1,5 @@
-package com.example.home.component
+package com.example.design_system.component
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
@@ -24,47 +22,29 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
-import com.example.home.R
 import com.example.model.Task
 import com.example.utils.getTaskTotalTime
 import java.time.LocalDate
 import java.time.LocalTime
 
 @Composable
-internal fun TaskCard(
+fun TaskCard(
     task: Task,
-    animDelay: Int = 100,
+    isAvailableSwipe: Boolean,
     onTaskEdit: (Long) -> Unit,
-    onTaskComplete: (Long) -> Unit,
+    onTaskToggleCompletion: (Long, Boolean) -> Unit,
     onTaskDelete: (Long) -> Unit,
 ) {
-    val alphaAnimation = remember { Animatable(initialValue = 0f) }
-
-    LaunchedEffect(animDelay) {
-        alphaAnimation.animateTo(
-            targetValue = 1f,
-            animationSpec = tween(
-                1000,
-                animDelay
-            )
-        )
-    }
-
     Box(
         modifier = Modifier.fillMaxWidth()
-            .graphicsLayer {
-                alpha = alphaAnimation.value
-            }
             .background(
                 priorityColors[task.priority],
                 RoundedCornerShape(
@@ -103,7 +83,7 @@ internal fun TaskCard(
                 IconButton(
                     modifier = Modifier.size(32.dp)
                         .weight(0.1f),
-                    onClick = { onTaskComplete(task.id) }
+                    onClick = { onTaskToggleCompletion(task.id, !task.isCompleted) }
                 ) {
                     if (task.isCompleted) {
                         Icon(
@@ -158,7 +138,7 @@ internal fun TaskCard(
                         )
                     }
                 }
-                if (task.date < LocalDate.now()) {
+                if (!isAvailableSwipe) {
                     IconButton(
                         modifier = Modifier.weight(0.1f),
                         onClick = { onTaskDelete(task.id) },
@@ -192,9 +172,9 @@ private fun TaskCardPreview() {
         )
         TaskCard(
             task = task,
-            animDelay = 100,
+            isAvailableSwipe = false,
             onTaskEdit = {},
-            onTaskComplete = {},
+            onTaskToggleCompletion = { _, _ -> },
             onTaskDelete = {}
         )
     }
