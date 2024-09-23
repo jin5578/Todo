@@ -137,6 +137,23 @@ fun TaskCard(
                             color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(15.dp),
+                            painter = painterResource(id = R.drawable.svg_calendar),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Text(
+                            text = task.date.toString(),
+                            style = TodoTheme.typography.taskDescTextStyle,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
                 }
                 if (!isAvailableSwipe) {
                     IconButton(

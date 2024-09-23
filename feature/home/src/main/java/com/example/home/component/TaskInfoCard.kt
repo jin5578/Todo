@@ -87,7 +87,7 @@ private fun TaskInfoCardPreview() {
         TaskInfoCard(
             modifier = Modifier,
             title = "Completed",
-            icon = R.drawable.svg_verify,
+            icon = R.drawable.svg_completed,
             content = "2 Tasks",
             backgroundColor = MaterialTheme.colorScheme.primaryContainer,
             onClick = { }

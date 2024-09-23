@@ -266,8 +266,8 @@ private fun HomeScreen(
                             translationX = leftTranslate.value
                         },
                     title = stringResource(R.string.completed),
-                    icon = R.drawable.svg_verify,
-                    content = "${completedTasks.size} Tasks",
+                    icon = R.drawable.svg_completed,
+                    content = "Today ${completedTasks.size} Tasks",
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateCompletedTask,
                 )
@@ -277,7 +277,8 @@ private fun HomeScreen(
                             translationX = rightTranslate.value
                         },
                     title = stringResource(R.string.incomplete),
-                    content = "${incompleteTasks.size} Tasks",
+                    icon = R.drawable.svg_incomplete,
+                    content = "Today ${incompleteTasks.size} Tasks",
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateIncompleteTask,
                 )
