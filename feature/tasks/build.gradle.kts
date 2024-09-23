@@ -71,4 +71,6 @@ dependencies {
     implementation(libs.compose.shimmer)
 
     implementation(libs.timber)
+
+    implementation(libs.paging.compose)
 }

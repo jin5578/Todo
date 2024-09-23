@@ -36,6 +36,8 @@ dependencies {
     implementation(libs.coroutines.core)
     testImplementation(libs.coroutines.test)
 
+    implementation(libs.paging.common.ktx)
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     kspAndroidTest(libs.hilt.android.compiler)
