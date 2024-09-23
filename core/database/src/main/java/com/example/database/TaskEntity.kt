@@ -14,7 +14,7 @@ import java.time.LocalTime
     LocalTimeConverter::class,
     LocalDateConverter::class,
 )
-data class TaskEntity(
+data class TaskEntity constructor(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Long = 0L,
@@ -30,6 +30,8 @@ data class TaskEntity(
     val endTime: LocalTime = LocalTime.now(),
     @ColumnInfo(name = "date")
     val date: LocalDate = LocalDate.now(),
+    @ColumnInfo(name = "epochDay")
+    val epochDay: Long = LocalDate.now().toEpochDay(),
     @ColumnInfo(name = "memo")
     val memo: String = "",
     @ColumnInfo(name = "priority")

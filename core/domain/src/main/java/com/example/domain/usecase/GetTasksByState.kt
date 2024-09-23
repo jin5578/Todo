@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetCompletedTasksUseCase @Inject constructor(
+class GetTasksByState @Inject constructor(
     private val taskRepository: TaskRepository
 ) {
-    suspend operator fun invoke(): Flow<List<Task>> =
-        flow { emit(taskRepository.getCompletedTasks()) }
+    suspend operator fun invoke(isCompleted: Boolean): Flow<List<Task>> =
+        flow { emit(taskRepository.getTasksByState(isCompleted)) }
 }

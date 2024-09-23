@@ -24,8 +24,14 @@ internal class DefaultTaskRepository @Inject constructor(
         return taskDataSource.getTaskCountByDate(date)
     }
 
-    override suspend fun getCompletedTasks(): List<Task> {
-        return taskDataSource.getCompletedTasks().map { entity ->
+    override suspend fun getTasksByState(isCompleted: Boolean): List<Task> {
+        return taskDataSource.getTasksByState(isCompleted).map { entity ->
+            entity.toTask()
+        }
+    }
+
+    override suspend fun getTasksByDateRange(from: LocalDate, to: LocalDate): List<Task> {
+        return taskDataSource.getTasksByDateRange(from = from, to = to).map { entity ->
             entity.toTask()
         }
     }
@@ -69,6 +75,7 @@ internal class DefaultTaskRepository @Inject constructor(
         startTime = this.startTime,
         endTime = this.endTime,
         date = this.date,
+        epochDay = this.date.toEpochDay(),
         memo = this.memo,
         priority = this.priority
     )

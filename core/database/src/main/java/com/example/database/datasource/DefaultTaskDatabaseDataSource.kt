@@ -19,8 +19,17 @@ class DefaultTaskDatabaseDataSource @Inject constructor(
         return taskDatabase.taskDao().getTasksByDate(date.toString()).map { it.count() }
     }
 
-    override suspend fun getCompletedTasks(): List<TaskEntity> {
-        return taskDatabase.taskDao().getCompletedTasks()
+    override suspend fun getTasksByState(isCompleted: Boolean): List<TaskEntity> {
+        return taskDatabase.taskDao().getTasksByState(isCompleted)
+    }
+
+    override suspend fun getTasksByDateRange(from: LocalDate, to: LocalDate): List<TaskEntity> {
+        return taskDatabase
+            .taskDao()
+            .getTasksByEpochDayRange(
+                from = from.toEpochDay(),
+                to = to.toEpochDay()
+            )
     }
 
     override suspend fun getTaskById(taskId: Long): TaskEntity {

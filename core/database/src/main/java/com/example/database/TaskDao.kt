@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 @Dao
 interface TaskDao {
@@ -28,8 +29,11 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE date = :selectedDate")
     fun getTasksByDate(selectedDate: String): Flow<List<TaskEntity>>
 
-    @Query("SELECT * FROM task WHERE isCompleted = 0")
-    suspend fun getCompletedTasks(): List<TaskEntity>
+    @Query("SELECT * FROM task WHERE date BETWEEN :from AND :to")
+    suspend fun getTasksByEpochDayRange(from: Long, to: Long): List<TaskEntity>
+
+    @Query("SELECT * FROM task WHERE isCompleted = :isCompleted")
+    suspend fun getTasksByState(isCompleted: Boolean): List<TaskEntity>
 
     @Query("SELECT * FROM task WHERE id=:id")
     suspend fun getTaskById(id: Long): TaskEntity
