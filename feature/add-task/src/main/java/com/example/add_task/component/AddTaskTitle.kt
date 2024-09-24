@@ -1,6 +1,7 @@
 package com.example.add_task.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,44 +44,40 @@ internal fun AddTaskTitle(
             style = TodoTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface
         )
-        Box(
+        TextField(
             modifier = Modifier.fillMaxWidth()
-                .background(
+                .focusRequester(focusRequester)
+                .border(
+                    width = 2.dp,
                     color = backgroundColor,
                     shape = RoundedCornerShape(8.dp)
-                )
-        ) {
-            TextField(
-                modifier = Modifier.fillMaxWidth()
-                    .focusRequester(focusRequester)
-                    .padding(horizontal = 8.dp),
-                value = taskTitle,
-                singleLine = true,
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    focusedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    cursorColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 ),
-                textStyle = TodoTheme.typography.taskTextStyle,
-                onValueChange = { onValueChange(it) },
-                placeholder = {
-                    Text(
-                        text = stringResource(id = R.string.please_enter_what_you_need_to_do),
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        style = TodoTheme.typography.taskTextStyle
-                    )
-                },
-                shape = RoundedCornerShape(8.dp),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                    imeAction = ImeAction.Done
+            value = taskTitle,
+            singleLine = true,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                focusedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                cursorColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            ),
+            textStyle = TodoTheme.typography.taskTextStyle,
+            onValueChange = { onValueChange(it) },
+            placeholder = {
+                Text(
+                    text = stringResource(id = R.string.please_enter_what_you_need_to_do),
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                    style = TodoTheme.typography.taskTextStyle
                 )
+            },
+            shape = RoundedCornerShape(8.dp),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences,
+                imeAction = ImeAction.Done
             )
-        }
+        )
     }
 }
 

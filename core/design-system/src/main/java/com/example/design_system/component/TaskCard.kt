@@ -46,126 +46,112 @@ fun TaskCard(
     Box(
         modifier = Modifier.fillMaxWidth()
             .background(
-                priorityColors[task.priority],
-                RoundedCornerShape(
-                    topStart = 8.dp,
-                    bottomStart = 8.dp,
-                    topEnd = 20.dp,
-                    bottomEnd = 20.dp
-                )
+                MaterialTheme.colorScheme.primary,
+                RoundedCornerShape(8.dp)
             )
-            .padding(start = 10.dp)
+            .border(
+                width = 2.dp,
+                color = priorityColors[task.priority],
+                shape = RoundedCornerShape(8.dp)
+            )
+            .padding(
+                horizontal = 8.dp,
+                vertical = 10.dp,
+            )
             .clickable {
                 onTaskEdit(task.id)
             }
     ) {
-        Box(
-            modifier = Modifier.fillMaxWidth()
-                .background(
-                    MaterialTheme.colorScheme.primary,
-                    RoundedCornerShape(
-                        topEnd = 8.dp,
-                        bottomEnd = 8.dp
-                    )
-                )
-                .padding(
-                    start = 8.dp,
-                    top = 10.dp,
-                    end = 8.dp,
-                    bottom = 10.dp
-                )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            IconButton(
+                modifier = Modifier.size(32.dp)
+                    .weight(0.1f),
+                onClick = { onTaskToggleCompletion(task.id, !task.isCompleted) }
             ) {
-                IconButton(
-                    modifier = Modifier.size(32.dp)
-                        .weight(0.1f),
-                    onClick = { onTaskToggleCompletion(task.id, !task.isCompleted) }
-                ) {
-                    if (task.isCompleted) {
-                        Icon(
-                            modifier = Modifier.size(20.dp),
-                            painter = painterResource(id = R.drawable.svg_check_circle),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primaryContainer
-                        )
-                    } else {
-                        Box(
-                            modifier = Modifier.size(20.dp)
-                                .border(
-                                    width = 2.dp,
-                                    color = MaterialTheme.colorScheme.primaryContainer,
-                                    shape = CircleShape
-                                ),
-                            contentAlignment = Alignment.Center,
-                            content = {}
-                        )
-                    }
+                if (task.isCompleted) {
+                    Icon(
+                        modifier = Modifier.size(20.dp),
+                        painter = painterResource(id = R.drawable.svg_check_circle),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primaryContainer
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier.size(20.dp)
+                            .border(
+                                width = 2.dp,
+                                color = MaterialTheme.colorScheme.primaryContainer,
+                                shape = CircleShape
+                            ),
+                        contentAlignment = Alignment.Center,
+                        content = {}
+                    )
                 }
-                Column(
-                    modifier = Modifier.weight(0.8f),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.Start
+            }
+            Column(
+                modifier = Modifier.weight(0.8f),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth()
+                        .basicMarquee(),
+                    text = task.title,
+                    style = TodoTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
+                    Icon(
+                        modifier = Modifier.size(15.dp),
+                        painter = painterResource(id = R.drawable.svg_clock),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
                     Text(
-                        modifier = Modifier.fillMaxWidth()
-                            .basicMarquee(),
-                        text = task.title,
-                        style = TodoTheme.typography.headlineSmall,
+                        text = getTaskTotalTime(
+                            task.startTime,
+                            task.endTime
+                        ),
+                        style = TodoTheme.typography.taskDescTextStyle,
                         color = MaterialTheme.colorScheme.onPrimary
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(15.dp),
-                            painter = painterResource(id = R.drawable.svg_clock),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                        Text(
-                            text = getTaskTotalTime(
-                                task.startTime,
-                                task.endTime
-                            ),
-                            style = TodoTheme.typography.taskDescTextStyle,
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(15.dp),
-                            painter = painterResource(id = R.drawable.svg_calendar),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                        Text(
-                            text = task.date.toString(),
-                            style = TodoTheme.typography.taskDescTextStyle,
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
                 }
-                if (!isAvailableSwipe) {
-                    IconButton(
-                        modifier = Modifier.weight(0.1f),
-                        onClick = { onTaskDelete(task.id) },
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                            contentDescription = null
-                        )
-                    }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        modifier = Modifier.size(15.dp),
+                        painter = painterResource(id = R.drawable.svg_calendar),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                    Text(
+                        text = task.date.toString(),
+                        style = TodoTheme.typography.taskDescTextStyle,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+            if (!isAvailableSwipe) {
+                IconButton(
+                    modifier = Modifier.weight(0.1f),
+                    onClick = { onTaskDelete(task.id) },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        contentDescription = null
+                    )
                 }
             }
         }
