@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
@@ -271,6 +272,7 @@ fun TodoTheme(
         val view = LocalView.current
         SideEffect {
             val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.surface.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
                 (colorScheme == SunRiseColorScheme || colorScheme == SkyBlueColorScheme || colorScheme == MistGrayColorScheme)
             WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars =
