@@ -31,7 +31,7 @@ fun EmptyTask(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             Image(
-                modifier = Modifier.size(180.dp),
+                modifier = Modifier.size(120.dp),
                 painter = painterResource(id = R.drawable.svg_no_tasks),
                 contentDescription = null
             )

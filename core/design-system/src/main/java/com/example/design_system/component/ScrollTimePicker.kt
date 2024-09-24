@@ -27,7 +27,8 @@ fun ScrollTimePicker(
         WheelTimePicker(
             timeFormat = TimeFormat.AM_PM,
             startTime = initTime,
-            textColor = MaterialTheme.colorScheme.onPrimary,
+            textColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            textStyle = TodoTheme.typography.taskTextStyle,
             onSnappedTime = onSelect
         )
     }
