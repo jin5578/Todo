@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.onPrimaryCharcoalBlack
@@ -101,9 +102,7 @@ internal fun SettingTheme(
 
     Column(
         modifier = Modifier.fillMaxWidth()
-            .padding(
-                bottom = 30.dp
-            ),
+            .padding(bottom = 30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
@@ -113,7 +112,8 @@ internal fun SettingTheme(
             color = MaterialTheme.colorScheme.onSecondaryContainer,
         )
         Row(
-            modifier = Modifier.horizontalScroll(scrollState).padding(horizontal = 20.dp),
+            modifier = Modifier.horizontalScroll(scrollState)
+                .padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             ThemeType.entries.forEachIndexed { index, type ->
@@ -179,5 +179,16 @@ private fun ThemeItem(
                     )
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun SettingThemePreview() {
+    TodoTheme {
+        SettingTheme(
+            initTheme = ThemeType.SUN_RISE,
+            onSelect = {}
+        )
     }
 }

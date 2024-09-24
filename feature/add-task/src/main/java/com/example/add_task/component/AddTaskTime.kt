@@ -67,12 +67,12 @@ internal fun AddTaskTime(
                 Spacer(modifier = Modifier.height(10.dp))
                 if (timePicker == TimePicker.CLOCK_TIME_PICKER) {
                     ClockTimePicker(
-                        defaultTime = startTime,
+                        initTime = startTime,
                         onClick = onShowStartTimePickerDialog
                     )
                 } else {
                     ScrollTimePicker(
-                        defaultTime = startTime,
+                        initTime = startTime,
                         onSelect = onSelectStartTime
                     )
                 }
@@ -96,12 +96,12 @@ internal fun AddTaskTime(
                 Spacer(modifier = Modifier.height(10.dp))
                 if (timePicker == TimePicker.CLOCK_TIME_PICKER) {
                     ClockTimePicker(
-                        defaultTime = endTime,
+                        initTime = endTime,
                         onClick = onShowEndTimePickerDialog
                     )
                 } else {
                     ScrollTimePicker(
-                        defaultTime = endTime,
+                        initTime = endTime,
                         onSelect = onSelectEndTime
                     )
                 }

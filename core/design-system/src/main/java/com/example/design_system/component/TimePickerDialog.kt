@@ -27,17 +27,17 @@ import java.time.LocalTime
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimePickerDialog(
-    defaultTime: LocalTime = LocalTime.now(),
+    initTime: LocalTime = LocalTime.now(),
     onClose: (LocalTime) -> Unit,
 ) {
     val timePickerState = rememberTimePickerState(
-        initialHour = defaultTime.hour,
-        initialMinute = defaultTime.minute,
+        initialHour = initTime.hour,
+        initialMinute = initTime.minute,
         is24Hour = false,
     )
 
     Dialog(
-        onDismissRequest = { onClose(defaultTime) }
+        onDismissRequest = { onClose(initTime) }
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
@@ -83,7 +83,7 @@ fun TimePickerDialog(
 private fun TimePickerDialogPreview() {
     TodoTheme {
         TimePickerDialog(
-            defaultTime = LocalTime.now(),
+            initTime = LocalTime.now(),
             onClose = {}
         )
     }

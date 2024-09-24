@@ -39,8 +39,10 @@ import com.example.design_system.component.Loading
 import com.example.design_system.theme.TodoTheme
 import com.example.model.Theme
 import com.example.model.ThemeType
+import com.example.model.TimePicker
 import com.example.setting.component.SettingCategory
 import com.example.setting.component.SettingTheme
+import com.example.setting.component.SettingTimePicker
 import com.example.setting.model.BottomSheetType
 import com.example.setting.model.CategoryItemUiState
 import com.example.setting.model.SettingUiState
@@ -72,6 +74,7 @@ internal fun SettingRoute(
         popBackStack = popBackStack,
         openUrl = { url -> openUrl(context, url) },
         onThemeChanged = viewModel::updateTheme,
+        onTimePickerChanged = viewModel::updateTimePicker,
         onShowMessageSnackBar = onShowMessageSnackBar
     )
 }
@@ -83,6 +86,7 @@ private fun SettingContent(
     popBackStack: () -> Unit,
     openUrl: (String) -> Unit,
     onThemeChanged: (ThemeType) -> Unit,
+    onTimePickerChanged: (TimePicker) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     when (uiState) {
@@ -93,10 +97,12 @@ private fun SettingContent(
         is SettingUiState.Success -> {
             SettingScreen(
                 theme = uiState.theme,
+                timePicker = uiState.timePicker,
                 navigateInfo = navigateInfo,
                 popBackStack = popBackStack,
                 openUrl = openUrl,
                 onThemeChanged = onThemeChanged,
+                onTimePickerChanged = onTimePickerChanged,
                 onShowMessageSnackBar = onShowMessageSnackBar
             )
         }
@@ -107,10 +113,12 @@ private fun SettingContent(
 @Composable
 private fun SettingScreen(
     theme: Theme,
+    timePicker: TimePicker,
     navigateInfo: () -> Unit,
     popBackStack: () -> Unit,
     openUrl: (String) -> Unit,
     onThemeChanged: (ThemeType) -> Unit,
+    onTimePickerChanged: (TimePicker) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -143,7 +151,7 @@ private fun SettingScreen(
             title = R.string.time_picker,
             icon = R.drawable.svg_clock,
             onClick = {
-                showBottomSheet = BottomSheetType.THEME
+                showBottomSheet = BottomSheetType.TIME_PICKER
             },
         )
     )
@@ -189,6 +197,13 @@ private fun SettingScreen(
                             )
                         }
 
+                        BottomSheetType.TIME_PICKER -> {
+                            SettingTimePicker(
+                                initTimePicker = timePicker,
+                                onSelect = onTimePickerChanged,
+                            )
+                        }
+
                         else -> {}
                     }
                 }
@@ -223,10 +238,12 @@ private fun SettingScreenPreview() {
     TodoTheme {
         SettingScreen(
             theme = Theme(ThemeType.SUN_RISE),
+            timePicker = TimePicker.SCROLL_TIME_PICKER,
             navigateInfo = {},
             popBackStack = {},
             openUrl = {},
             onThemeChanged = {},
+            onTimePickerChanged = {},
             onShowMessageSnackBar = {}
         )
     }

@@ -68,6 +68,10 @@ internal class DefaultSystemRepository @Inject constructor(
         systemDataSource.updateTheme(themeType.themeName)
     }
 
+    override suspend fun updateTimePicker(timePicker: TimePicker) {
+        systemDataSource.updateTimePicker(timePicker.type)
+    }
+
     private fun String.toTheme() = when (this) {
         "System" -> Theme(type = ThemeType.SYSTEM)
         "SunRise" -> Theme(type = ThemeType.SUN_RISE)

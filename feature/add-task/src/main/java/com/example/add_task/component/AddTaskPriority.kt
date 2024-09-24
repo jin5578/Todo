@@ -35,10 +35,10 @@ import com.example.model.Priority
 @Composable
 internal fun AddTaskPriority(
     modifier: Modifier = Modifier,
-    defaultPriority: Priority,
+    initPriority: Priority,
     onSelect: (Priority) -> Unit
 ) {
-    var selectedPriority by remember { mutableStateOf(defaultPriority) }
+    var selectedPriority by remember { mutableStateOf(initPriority) }
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -129,7 +129,7 @@ private fun AddTaskPriorityItem(
 private fun AddTaskPriorityPreview() {
     TodoTheme {
         AddTaskPriority(
-            defaultPriority = Priority.HIGH,
+            initPriority = Priority.HIGH,
             onSelect = {}
         )
     }

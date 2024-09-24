@@ -7,4 +7,5 @@ interface SystemPreferencesDataSource {
     val systemData: Flow<SystemData>
     suspend fun updateSortTask(sortTask: String)
     suspend fun updateTheme(theme: String)
+    suspend fun updateTimePicker(timePicker: String)
 }

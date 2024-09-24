@@ -9,4 +9,5 @@
     <string name="info">Info</string>
     <string name="system_setting">System setting</string>
     <string name="choose_theme_style">Choose theme style</string>
+    <string name="choose_time_picker_style">Choose time picker style</string>
 </resources>

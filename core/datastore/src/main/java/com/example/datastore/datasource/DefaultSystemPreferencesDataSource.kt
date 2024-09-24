@@ -44,6 +44,12 @@ class DefaultSystemPreferencesDataSource @Inject constructor(
         }
     }
 
+    override suspend fun updateTimePicker(timePicker: String) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKey.TIME_PICKER_KEY] = timePicker
+        }
+    }
+
     companion object {
         private val DEFAULT_SLEEP_TIME = LocalTime.of(23, 59).toString()
         private const val DEFAULT_SORT_TASK = "Creation Time (Latest at Top)"

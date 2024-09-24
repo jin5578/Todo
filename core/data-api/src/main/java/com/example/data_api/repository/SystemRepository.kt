@@ -3,6 +3,7 @@ package com.example.data_api.repository
 import com.example.model.SortTask
 import com.example.model.Theme
 import com.example.model.ThemeType
+import com.example.model.TimePicker
 import com.example.model.addtask.AddTaskSystem
 import com.example.model.home.HomeSystem
 import com.example.model.setting.SettingSystem
@@ -15,4 +16,5 @@ interface SystemRepository {
     fun getAddTaskSystem(): Flow<AddTaskSystem>
     suspend fun updateSortTask(sortTask: SortTask)
     suspend fun updateTheme(themeType: ThemeType)
+    suspend fun updateTimePicker(timePicker: TimePicker)
 }

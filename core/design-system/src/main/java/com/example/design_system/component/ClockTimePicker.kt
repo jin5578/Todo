@@ -26,7 +26,7 @@ import java.util.Locale
 
 @Composable
 fun ClockTimePicker(
-    defaultTime: LocalTime,
+    initTime: LocalTime,
     onClick: () -> Unit
 ) {
     Box {
@@ -52,7 +52,7 @@ fun ClockTimePicker(
             val timeFormat = DateTimeFormatter.ofPattern("hh : mm a", Locale.US)
 
             Text(
-                text = defaultTime.format(timeFormat),
+                text = initTime.format(timeFormat),
                 style = TodoTheme.typography.taskTextStyle,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
@@ -65,7 +65,7 @@ fun ClockTimePicker(
 private fun ClockTimePickerPreview() {
     TodoTheme {
         ClockTimePicker(
-            defaultTime = LocalTime.now(),
+            initTime = LocalTime.now(),
             onClick = {}
         )
     }

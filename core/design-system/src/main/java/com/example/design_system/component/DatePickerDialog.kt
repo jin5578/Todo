@@ -43,13 +43,13 @@ import java.util.Locale
 
 @Composable
 fun DatePickerDialog(
-    defaultDay: LocalDate = LocalDate.now(),
+    initDay: LocalDate = LocalDate.now(),
     onClose: (LocalDate) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val scope = rememberCoroutineScope()
 
-    var selectedDay by remember { mutableStateOf(defaultDay) }
+    var selectedDay by remember { mutableStateOf(initDay) }
     val firstDayOfWeek = remember { firstDayOfWeekFromLocale() }
 
     val currentMonth = remember { YearMonth.now() }
@@ -66,7 +66,7 @@ fun DatePickerDialog(
     val dateFormat = DateTimeFormatter.ofPattern("d MMMM, yyyy", Locale.US)
 
     Dialog(
-        onDismissRequest = { onClose(defaultDay) }
+        onDismissRequest = { onClose(initDay) }
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
@@ -186,7 +186,7 @@ fun DatePickerDialog(
 private fun DatePickerDialogPreview() {
     TodoTheme {
         DatePickerDialog(
-            defaultDay = LocalDate.now(),
+            initDay = LocalDate.now(),
             onClose = {},
             onShowMessageSnackBar = {},
         )

@@ -172,7 +172,7 @@ private fun AddTaskScreen(
     ) { paddingValues ->
         if (isShowDatePickerDialog) {
             DatePickerDialog(
-                defaultDay = taskDate,
+                initDay = taskDate,
                 onClose = { day ->
                     taskDate = day
                     isShowDatePickerDialog = false
@@ -183,7 +183,7 @@ private fun AddTaskScreen(
 
         if (isShowStartTimePickerDialog) {
             TimePickerDialog(
-                defaultTime = taskStartTime,
+                initTime = taskStartTime,
                 onClose = {
                     taskStartTime = it
                     taskEndTime = taskStartTime.plusMinutes(30)
@@ -194,7 +194,7 @@ private fun AddTaskScreen(
 
         if (isShowEndTimePickerDialog) {
             TimePickerDialog(
-                defaultTime = taskEndTime,
+                initTime = taskEndTime,
                 onClose = {
                     taskEndTime = it
                     if (taskEndTime < taskStartTime) {
@@ -261,7 +261,7 @@ private fun AddTaskScreen(
                     onValueChange = { taskMemo = it }
                 )
                 AddTaskPriority(
-                    defaultPriority = taskPriority,
+                    initPriority = taskPriority,
                     onSelect = { taskPriority = it }
                 )
             }
