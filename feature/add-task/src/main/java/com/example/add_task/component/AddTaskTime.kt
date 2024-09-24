@@ -49,8 +49,9 @@ internal fun AddTaskTime(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
+            val aspectRatio = if (timePicker == TimePicker.SCROLL_TIME_PICKER) 1f else 1.6f
             Column(
-                modifier = Modifier.aspectRatio(1.6f)
+                modifier = Modifier.aspectRatio(aspectRatio)
                     .weight(1f)
                     .background(
                         color = MaterialTheme.colorScheme.secondaryContainer,
@@ -79,7 +80,7 @@ internal fun AddTaskTime(
             }
             Spacer(modifier = Modifier.width(10.dp))
             Column(
-                modifier = Modifier.aspectRatio(1.6f)
+                modifier = Modifier.aspectRatio(aspectRatio)
                     .weight(1f)
                     .background(
                         color = MaterialTheme.colorScheme.secondaryContainer,
@@ -114,14 +115,25 @@ internal fun AddTaskTime(
 @Composable
 private fun AddTaskTimePreview() {
     TodoTheme {
-        AddTaskTime(
-            timePicker = TimePicker.CLOCK_TIME_PICKER,
-            startTime = LocalTime.now(),
-            endTime = LocalTime.now().plusMinutes(30),
-            onSelectStartTime = {},
-            onSelectEndTime = {},
-            onShowStartTimePickerDialog = {},
-            onShowEndTimePickerDialog = {}
-        )
+        Column {
+            AddTaskTime(
+                timePicker = TimePicker.SCROLL_TIME_PICKER,
+                startTime = LocalTime.now(),
+                endTime = LocalTime.now().plusMinutes(30),
+                onSelectStartTime = {},
+                onSelectEndTime = {},
+                onShowStartTimePickerDialog = {},
+                onShowEndTimePickerDialog = {}
+            )
+            AddTaskTime(
+                timePicker = TimePicker.CLOCK_TIME_PICKER,
+                startTime = LocalTime.now(),
+                endTime = LocalTime.now().plusMinutes(30),
+                onSelectStartTime = {},
+                onSelectEndTime = {},
+                onShowStartTimePickerDialog = {},
+                onShowEndTimePickerDialog = {}
+            )
+        }
     }
 }
