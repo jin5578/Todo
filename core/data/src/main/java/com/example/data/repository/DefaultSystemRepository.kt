@@ -7,6 +7,7 @@ import com.example.model.Theme
 import com.example.model.ThemeType
 import com.example.model.TimePicker
 import com.example.model.addtask.AddTaskSystem
+import com.example.model.edittask.EditTaskSystem
 import com.example.model.home.HomeSystem
 import com.example.model.setting.SettingSystem
 import kotlinx.coroutines.flow.Flow
@@ -55,6 +56,15 @@ internal class DefaultSystemRepository @Inject constructor(
         return systemDataSource.systemData.map {
             val timePicker = it.timePicker.toTimePicker()
             AddTaskSystem(
+                timePicker = timePicker
+            )
+        }
+    }
+
+    override fun getEditTaskSystem(): Flow<EditTaskSystem> {
+        return systemDataSource.systemData.map {
+            val timePicker = it.timePicker.toTimePicker()
+            EditTaskSystem(
                 timePicker = timePicker
             )
         }

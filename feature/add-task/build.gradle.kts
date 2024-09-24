@@ -68,9 +68,6 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.navigation.test)
 
     implementation(libs.kotlinx.immutable)
-    implementation(libs.compose.shimmer)
 
     implementation(libs.timber)
-
-    implementation(libs.kizitonwose.calendar)
 }

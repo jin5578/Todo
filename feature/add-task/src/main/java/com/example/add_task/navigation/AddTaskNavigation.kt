@@ -14,7 +14,7 @@ fun NavController.navigateAddTask(date: LocalDate) {
 
 fun NavGraphBuilder.addTaskNavGraph(
     popBackStack: () -> Unit,
-    onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
+    onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     composable<Route.AddTask> { navBackStackEntry ->
@@ -23,7 +23,7 @@ fun NavGraphBuilder.addTaskNavGraph(
         AddTaskRoute(
             popBackStack = popBackStack,
             date = LocalDate.parse(date),
-            onShowErrorSnackbar = onShowErrorSnackbar,
+            onShowErrorSnackBar = onShowErrorSnackBar,
             onShowMessageSnackBar = onShowMessageSnackBar
         )
     }

@@ -43,7 +43,7 @@ internal fun TasksRoute(
     title: String,
     popBackStack: () -> Unit,
     navigateEditTask: (Long) -> Unit,
-    onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
+    onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -54,7 +54,7 @@ internal fun TasksRoute(
 
     LaunchedEffect(true) {
         viewModel.errorFlow.collectLatest { throwable ->
-            onShowErrorSnackbar(throwable)
+            onShowErrorSnackBar(throwable)
         }
     }
 

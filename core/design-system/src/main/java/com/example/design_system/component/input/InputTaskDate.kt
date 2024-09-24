@@ -1,4 +1,4 @@
-package com.example.add_task.component
+package com.example.design_system.component.input
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -30,33 +30,33 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.add_task.R
-import com.example.add_task.model.DateOptionUiState
+import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
+import com.example.model.DateOption
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Composable
-internal fun AddTaskDate(
+fun InputTaskDate(
     modifier: Modifier = Modifier,
     date: LocalDate,
     onDateChange: (LocalDate) -> Unit,
     onShowDatePickerDialog: () -> Unit,
 ) {
     val options = persistentListOf(
-        DateOptionUiState(
+        DateOption(
             title = R.string.today,
             date = LocalDate.now(),
             onClick = { onDateChange(it) }
         ),
-        DateOptionUiState(
+        DateOption(
             title = R.string.tomorrow,
             date = LocalDate.now().plusDays(1),
             onClick = { onDateChange(it) }
         ),
-        DateOptionUiState(
+        DateOption(
             title = R.string.next_week,
             date = LocalDate.now().plusWeeks(1),
             onClick = { onDateChange(it) }
@@ -98,7 +98,6 @@ internal fun AddTaskDate(
                 )
             }
         }
-
         Row(
             modifier = Modifier.fillMaxWidth()
                 .border(
@@ -124,7 +123,7 @@ internal fun AddTaskDate(
                     }
                 }
 
-                AddTaskDateItem(
+                InputTaskDateItem(
                     modifier = Modifier.weight(1f),
                     title = item.title,
                     date = item.date,
@@ -141,7 +140,7 @@ internal fun AddTaskDate(
 }
 
 @Composable
-private fun AddTaskDateItem(
+private fun InputTaskDateItem(
     modifier: Modifier = Modifier,
     @StringRes title: Int,
     date: LocalDate,
@@ -177,9 +176,9 @@ private fun AddTaskDateItem(
 
 @Preview
 @Composable
-private fun AddTaskDatePreview() {
+private fun InputTaskDatePreview() {
     TodoTheme {
-        AddTaskDate(
+        InputTaskDate(
             date = LocalDate.now(),
             onDateChange = {},
             onShowDatePickerDialog = {}

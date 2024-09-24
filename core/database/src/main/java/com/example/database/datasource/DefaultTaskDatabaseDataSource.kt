@@ -38,6 +38,10 @@ class DefaultTaskDatabaseDataSource @Inject constructor(
         return taskDatabase.taskDao().getTasksByState(isCompleted)
     }
 
+    override fun getFlowTaskById(taskId: Long): Flow<TaskEntity> {
+        return taskDatabase.taskDao().getFlowTaskById(taskId)
+    }
+
     override suspend fun getTaskById(taskId: Long): TaskEntity {
         return taskDatabase.taskDao().getTaskById(taskId)
     }

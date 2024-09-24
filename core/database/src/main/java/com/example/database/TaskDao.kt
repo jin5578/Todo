@@ -35,5 +35,8 @@ interface TaskDao {
     fun getTasksByState(isCompleted: Boolean): Flow<List<TaskEntity>>
 
     @Query("SELECT * FROM task WHERE id=:id")
+    fun getFlowTaskById(id: Long): Flow<TaskEntity>
+
+    @Query("SELECT * FROM task WHERE id=:id")
     suspend fun getTaskById(id: Long): TaskEntity
 }

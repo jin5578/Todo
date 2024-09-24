@@ -42,6 +42,7 @@ dependencies {
     implementation(project(":core:navigation"))
 
     implementation(project(":feature:add-task"))
+    implementation(project(":feature:edit-task"))
     implementation(project(":feature:home"))
     implementation(project(":feature:setting"))
     implementation(project(":feature:tasks"))

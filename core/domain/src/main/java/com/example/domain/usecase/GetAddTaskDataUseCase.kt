@@ -18,9 +18,9 @@ class GetAddTaskDataUseCase @Inject constructor(
             taskRepository.getTaskCountByDate(date),
         ) { addTaskSystem, taskCount ->
             AddTask(
-                date,
-                taskCount,
-                addTaskSystem
+                date = date,
+                taskCount = taskCount,
+                addTaskSystem = addTaskSystem
             )
         }
     }

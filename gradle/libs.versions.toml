@@ -15,6 +15,7 @@ glanceExperimentalTools = "0.2.2"
 profileinstaller = "1.3.1"
 baselineprofile = "1.2.4"
 
+androidxAnnotationJvm = "1.8.2"
 androidxComposeBom = "2024.05.00"
 androidxComposeNavigation = "2.8.0-beta02"
 androidxComposeMaterial3 = "1.2.1"
@@ -82,7 +83,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "a
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiAutomator" }
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
-
+androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "androidxAnnotationJvm" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidxComposeMaterial3" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }

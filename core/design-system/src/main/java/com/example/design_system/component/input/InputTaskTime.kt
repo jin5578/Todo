@@ -1,4 +1,4 @@
-package com.example.add_task.component
+package com.example.design_system.component.input
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.add_task.R
+import com.example.design_system.R
 import com.example.design_system.component.ClockTimePicker
 import com.example.design_system.component.ScrollTimePicker
 import com.example.design_system.theme.TodoTheme
@@ -26,7 +26,7 @@ import com.example.model.TimePicker
 import java.time.LocalTime
 
 @Composable
-internal fun AddTaskTime(
+fun InputTaskTime(
     modifier: Modifier = Modifier,
     timePicker: TimePicker = TimePicker.CLOCK_TIME_PICKER,
     startTime: LocalTime,
@@ -113,10 +113,10 @@ internal fun AddTaskTime(
 
 @Preview()
 @Composable
-private fun AddTaskTimePreview() {
+private fun InputTaskTimePreview() {
     TodoTheme {
         Column {
-            AddTaskTime(
+            InputTaskTime(
                 timePicker = TimePicker.SCROLL_TIME_PICKER,
                 startTime = LocalTime.now(),
                 endTime = LocalTime.now().plusMinutes(30),
@@ -125,7 +125,7 @@ private fun AddTaskTimePreview() {
                 onShowStartTimePickerDialog = {},
                 onShowEndTimePickerDialog = {}
             )
-            AddTaskTime(
+            InputTaskTime(
                 timePicker = TimePicker.CLOCK_TIME_PICKER,
                 startTime = LocalTime.now(),
                 endTime = LocalTime.now().plusMinutes(30),

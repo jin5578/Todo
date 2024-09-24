@@ -1,4 +1,4 @@
-package com.example.add_task.component
+package com.example.design_system.component.input
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -27,13 +27,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.add_task.R
+import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
 import com.example.model.Priority
 
 @Composable
-internal fun AddTaskPriority(
+fun InputTaskPriority(
     modifier: Modifier = Modifier,
     initPriority: Priority,
     onSelect: (Priority) -> Unit
@@ -54,7 +54,7 @@ internal fun AddTaskPriority(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Priority.entries.forEach { priority ->
-                AddTaskPriorityItem(
+                InputTaskPriorityItem(
                     modifier = Modifier.weight(1f),
                     title = priority.type,
                     backgroundColor = priorityColors[priority.ordinal],
@@ -70,7 +70,7 @@ internal fun AddTaskPriority(
 }
 
 @Composable
-private fun AddTaskPriorityItem(
+private fun InputTaskPriorityItem(
     modifier: Modifier = Modifier,
     title: String,
     backgroundColor: Color,
@@ -126,9 +126,9 @@ private fun AddTaskPriorityItem(
 
 @Preview
 @Composable
-private fun AddTaskPriorityPreview() {
+private fun InputTaskPriorityPreview() {
     TodoTheme {
-        AddTaskPriority(
+        InputTaskPriority(
             initPriority = Priority.HIGH,
             onSelect = {}
         )

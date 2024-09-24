@@ -1,12 +1,9 @@
-package com.example.add_task.component
+package com.example.design_system.component.input
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
@@ -23,16 +20,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.add_task.R
+import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
-import com.example.design_system.theme.priorityColors
 
 @Composable
-internal fun AddTaskTitle(
+fun InputTaskMemo(
     modifier: Modifier = Modifier,
     focusRequester: FocusRequester,
-    backgroundColor: Color,
-    taskTitle: String,
+    taskMemo: String,
     onValueChange: (String) -> Unit,
 ) {
     Column(
@@ -40,20 +35,14 @@ internal fun AddTaskTitle(
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         Text(
-            text = stringResource(R.string.title),
+            text = stringResource(R.string.memo),
             style = TodoTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface
         )
         TextField(
-            modifier = Modifier.fillMaxWidth()
-                .focusRequester(focusRequester)
-                .border(
-                    width = 2.dp,
-                    color = backgroundColor,
-                    shape = RoundedCornerShape(8.dp)
-                ),
-            value = taskTitle,
-            singleLine = true,
+            modifier = Modifier.fillMaxWidth().height(100.dp)
+                .focusRequester(focusRequester),
+            value = taskMemo,
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 focusedIndicatorColor = Color.Transparent,
@@ -67,7 +56,7 @@ internal fun AddTaskTitle(
             onValueChange = { onValueChange(it) },
             placeholder = {
                 Text(
-                    text = stringResource(id = R.string.please_enter_what_you_need_to_do),
+                    text = stringResource(id = R.string.please_enter_a_note),
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                     style = TodoTheme.typography.taskTextStyle
                 )
@@ -75,7 +64,7 @@ internal fun AddTaskTitle(
             shape = RoundedCornerShape(8.dp),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
-                imeAction = ImeAction.Done
+                imeAction = ImeAction.Unspecified
             )
         )
     }
@@ -83,12 +72,11 @@ internal fun AddTaskTitle(
 
 @Preview
 @Composable
-private fun AddTaskTitlePreview() {
+private fun InputTaskMemoPreview() {
     TodoTheme {
-        AddTaskTitle(
+        InputTaskMemo(
             focusRequester = FocusRequester(),
-            backgroundColor = priorityColors[0],
-            taskTitle = "Task",
+            taskMemo = "Memo",
             onValueChange = {}
         )
     }

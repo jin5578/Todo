@@ -14,7 +14,7 @@ fun NavController.navigateTasks(title: String) {
 fun NavGraphBuilder.tasksNavGraph(
     popBackStack: () -> Unit,
     navigateEditTask: (Long) -> Unit,
-    onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
+    onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     composable<Route.Tasks> { navBackStackEntry ->
@@ -24,7 +24,7 @@ fun NavGraphBuilder.tasksNavGraph(
             title = title,
             popBackStack = popBackStack,
             navigateEditTask = navigateEditTask,
-            onShowErrorSnackbar = onShowErrorSnackbar,
+            onShowErrorSnackBar = onShowErrorSnackBar,
             onShowMessageSnackBar = onShowMessageSnackBar
         )
     }

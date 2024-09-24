@@ -36,16 +36,16 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.add_task.component.AddTaskDate
-import com.example.add_task.component.AddTaskMemo
-import com.example.add_task.component.AddTaskPriority
-import com.example.add_task.component.AddTaskTime
-import com.example.add_task.component.AddTaskTitle
 import com.example.add_task.model.AddTaskUiEffect
 import com.example.add_task.model.AddTaskUiState
 import com.example.design_system.component.DatePickerDialog
 import com.example.design_system.component.Loading
 import com.example.design_system.component.TimePickerDialog
+import com.example.design_system.component.input.InputTaskDate
+import com.example.design_system.component.input.InputTaskMemo
+import com.example.design_system.component.input.InputTaskPriority
+import com.example.design_system.component.input.InputTaskTime
+import com.example.design_system.component.input.InputTaskTitle
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
 import com.example.model.Priority
@@ -63,7 +63,7 @@ internal fun AddTaskRoute(
     viewModel: AddTaskViewModel = hiltViewModel(),
     date: LocalDate,
     popBackStack: () -> Unit,
-    onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
+    onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -75,7 +75,7 @@ internal fun AddTaskRoute(
 
     LaunchedEffect(true) {
         viewModel.errorFlow.collectLatest { throwable ->
-            onShowErrorSnackbar(throwable)
+            onShowErrorSnackBar(throwable)
         }
     }
 
@@ -227,18 +227,18 @@ private fun AddTaskScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(30.dp),
             ) {
-                AddTaskTitle(
+                InputTaskTitle(
                     focusRequester = titleFocusRequester,
                     backgroundColor = priorityColors[taskPriority.ordinal],
                     taskTitle = taskTitle,
                     onValueChange = { taskTitle = it }
                 )
-                AddTaskDate(
+                InputTaskDate(
                     date = taskDate,
                     onDateChange = { taskDate = it },
                     onShowDatePickerDialog = { isShowDatePickerDialog = true }
                 )
-                AddTaskTime(
+                InputTaskTime(
                     timePicker = timePicker,
                     startTime = taskStartTime,
                     endTime = taskEndTime,
@@ -255,12 +255,12 @@ private fun AddTaskScreen(
                     onShowStartTimePickerDialog = { isShowStartTimePickerDialog = true },
                     onShowEndTimePickerDialog = { isShowEndTimePickerDialog = true },
                 )
-                AddTaskMemo(
+                InputTaskMemo(
                     focusRequester = memoFocusRequester,
                     taskMemo = taskMemo,
                     onValueChange = { taskMemo = it }
                 )
-                AddTaskPriority(
+                InputTaskPriority(
                     initPriority = taskPriority,
                     onSelect = { taskPriority = it }
                 )

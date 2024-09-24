@@ -51,6 +51,12 @@ internal class DefaultTaskRepository @Inject constructor(
         }
     }
 
+    override fun getFlowTaskById(taskId: Long): Flow<Task> {
+        return taskDataSource.getFlowTaskById(taskId).map { entity ->
+            entity.toTask()
+        }
+    }
+
     override suspend fun getTaskById(taskId: Long): Task {
         return taskDataSource.getTaskById(taskId).toTask()
     }

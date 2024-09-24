@@ -13,14 +13,14 @@ fun NavController.navigateSetting() {
 fun NavGraphBuilder.settingNavGraph(
     navigateInfo: () -> Unit,
     popBackStack: () -> Unit,
-    onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
+    onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     composable<Route.Setting> {
         SettingRoute(
             navigateInfo = navigateInfo,
             popBackStack = popBackStack,
-            onShowErrorSnackbar = onShowErrorSnackbar,
+            onShowErrorSnackBar = onShowErrorSnackBar,
             onShowMessageSnackBar = onShowMessageSnackBar,
         )
     }

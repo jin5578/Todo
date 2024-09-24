@@ -69,5 +69,7 @@ dependencies {
     implementation(libs.kizitonwose.calendar)
     implementation(libs.wheelpicker.compose)
 
+    implementation(libs.kotlinx.immutable)
+
     implementation(libs.timber)
 }

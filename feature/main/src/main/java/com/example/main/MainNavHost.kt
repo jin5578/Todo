@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.example.add_task.navigation.addTaskNavGraph
+import com.example.edit_task.navigation.editTaskNavGraph
 import com.example.home.navigation.homeNavGraph
 import com.example.setting.navigation.settingNavGraph
 import com.example.tasks.navigation.tasksNavGraph
@@ -37,25 +38,30 @@ internal fun MainNavHost(
                 navigateIncompleteTask = navigator::navigateTasks,
                 navigateThisWeekTask = navigator::navigateTasks,
                 navigateAllTask = navigator::navigateTasks,
-                navigateEditTask = {},
-                onShowErrorSnackbar = onShowErrorSnackBar,
+                navigateEditTask = navigator::navigateEditTask,
+                onShowErrorSnackBar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )
             settingNavGraph(
                 navigateInfo = {},
                 popBackStack = navigator::popBackStackIfNotHome,
-                onShowErrorSnackbar = onShowErrorSnackBar,
+                onShowErrorSnackBar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )
             addTaskNavGraph(
                 popBackStack = navigator::popBackStackIfNotHome,
-                onShowErrorSnackbar = onShowErrorSnackBar,
+                onShowErrorSnackBar = onShowErrorSnackBar,
+                onShowMessageSnackBar = onShowMessageSnackBar,
+            )
+            editTaskNavGraph(
+                popBackStack = navigator::popBackStackIfNotHome,
+                onShowErrorSnackBar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )
             tasksNavGraph(
                 popBackStack = navigator::popBackStackIfNotHome,
                 navigateEditTask = {},
-                onShowErrorSnackbar = onShowErrorSnackBar,
+                onShowErrorSnackBar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )
         }

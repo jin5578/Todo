@@ -55,7 +55,7 @@ internal fun SettingRoute(
     viewModel: SettingViewModel = hiltViewModel(),
     navigateInfo: () -> Unit,
     popBackStack: () -> Unit,
-    onShowErrorSnackbar: (throwable: Throwable?) -> Unit,
+    onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -64,7 +64,7 @@ internal fun SettingRoute(
 
     LaunchedEffect(true) {
         viewModel.errorFlow.collectLatest { throwable ->
-            onShowErrorSnackbar(throwable)
+            onShowErrorSnackBar(throwable)
         }
     }
 
