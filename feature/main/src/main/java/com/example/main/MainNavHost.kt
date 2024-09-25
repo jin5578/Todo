@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.example.add_task.navigation.addTaskNavGraph
+import com.example.calendar.navigation.calendarNavGraph
 import com.example.edit_task.navigation.editTaskNavGraph
 import com.example.home.navigation.homeNavGraph
 import com.example.setting.navigation.settingNavGraph
@@ -29,10 +30,8 @@ internal fun MainNavHost(
             startDestination = navigator.startDestination,
         ) {
             homeNavGraph(
-                navigateCalendar = {},
-                navigateSetting = {
-                    navigator.navigateSetting()
-                },
+                navigateCalendar = navigator::navigateCalendar,
+                navigateSetting = navigator::navigateSetting,
                 navigateAddTask = navigator::navigateAddTask,
                 navigateCompletedTask = navigator::navigateTasks,
                 navigateIncompleteTask = navigator::navigateTasks,
@@ -60,7 +59,12 @@ internal fun MainNavHost(
             )
             tasksNavGraph(
                 popBackStack = navigator::popBackStackIfNotHome,
-                navigateEditTask = {},
+                navigateEditTask = navigator::navigateEditTask,
+                onShowErrorSnackBar = onShowErrorSnackBar,
+                onShowMessageSnackBar = onShowMessageSnackBar,
+            )
+            calendarNavGraph(
+                popBackStack = navigator::popBackStackIfNotHome,
                 onShowErrorSnackBar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )

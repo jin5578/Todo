@@ -35,6 +35,7 @@ include(
 )
 include(
     ":feature:add-task",
+    ":feature:calendar",
     ":feature:edit-task",
     ":feature:home",
     ":feature:main",
