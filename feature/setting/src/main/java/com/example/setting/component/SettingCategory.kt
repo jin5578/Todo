@@ -75,13 +75,13 @@ private fun CategoryItem(
         )
         .padding(
             horizontal = 16.dp,
-            vertical = 12.dp
+            vertical = 16.dp
         ),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Icon(
-            modifier = Modifier.size(20.dp),
+            modifier = Modifier.size(18.dp),
             painter = painterResource(icon),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSecondaryContainer
@@ -89,11 +89,11 @@ private fun CategoryItem(
         Text(
             modifier = Modifier.weight(1f),
             text = stringResource(title),
-            style = TodoTheme.typography.settingItemTextStyle,
+            style = TodoTheme.typography.infoTextStyle,
             color = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Icon(
-            modifier = Modifier.size(16.dp),
+            modifier = Modifier.size(14.dp),
             imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_right_twin),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSecondaryContainer

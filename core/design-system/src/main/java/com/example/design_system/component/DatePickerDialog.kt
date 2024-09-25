@@ -110,7 +110,6 @@ fun DatePickerDialog(
                     ) {
                         Icon(
                             modifier = Modifier.size(32.dp)
-                                .padding(8.dp)
                                 .clip(CircleShape)
                                 .clickable {
                                     scope.launch {
@@ -120,7 +119,8 @@ fun DatePickerDialog(
                                             )
                                         )
                                     }
-                                },
+                                }
+                                .padding(8.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar_arrow_left),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSecondaryContainer
@@ -132,7 +132,6 @@ fun DatePickerDialog(
                         )
                         Icon(
                             modifier = Modifier.size(32.dp)
-                                .padding(8.dp)
                                 .clip(CircleShape)
                                 .clickable {
                                     scope.launch {
@@ -142,7 +141,8 @@ fun DatePickerDialog(
                                             )
                                         )
                                     }
-                                },
+                                }
+                                .padding(8.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar_arrow_right),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSecondaryContainer

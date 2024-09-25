@@ -86,7 +86,7 @@ fun InputTaskDate(
             ) {
                 val dateFormat = DateTimeFormatter.ofPattern("d MMMM", Locale.US)
                 Icon(
-                    modifier = Modifier.size(18.dp),
+                    modifier = Modifier.size(14.dp),
                     imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurface

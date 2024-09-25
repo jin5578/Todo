@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +22,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.R
@@ -54,13 +54,13 @@ fun TaskCard(
                 color = priorityColors[task.priority],
                 shape = RoundedCornerShape(8.dp)
             )
+            .clickable {
+                onTaskEdit(task.id)
+            }
             .padding(
                 horizontal = 8.dp,
                 vertical = 10.dp,
             )
-            .clickable {
-                onTaskEdit(task.id)
-            }
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -74,7 +74,7 @@ fun TaskCard(
             ) {
                 if (task.isCompleted) {
                     Icon(
-                        modifier = Modifier.size(20.dp),
+                        modifier = Modifier.size(21.dp),
                         painter = painterResource(id = R.drawable.svg_check_circle),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primaryContainer
@@ -110,7 +110,7 @@ fun TaskCard(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        modifier = Modifier.size(15.dp),
+                        modifier = Modifier.size(14.dp),
                         painter = painterResource(id = R.drawable.svg_clock),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onPrimary
@@ -130,7 +130,7 @@ fun TaskCard(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        modifier = Modifier.size(15.dp),
+                        modifier = Modifier.size(14.dp),
                         painter = painterResource(id = R.drawable.svg_calendar),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onPrimary
@@ -148,7 +148,8 @@ fun TaskCard(
                     onClick = { onTaskDelete(task.id) },
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Delete,
+                        modifier = Modifier.size(18.dp),
+                        imageVector = ImageVector.vectorResource(R.drawable.svg_delete),
                         tint = MaterialTheme.colorScheme.onPrimary,
                         contentDescription = null
                     )

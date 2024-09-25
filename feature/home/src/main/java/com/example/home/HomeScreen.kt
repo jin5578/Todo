@@ -11,10 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -207,8 +206,11 @@ private fun HomeScreen(
                     )
                 },
                 actions = {
-                    IconButton(onClick = navigateCalendar) {
+                    IconButton(
+                        onClick = navigateCalendar
+                    ) {
                         Icon(
+                            modifier = Modifier.size(24.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
@@ -216,6 +218,7 @@ private fun HomeScreen(
                     }
                     IconButton(onClick = navigateSetting) {
                         Icon(
+                            modifier = Modifier.size(24.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.svg_setting),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
@@ -231,6 +234,7 @@ private fun HomeScreen(
                 onClick = navigateAddTask,
             ) {
                 Icon(
+                    modifier = Modifier.size(24.dp),
                     imageVector = ImageVector.vectorResource(R.drawable.svg_plus),
                     contentDescription = null
                 )
@@ -331,7 +335,8 @@ private fun HomeScreen(
 
                     IconButton(onClick = { isShowSortTaskDialog = true }) {
                         Icon(
-                            imageVector = Icons.Default.FilterList,
+                            modifier = Modifier.size(21.dp),
+                            imageVector = ImageVector.vectorResource(R.drawable.svg_sort),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.primary
                         )

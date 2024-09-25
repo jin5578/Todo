@@ -7,9 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +27,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import com.example.home.R
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +37,7 @@ import kotlinx.coroutines.delay
 internal fun <T> SwipeActionBox(
     item: T,
     backgroundColor: Color = MaterialTheme.colorScheme.error,
-    icon: ImageVector = Icons.Default.Delete,
+    icon: ImageVector = ImageVector.vectorResource(R.drawable.svg_delete),
     iconTint: Color = MaterialTheme.colorScheme.onError,
     animationDuration: Int = 300,
     onDeleteAction: (T) -> Unit,
@@ -109,6 +110,7 @@ private fun ActionBackground(
             .padding(16.dp), contentAlignment = Alignment.CenterEnd
     ) {
         Icon(
+            modifier = Modifier.size(18.dp),
             imageVector = icon,
             contentDescription = null,
             tint = iconTint
