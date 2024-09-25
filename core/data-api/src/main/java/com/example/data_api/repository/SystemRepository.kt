@@ -19,4 +19,5 @@ interface SystemRepository {
     suspend fun updateSortTask(sortTask: SortTask)
     suspend fun updateTheme(themeType: ThemeType)
     suspend fun updateTimePicker(timePicker: TimePicker)
+    suspend fun updateBuildVersion(buildVersion: String)
 }

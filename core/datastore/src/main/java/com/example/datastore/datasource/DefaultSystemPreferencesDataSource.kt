@@ -50,6 +50,12 @@ class DefaultSystemPreferencesDataSource @Inject constructor(
         }
     }
 
+    override suspend fun updateBuildVersion(buildVersion: String) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKey.BUILD_VERSION_KEY] = buildVersion
+        }
+    }
+
     companion object {
         private val DEFAULT_SLEEP_TIME = LocalTime.of(23, 59).toString()
         private const val DEFAULT_SORT_TASK = "Creation Time (Latest at Top)"

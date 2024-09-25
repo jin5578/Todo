@@ -8,4 +8,5 @@ interface SystemPreferencesDataSource {
     suspend fun updateSortTask(sortTask: String)
     suspend fun updateTheme(theme: String)
     suspend fun updateTimePicker(timePicker: String)
+    suspend fun updateBuildVersion(buildVersion: String)
 }

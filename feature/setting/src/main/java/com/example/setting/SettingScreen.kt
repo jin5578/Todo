@@ -98,6 +98,7 @@ private fun SettingContent(
             SettingScreen(
                 theme = uiState.theme,
                 timePicker = uiState.timePicker,
+                buildVersion = uiState.buildVersion,
                 navigateInfo = navigateInfo,
                 popBackStack = popBackStack,
                 openUrl = openUrl,
@@ -114,6 +115,7 @@ private fun SettingContent(
 private fun SettingScreen(
     theme: Theme,
     timePicker: TimePicker,
+    buildVersion: String,
     navigateInfo: () -> Unit,
     popBackStack: () -> Unit,
     openUrl: (String) -> Unit,
@@ -228,6 +230,13 @@ private fun SettingScreen(
                     category = systemCategory,
                 )
             }
+
+            Text(
+                modifier = Modifier.padding(bottom = 20.dp),
+                text = "Version $buildVersion",
+                style = TodoTheme.typography.infoDescTextStyle,
+                color = MaterialTheme.colorScheme.onSurface
+            )
         }
     }
 }
@@ -239,6 +248,7 @@ private fun SettingScreenPreview() {
         SettingScreen(
             theme = Theme(ThemeType.SUN_RISE),
             timePicker = TimePicker.SCROLL_TIME_PICKER,
+            buildVersion = "1.0.0",
             navigateInfo = {},
             popBackStack = {},
             openUrl = {},
