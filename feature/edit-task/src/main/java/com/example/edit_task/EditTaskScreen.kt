@@ -244,7 +244,9 @@ private fun EditTaskScreen(
                     endTime = taskEndTime,
                     onSelectStartTime = {
                         taskStartTime = it
-                        taskEndTime = taskStartTime.plusMinutes(30)
+                        if (taskEndTime > taskStartTime) {
+                            taskEndTime = taskStartTime.plusMinutes(30)
+                        }
                     },
                     onSelectEndTime = {
                         taskEndTime = it

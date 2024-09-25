@@ -73,7 +73,6 @@ internal fun SettingTimePicker(
         ) {
             ScrollTimePicker(
                 initTime = LocalTime.now(),
-                onSelect = { }
             )
             ClockTimePicker(
                 initTime = LocalTime.now(),

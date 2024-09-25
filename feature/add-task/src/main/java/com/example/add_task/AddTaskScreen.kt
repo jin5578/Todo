@@ -54,6 +54,7 @@ import com.example.model.TimePicker
 import com.example.utils.checkValidTask
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
+import timber.log.Timber
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.UUID
@@ -244,7 +245,9 @@ private fun AddTaskScreen(
                     endTime = taskEndTime,
                     onSelectStartTime = {
                         taskStartTime = it
-                        taskEndTime = taskStartTime.plusMinutes(30)
+                        if (taskEndTime > taskStartTime) {
+                            taskEndTime = taskStartTime.plusMinutes(30)
+                        }
                     },
                     onSelectEndTime = {
                         taskEndTime = it

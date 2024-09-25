@@ -17,7 +17,7 @@ import java.time.LocalTime
 @Composable
 fun ScrollTimePicker(
     initTime: LocalTime,
-    onSelect: (LocalTime) -> Unit,
+    onSelect: (LocalTime) -> Unit = {},
 ) {
     AnimatedVisibility(
         visible = true,
