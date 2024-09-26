@@ -3,7 +3,6 @@ package com.example.design_system.component
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,36 +27,34 @@ import java.util.Locale
 @Composable
 fun ClockTimePicker(
     initTime: LocalTime,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
-    Box {
-        Row(
-            modifier = Modifier.clip(RoundedCornerShape(16.dp))
-                .border(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer,
-                    shape = RoundedCornerShape(16.dp)
-                )
-                .clickable { onClick() }
-                .padding(10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Icon(
-                modifier = Modifier.size(21.dp),
-                imageVector = ImageVector.vectorResource(R.drawable.svg_clock),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+    Row(
+        modifier = Modifier.clip(RoundedCornerShape(16.dp))
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                shape = RoundedCornerShape(16.dp)
             )
+            .clickable { onClick() }
+            .padding(10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Icon(
+            modifier = Modifier.size(21.dp),
+            imageVector = ImageVector.vectorResource(R.drawable.svg_clock),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSecondaryContainer,
+        )
 
-            val timeFormat = DateTimeFormatter.ofPattern("hh : mm a", Locale.US)
+        val timeFormat = DateTimeFormatter.ofPattern("hh : mm a", Locale.US)
 
-            Text(
-                text = initTime.format(timeFormat),
-                style = TodoTheme.typography.taskTextStyle,
-                color = MaterialTheme.colorScheme.onSecondaryContainer
-            )
-        }
+        Text(
+            text = initTime.format(timeFormat),
+            style = TodoTheme.typography.taskTextStyle,
+            color = MaterialTheme.colorScheme.onSecondaryContainer
+        )
     }
 }
 

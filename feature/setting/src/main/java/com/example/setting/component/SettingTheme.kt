@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.onPrimaryCharcoalBlack
 import com.example.design_system.theme.onPrimaryDeepForestGreen
@@ -114,7 +115,7 @@ internal fun SettingTheme(
         Row(
             modifier = Modifier.horizontalScroll(scrollState)
                 .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             ThemeType.entries.forEachIndexed { index, type ->
                 ThemeItem(
@@ -152,7 +153,7 @@ private fun ThemeItem(
         ) {
             Text(
                 text = title,
-                style = TodoTheme.typography.headlineSmall,
+                style = TodoTheme.typography.infoTextStyle.copy(fontSize = 16.sp),
                 color = themeColor.textColor,
                 modifier = Modifier.padding(
                     horizontal = 24.dp,

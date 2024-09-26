@@ -6,10 +6,10 @@ enum class TimePicker(
 ) {
     SCROLL_TIME_PICKER(
         type = "ScrollTimePicker",
-        timePickerName = "Scroll time picker"
+        timePickerName = "Scroll picker"
     ),
     CLOCK_TIME_PICKER(
         type = "ClockTimePicker",
-        timePickerName = "Clock time picker"
+        timePickerName = "Clock picker"
     )
 }
