@@ -122,10 +122,11 @@ internal fun SettingTheme(
                     title = type.themeName,
                     themeColor = themeColors[index],
                     isSelected = selectedTheme == type,
-                ) {
-                    selectedTheme = type
-                    onSelect(type)
-                }
+                    onClick = {
+                        selectedTheme = type
+                        onSelect(type)
+                    }
+                )
             }
         }
     }
@@ -152,13 +153,13 @@ private fun ThemeItem(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = title,
-                style = TodoTheme.typography.infoTextStyle.copy(fontSize = 16.sp),
-                color = themeColor.textColor,
                 modifier = Modifier.padding(
                     horizontal = 24.dp,
                     vertical = 16.dp
-                )
+                ),
+                text = title,
+                style = TodoTheme.typography.infoTextStyle.copy(fontSize = 16.sp),
+                color = themeColor.textColor,
             )
         }
 

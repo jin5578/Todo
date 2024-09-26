@@ -52,8 +52,8 @@ internal fun SettingTimePicker(
             color = MaterialTheme.colorScheme.onSecondaryContainer,
         )
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.Center,
         ) {
             ToggleButton(
@@ -84,7 +84,7 @@ private fun ToggleButton(
     modifier: Modifier = Modifier,
     timePicker: TimePicker,
     isSelected: Boolean,
-    onClick: (TimePicker) -> Unit
+    onClick: () -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -92,8 +92,9 @@ private fun ToggleButton(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(8.dp))
-                .clickable { onClick(timePicker) }
+            modifier = Modifier.fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp))
+                .clickable { onClick() }
                 .background(
                     if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
                 ),
@@ -110,6 +111,7 @@ private fun ToggleButton(
 
             )
         }
+
         if (isSelected) {
             val animValue = remember {
                 Animatable(initialValue = 0f)
