@@ -24,10 +24,8 @@ data class TaskEntity constructor(
     val title: String = "",
     @ColumnInfo(name = "isCompleted")
     val isCompleted: Boolean = false,
-    @ColumnInfo(name = "startTime")
-    val startTime: LocalTime = LocalTime.now(),
-    @ColumnInfo(name = "endTime")
-    val endTime: LocalTime = LocalTime.now(),
+    @ColumnInfo(name = "time")
+    val time: LocalTime = LocalTime.now(),
     @ColumnInfo(name = "date")
     val date: LocalDate = LocalDate.now(),
     @ColumnInfo(name = "epochDay")

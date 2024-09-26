@@ -135,13 +135,11 @@ private fun AddTaskScreen(
     val scrollState = rememberScrollState()
 
     var isShowDatePickerDialog by remember { mutableStateOf(false) }
-    var isShowStartTimePickerDialog by remember { mutableStateOf(false) }
-    var isShowEndTimePickerDialog by remember { mutableStateOf(false) }
+    var isShowTimePickerDialog by remember { mutableStateOf(false) }
 
     var taskTitle by remember { mutableStateOf("") }
     var taskDate by remember { mutableStateOf(date) }
-    var taskStartTime by remember { mutableStateOf(LocalTime.now()) }
-    var taskEndTime by remember { mutableStateOf(LocalTime.now().plusMinutes(30)) }
+    var taskTime by remember { mutableStateOf(LocalTime.now()) }
     var taskMemo by remember { mutableStateOf("") }
     var taskPriority by remember { mutableStateOf(Priority.LOW) }
 
@@ -182,26 +180,13 @@ private fun AddTaskScreen(
             )
         }
 
-        if (isShowStartTimePickerDialog) {
+        if (isShowTimePickerDialog) {
             TimePickerDialog(
-                initTime = taskStartTime,
+                timePicker = timePicker,
+                initTime = taskTime,
                 onClose = {
-                    taskStartTime = it
-                    taskEndTime = taskStartTime.plusMinutes(30)
-                    isShowStartTimePickerDialog = false
-                }
-            )
-        }
-
-        if (isShowEndTimePickerDialog) {
-            TimePickerDialog(
-                initTime = taskEndTime,
-                onClose = {
-                    taskEndTime = it
-                    if (taskEndTime < taskStartTime) {
-                        taskStartTime = taskEndTime.minusMinutes(30)
-                    }
-                    isShowEndTimePickerDialog = false
+                    taskTime = it
+                    isShowTimePickerDialog = false
                 }
             )
         }
@@ -240,23 +225,9 @@ private fun AddTaskScreen(
                     onShowDatePickerDialog = { isShowDatePickerDialog = true }
                 )
                 InputTaskTime(
-                    timePicker = timePicker,
-                    startTime = taskStartTime,
-                    endTime = taskEndTime,
-                    onSelectStartTime = {
-                        taskStartTime = it
-                        if (taskEndTime > taskStartTime) {
-                            taskEndTime = taskStartTime.plusMinutes(30)
-                        }
-                    },
-                    onSelectEndTime = {
-                        taskEndTime = it
-                        if (taskEndTime < taskStartTime) {
-                            taskStartTime = taskEndTime.minusMinutes(30)
-                        }
-                    },
-                    onShowStartTimePickerDialog = { isShowStartTimePickerDialog = true },
-                    onShowEndTimePickerDialog = { isShowEndTimePickerDialog = true },
+                    time = taskTime,
+                    onTimeChange = { taskTime = it },
+                    onShowTimePickerDialog = { isShowTimePickerDialog = true },
                 )
                 InputTaskMemo(
                     focusRequester = memoFocusRequester,
@@ -280,8 +251,7 @@ private fun AddTaskScreen(
                             uuid = UUID.randomUUID().toString(),
                             title = taskTitle.trim(),
                             isCompleted = false,
-                            startTime = taskStartTime,
-                            endTime = taskEndTime,
+                            time = taskTime,
                             date = taskDate,
                             memo = taskMemo,
                             priority = taskPriority.ordinal

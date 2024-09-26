@@ -31,9 +31,10 @@ import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
 import com.example.model.Task
-import com.example.utils.getTaskTotalTime
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Composable
 fun TaskCard(
@@ -137,11 +138,9 @@ fun TaskCard(
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onPrimary
                     )
+                    val timeFormat = DateTimeFormatter.ofPattern("hh:mm a", Locale.US)
                     Text(
-                        text = getTaskTotalTime(
-                            task.startTime,
-                            task.endTime
-                        ),
+                        text = task.time.format(timeFormat),
                         style = TodoTheme.typography.taskDescTextStyle,
                         color = MaterialTheme.colorScheme.onPrimary
                     )
@@ -190,8 +189,7 @@ private fun TaskCardPreview() {
             uuid = "corrumpit",
             title = "inceptos",
             isCompleted = false,
-            startTime = LocalTime.now(),
-            endTime = LocalTime.now(),
+            time = LocalTime.now(),
             date = LocalDate.now(),
             memo = "memo",
             priority = 2

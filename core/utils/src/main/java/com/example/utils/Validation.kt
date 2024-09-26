@@ -9,9 +9,5 @@ fun checkValidTask(
         return Pair(false, "Title can't be empty")
     }
 
-    if (task.startTime >= task.endTime) {
-        return Pair(false, "Please check the time")
-    }
-
     return Pair(true, "Valid task")
 }

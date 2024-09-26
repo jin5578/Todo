@@ -109,8 +109,8 @@ internal class DefaultSystemRepository @Inject constructor(
     private fun String.toSortTask() = when (this) {
         "Priority (Low to High)" -> SortTask.BY_PRIORITY_ASCENDING
         "Priority (High to Low)" -> SortTask.BY_PRIORITY_DESCENDING
-        "Start Time (Latest at Bottom)" -> SortTask.BY_START_TIME_ASCENDING
-        "Start Time (Latest at Top)" -> SortTask.BY_START_TIME_DESCENDING
+        "Time (Latest at Bottom)" -> SortTask.BY_TIME_ASCENDING
+        "Time (Latest at Top)" -> SortTask.BY_TIME_DESCENDING
         "Creation Time (Latest at Bottom)" -> SortTask.BY_CREATE_TIME_ASCENDING
         else -> SortTask.BY_CREATE_TIME_DESCENDING
     }

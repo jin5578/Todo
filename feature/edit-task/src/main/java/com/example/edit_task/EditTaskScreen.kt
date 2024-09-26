@@ -54,6 +54,7 @@ import com.example.model.TimePicker
 import com.example.utils.checkValidTask
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
+import java.time.LocalTime
 import com.example.design_system.R as DesignSystemR
 
 @Composable
@@ -136,13 +137,11 @@ private fun EditTaskScreen(
     val scrollState = rememberScrollState()
 
     var isShowDatePickerDialog by remember { mutableStateOf(false) }
-    var isShowStartTimePickerDialog by remember { mutableStateOf(false) }
-    var isShowEndTimePickerDialog by remember { mutableStateOf(false) }
+    var isShowTimePickerDialog by remember { mutableStateOf(false) }
 
     var taskTitle by remember { mutableStateOf(task.title) }
     var taskDate by remember { mutableStateOf(task.date) }
-    var taskStartTime by remember { mutableStateOf(task.startTime) }
-    var taskEndTime by remember { mutableStateOf(task.endTime) }
+    var taskTime by remember { mutableStateOf(LocalTime.now()) }
     var taskMemo by remember { mutableStateOf(task.memo) }
     var taskPriority by remember {
         mutableStateOf(Priority.entries.getOrNull(task.priority) ?: Priority.LOW)
@@ -197,26 +196,13 @@ private fun EditTaskScreen(
             )
         }
 
-        if (isShowStartTimePickerDialog) {
+        if (isShowTimePickerDialog) {
             TimePickerDialog(
-                initTime = taskStartTime,
+                timePicker = timePicker,
+                initTime = taskTime,
                 onClose = {
-                    taskStartTime = it
-                    taskEndTime = taskStartTime.plusMinutes(30)
-                    isShowStartTimePickerDialog = false
-                }
-            )
-        }
-
-        if (isShowEndTimePickerDialog) {
-            TimePickerDialog(
-                initTime = taskEndTime,
-                onClose = {
-                    taskEndTime = it
-                    if (taskEndTime < taskStartTime) {
-                        taskStartTime = taskEndTime.minusMinutes(30)
-                    }
-                    isShowEndTimePickerDialog = false
+                    taskTime = it
+                    isShowTimePickerDialog = false
                 }
             )
         }
@@ -256,23 +242,9 @@ private fun EditTaskScreen(
                     onShowDatePickerDialog = { isShowDatePickerDialog = true }
                 )
                 InputTaskTime(
-                    timePicker = timePicker,
-                    startTime = taskStartTime,
-                    endTime = taskEndTime,
-                    onSelectStartTime = {
-                        taskStartTime = it
-                        if (taskEndTime > taskStartTime) {
-                            taskEndTime = taskStartTime.plusMinutes(30)
-                        }
-                    },
-                    onSelectEndTime = {
-                        taskEndTime = it
-                        if (taskEndTime < taskStartTime) {
-                            taskStartTime = taskEndTime.minusMinutes(30)
-                        }
-                    },
-                    onShowStartTimePickerDialog = { isShowStartTimePickerDialog = true },
-                    onShowEndTimePickerDialog = { isShowEndTimePickerDialog = true },
+                    time = taskTime,
+                    onTimeChange = { taskTime = it },
+                    onShowTimePickerDialog = { isShowTimePickerDialog = true },
                 )
                 InputTaskMemo(
                     focusRequester = memoFocusRequester,
@@ -297,8 +269,7 @@ private fun EditTaskScreen(
                             uuid = task.uuid,
                             title = taskTitle.trim(),
                             isCompleted = task.isCompleted,
-                            startTime = taskStartTime,
-                            endTime = taskEndTime,
+                            time = taskTime,
                             date = taskDate,
                             memo = taskMemo,
                             priority = taskPriority.ordinal

@@ -38,4 +38,7 @@
     <string name="system_setting">System setting</string>
     <string name="choose_theme_style">Choose theme style</string>
     <string name="choose_time_picker_style">Choose time picker style</string>
+    <string name="now">Now</string>
+    <string name="in_1_hour">In 1 hour</string>
+    <string name="in_2_hours">In 2 hour</string>
 </resources>

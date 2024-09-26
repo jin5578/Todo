@@ -22,11 +22,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
+import com.example.model.TimePicker
 import java.time.LocalTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimePickerDialog(
+    timePicker: TimePicker,
     initTime: LocalTime = LocalTime.now(),
     onClose: (LocalTime) -> Unit,
 ) {
@@ -83,6 +85,7 @@ fun TimePickerDialog(
 private fun TimePickerDialogPreview() {
     TodoTheme {
         TimePickerDialog(
+            timePicker = TimePicker.CLOCK_TIME_PICKER,
             initTime = LocalTime.now(),
             onClose = {}
         )

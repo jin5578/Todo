@@ -364,12 +364,12 @@ private fun HomeScreen(
                                     -it.priority
                                 }
 
-                                SortTask.BY_START_TIME_ASCENDING -> {
-                                    it.startTime.toSecondOfDay()
+                                SortTask.BY_TIME_ASCENDING -> {
+                                    it.time.toSecondOfDay()
                                 }
 
-                                SortTask.BY_START_TIME_DESCENDING -> {
-                                    -it.startTime.toSecondOfDay()
+                                SortTask.BY_TIME_DESCENDING -> {
+                                    -it.time.toSecondOfDay()
                                 }
                             }
                         }
@@ -429,8 +429,7 @@ fun HomeScreenPreview() {
                 uuid = "cu",
                 title = "purus",
                 isCompleted = false,
-                startTime = LocalTime.now(),
-                endTime = LocalTime.now(),
+                time = LocalTime.now(),
                 date = LocalDate.now(),
                 memo = "memo",
                 priority = 1
@@ -440,7 +439,7 @@ fun HomeScreenPreview() {
             completedTasks = completedTasks,
             incompleteTasks = persistentListOf(),
             sleepTime = LocalTime.now(),
-            sortTask = SortTask.BY_START_TIME_ASCENDING,
+            sortTask = SortTask.BY_TIME_ASCENDING,
             theme = Theme(ThemeType.SUN_RISE),
             buildVersion = "1.0.0",
             navigateCalendar = {},
