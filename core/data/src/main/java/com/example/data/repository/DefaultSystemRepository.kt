@@ -7,6 +7,7 @@ import com.example.model.Theme
 import com.example.model.ThemeType
 import com.example.model.TimePicker
 import com.example.model.addtask.AddTaskSystem
+import com.example.model.calendar.CalendarSystem
 import com.example.model.edittask.EditTaskSystem
 import com.example.model.home.HomeSystem
 import com.example.model.setting.SettingSystem
@@ -66,6 +67,15 @@ internal class DefaultSystemRepository @Inject constructor(
             val timePicker = it.timePicker.toTimePicker()
             EditTaskSystem(
                 timePicker = timePicker
+            )
+        }
+    }
+
+    override fun getCalendarSystem(): Flow<CalendarSystem> {
+        return systemDataSource.systemData.map {
+            val sortTask = it.sortTask.toSortTask()
+            CalendarSystem(
+                sortTask = sortTask
             )
         }
     }

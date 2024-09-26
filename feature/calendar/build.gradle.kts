@@ -70,4 +70,6 @@ dependencies {
     implementation(libs.kotlinx.immutable)
 
     implementation(libs.timber)
+
+    implementation(libs.kizitonwose.calendar)
 }

@@ -11,12 +11,16 @@ fun NavController.navigateCalendar() {
 }
 
 fun NavGraphBuilder.calendarNavGraph(
+    navigateAddTask: () -> Unit,
+    navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
     onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     composable<Route.Calendar> {
         CalendarRoute(
+            navigateAddTask = navigateAddTask,
+            navigateEditTask = navigateEditTask,
             popBackStack = popBackStack,
             onShowErrorSnackBar = onShowErrorSnackBar,
             onShowMessageSnackBar = onShowMessageSnackBar

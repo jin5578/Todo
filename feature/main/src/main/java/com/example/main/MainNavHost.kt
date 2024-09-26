@@ -64,6 +64,8 @@ internal fun MainNavHost(
                 onShowMessageSnackBar = onShowMessageSnackBar,
             )
             calendarNavGraph(
+                navigateAddTask = navigator::navigateAddTask,
+                navigateEditTask = navigator::navigateEditTask,
                 popBackStack = navigator::popBackStackIfNotHome,
                 onShowErrorSnackBar = onShowErrorSnackBar,
                 onShowMessageSnackBar = onShowMessageSnackBar,
