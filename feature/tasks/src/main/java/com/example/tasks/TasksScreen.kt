@@ -36,6 +36,7 @@ import com.example.model.Task
 import com.example.tasks.model.TasksUiState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.collectLatest
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun TasksRoute(
@@ -123,7 +124,7 @@ private fun TasksScreen(
                 title = {
                     Text(
                         text = title,
-                        style = TodoTheme.typography.headlineLarge,
+                        style = TodoTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                 },
@@ -131,7 +132,7 @@ private fun TasksScreen(
                     IconButton(onClick = popBackStack) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_left),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_left),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )

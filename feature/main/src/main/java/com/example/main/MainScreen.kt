@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun MainScreen(
@@ -24,8 +25,8 @@ internal fun MainScreen(
         coroutineScope.launch {
             snackbarHostState.showSnackbar(
                 when (throwable) {
-                    is UnknownHostException -> localContextResources.getString(R.string.error_message_network)
-                    else -> localContextResources.getString(R.string.error_message_unknown)
+                    is UnknownHostException -> localContextResources.getString(DesignSystemR.string.error_message_network)
+                    else -> localContextResources.getString(DesignSystemR.string.error_message_unknown)
                 }
             )
         }

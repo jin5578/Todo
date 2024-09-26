@@ -26,10 +26,10 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.theme.TodoTheme
-import com.example.setting.R
 import com.example.setting.model.CategoryItemUiState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun SettingCategory(
@@ -94,7 +94,7 @@ private fun CategoryItem(
         )
         Icon(
             modifier = Modifier.size(14.dp),
-            imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_right_twin),
+            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_right_twin),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
@@ -106,20 +106,20 @@ private fun CategoryItem(
 private fun SettingCategoryPreview() {
     val infoCategory = persistentListOf(
         CategoryItemUiState(
-            title = R.string.about,
-            icon = R.drawable.svg_information,
+            title = DesignSystemR.string.about,
+            icon = DesignSystemR.drawable.svg_information,
             onClick = {}
         ),
         CategoryItemUiState(
-            title = R.string.github,
-            icon = R.drawable.svg_github,
+            title = DesignSystemR.string.github,
+            icon = DesignSystemR.drawable.svg_github,
             onClick = {}
         )
     )
 
     TodoTheme {
         SettingCategory(
-            title = R.string.info,
+            title = DesignSystemR.string.info,
             category = infoCategory
         )
     }

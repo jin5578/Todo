@@ -49,8 +49,8 @@ import com.example.design_system.theme.primarySunRise
 import com.example.design_system.theme.surfaceMidnightBlue
 import com.example.design_system.theme.surfaceSunRise
 import com.example.model.ThemeType
-import com.example.setting.R
 import com.example.setting.model.ThemeColor
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun SettingTheme(
@@ -108,7 +108,7 @@ internal fun SettingTheme(
         verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
         Text(
-            text = stringResource(R.string.choose_theme_style),
+            text = stringResource(DesignSystemR.string.choose_theme_style),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSecondaryContainer,
         )

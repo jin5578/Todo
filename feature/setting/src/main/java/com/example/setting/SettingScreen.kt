@@ -49,6 +49,7 @@ import com.example.setting.model.SettingUiState
 import com.example.utils.openUrl
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.collectLatest
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun SettingRoute(
@@ -130,28 +131,28 @@ private fun SettingScreen(
 
     val infoCategory = persistentListOf(
         CategoryItemUiState(
-            title = R.string.about,
-            icon = R.drawable.svg_information,
+            title = DesignSystemR.string.about,
+            icon = DesignSystemR.drawable.svg_information,
             onClick = navigateInfo
         ),
         CategoryItemUiState(
-            title = R.string.github,
-            icon = R.drawable.svg_github,
+            title = DesignSystemR.string.github,
+            icon = DesignSystemR.drawable.svg_github,
             onClick = { openUrl("https://github.com/jin5578") }
         )
     )
 
     val systemCategory = persistentListOf(
         CategoryItemUiState(
-            title = R.string.theme,
-            icon = R.drawable.svg_theme,
+            title = DesignSystemR.string.theme,
+            icon = DesignSystemR.drawable.svg_theme,
             onClick = {
                 showBottomSheet = BottomSheetType.THEME
             },
         ),
         CategoryItemUiState(
-            title = R.string.time_picker,
-            icon = R.drawable.svg_clock,
+            title = DesignSystemR.string.time_picker,
+            icon = DesignSystemR.drawable.svg_clock,
             onClick = {
                 showBottomSheet = BottomSheetType.TIME_PICKER
             },
@@ -166,8 +167,8 @@ private fun SettingScreen(
                 ),
                 title = {
                     Text(
-                        text = stringResource(id = R.string.settings),
-                        style = TodoTheme.typography.headlineLarge,
+                        text = stringResource(id = DesignSystemR.string.settings),
+                        style = TodoTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                 },
@@ -175,7 +176,7 @@ private fun SettingScreen(
                     IconButton(onClick = popBackStack) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_left),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_left),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )
@@ -222,11 +223,11 @@ private fun SettingScreen(
                 verticalArrangement = Arrangement.spacedBy(24.dp),
             ) {
                 SettingCategory(
-                    title = R.string.info,
+                    title = DesignSystemR.string.info,
                     category = infoCategory,
                 )
                 SettingCategory(
-                    title = R.string.system_setting,
+                    title = DesignSystemR.string.system_setting,
                     category = systemCategory,
                 )
             }

@@ -54,10 +54,10 @@ import com.example.model.TimePicker
 import com.example.utils.checkValidTask
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
-import timber.log.Timber
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.UUID
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun AddTaskRoute(
@@ -153,8 +153,8 @@ private fun AddTaskScreen(
                 ),
                 title = {
                     Text(
-                        text = stringResource(R.string.add_task),
-                        style = TodoTheme.typography.headlineLarge,
+                        text = stringResource(DesignSystemR.string.add_task),
+                        style = TodoTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                 },
@@ -162,7 +162,7 @@ private fun AddTaskScreen(
                     IconButton(onClick = popBackStack) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_left),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_left),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )
@@ -305,7 +305,7 @@ private fun AddTaskScreen(
                 ) {
                     Text(
                         modifier = Modifier.padding(8.dp),
-                        text = stringResource(R.string.add_task),
+                        text = stringResource(DesignSystemR.string.add_task),
                         style = TodoTheme.typography.headlineSmall,
                     )
                 }

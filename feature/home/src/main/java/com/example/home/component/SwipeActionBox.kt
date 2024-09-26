@@ -29,15 +29,15 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import com.example.home.R
 import kotlinx.coroutines.delay
+import com.example.design_system.R as DesignSystemR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun <T> SwipeActionBox(
     item: T,
     backgroundColor: Color = MaterialTheme.colorScheme.error,
-    icon: ImageVector = ImageVector.vectorResource(R.drawable.svg_delete),
+    icon: ImageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_delete),
     iconTint: Color = MaterialTheme.colorScheme.onError,
     animationDuration: Int = 300,
     onDeleteAction: (T) -> Unit,

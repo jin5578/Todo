@@ -4,11 +4,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -57,6 +59,7 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun CalendarRoute(
@@ -164,34 +167,37 @@ private fun CalendarScreen(
                     IconButton(onClick = popBackStack) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_left),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_left),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 },
                 actions = {
-                    Box(
-                        modifier = Modifier.clickable {
-                            selectedDay = currentDate
-                            coroutineScope.launch {
-                                weekCalendarState.animateScrollToWeek(LocalDate.now())
+                    Row {
+                        Box(
+                            modifier = Modifier.clickable {
+                                selectedDay = currentDate
+                                coroutineScope.launch {
+                                    weekCalendarState.animateScrollToWeek(LocalDate.now())
+                                }
                             }
-                        }
-                            .padding(end = 10.dp).border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.primary,
-                                shape = RoundedCornerShape(8.dp)
-                            ),
-                    ) {
-                        Text(
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
-                            text = currentDate.format(dateFormat),
-                            style = TodoTheme.typography.infoTextStyle.copy(
-                                fontSize = 14.sp
+                                .border(
+                                    width = 1.dp,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    shape = RoundedCornerShape(8.dp)
+                                ),
+                        ) {
+                            Text(
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
+                                text = currentDate.format(dateFormat),
+                                style = TodoTheme.typography.infoTextStyle.copy(
+                                    fontSize = 14.sp
+                                )
                             )
-                        )
+                        }
                     }
+                    Spacer(modifier = Modifier.width(10.dp))
                 }
             )
         },
@@ -203,7 +209,7 @@ private fun CalendarScreen(
             ) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    imageVector = ImageVector.vectorResource(R.drawable.svg_plus),
+                    imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_plus),
                     contentDescription = null
                 )
             }

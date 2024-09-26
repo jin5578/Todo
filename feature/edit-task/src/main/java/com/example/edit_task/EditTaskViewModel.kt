@@ -2,7 +2,9 @@ package com.example.edit_task
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.usecase.DeleteTaskUseCase
 import com.example.domain.usecase.GetEditTaskDataUseCase
+import com.example.domain.usecase.GetTaskByIdUseCase
 import com.example.domain.usecase.UpdateTaskUseCase
 import com.example.edit_task.model.EditTaskUiEffect
 import com.example.edit_task.model.EditTaskUiState
@@ -21,6 +23,8 @@ import javax.inject.Inject
 class EditTaskViewModel @Inject constructor(
     private val getEditTaskDataUseCase: GetEditTaskDataUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
+    private val getTaskByIdUseCase: GetTaskByIdUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase,
 ) : ViewModel() {
     private val _errorFlow: MutableSharedFlow<Throwable> = MutableSharedFlow()
     val errorFlow = _errorFlow.asSharedFlow()
@@ -41,8 +45,8 @@ class EditTaskViewModel @Inject constructor(
                     task = editTask.task,
                     timePicker = editTaskSetting.timePicker
                 )
-            }.catch { throwable ->
-                _errorFlow.emit(throwable)
+            }.catch {
+
             }.collect {
                 _uiState.value = it
             }
@@ -53,11 +57,21 @@ class EditTaskViewModel @Inject constructor(
         viewModelScope.launch {
             updateTaskUseCase(task)
             _uiEffect.value =
-                EditTaskUiEffect.SuccessUpdateTask(SUCCESSFULLY_UPDATED_THE_SCHEDULE)
+                EditTaskUiEffect.SuccessAction(SUCCESSFULLY_UPDATED_THE_SCHEDULE)
+        }
+    }
+
+    fun deleteTask(taskId: Long) {
+        viewModelScope.launch {
+            val task = getTaskByIdUseCase(taskId)
+            deleteTaskUseCase(task)
+            _uiEffect.value =
+                EditTaskUiEffect.SuccessAction(SUCCESSFULLY_DELETED_THE_SCHEDULE)
         }
     }
 
     companion object {
         private const val SUCCESSFULLY_UPDATED_THE_SCHEDULE = "Successfully updated the schedule"
+        private const val SUCCESSFULLY_DELETED_THE_SCHEDULE = "Successfully deleted the schedule"
     }
 }

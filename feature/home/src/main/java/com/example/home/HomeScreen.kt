@@ -58,6 +58,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun HomeRoute(
@@ -200,7 +201,7 @@ private fun HomeScreen(
                 ),
                 title = {
                     Text(
-                        text = stringResource(id = R.string.app_name),
+                        text = stringResource(id = DesignSystemR.string.app_name),
                         style = TodoTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -211,7 +212,7 @@ private fun HomeScreen(
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_calendar),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )
@@ -219,7 +220,7 @@ private fun HomeScreen(
                     IconButton(onClick = navigateSetting) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_setting),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_setting),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )
@@ -235,7 +236,7 @@ private fun HomeScreen(
             ) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    imageVector = ImageVector.vectorResource(R.drawable.svg_plus),
+                    imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_plus),
                     contentDescription = null
                 )
             }
@@ -269,8 +270,8 @@ private fun HomeScreen(
                         .graphicsLayer {
                             translationX = leftTranslate.value
                         },
-                    title = stringResource(R.string.completed),
-                    icon = R.drawable.svg_completed,
+                    title = stringResource(DesignSystemR.string.completed),
+                    icon = DesignSystemR.drawable.svg_completed,
                     content = "Today ${completedTasks.size} Tasks",
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateCompletedTask,
@@ -280,8 +281,8 @@ private fun HomeScreen(
                         .graphicsLayer {
                             translationX = rightTranslate.value
                         },
-                    title = stringResource(R.string.incomplete),
-                    icon = R.drawable.svg_incomplete,
+                    title = stringResource(DesignSystemR.string.incomplete),
+                    icon = DesignSystemR.drawable.svg_incomplete,
                     content = "Today ${incompleteTasks.size} Tasks",
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateIncompleteTask,
@@ -302,7 +303,7 @@ private fun HomeScreen(
                         .graphicsLayer {
                             translationX = leftTranslate.value
                         },
-                    title = stringResource(R.string.this_week),
+                    title = stringResource(DesignSystemR.string.this_week),
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateThisWeekTask,
                 )
@@ -311,7 +312,7 @@ private fun HomeScreen(
                         .graphicsLayer {
                             translationX = rightTranslate.value
                         },
-                    title = stringResource(R.string.all),
+                    title = stringResource(DesignSystemR.string.all),
                     backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                     onClick = navigateAllTask,
                 )
@@ -328,7 +329,7 @@ private fun HomeScreen(
                 ) {
                     Text(
                         modifier = Modifier.padding(16.dp),
-                        text = stringResource(R.string.today_tasks),
+                        text = stringResource(DesignSystemR.string.today_tasks),
                         style = TodoTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.primary,
                     )
@@ -336,7 +337,7 @@ private fun HomeScreen(
                     IconButton(onClick = { isShowSortTaskDialog = true }) {
                         Icon(
                             modifier = Modifier.size(21.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_sort),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_sort),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.primary
                         )

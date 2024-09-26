@@ -9,7 +9,7 @@ sealed interface EditTaskUiEffect {
     data object Idle : EditTaskUiEffect
 
     @Immutable
-    data class SuccessUpdateTask(
+    data class SuccessAction(
         val message: String
     ) : EditTaskUiEffect
 }

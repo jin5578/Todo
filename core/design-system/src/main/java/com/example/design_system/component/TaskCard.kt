@@ -105,6 +105,28 @@ fun TaskCard(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
                 Spacer(modifier = Modifier.height(8.dp))
+                if (task.memo.isNotEmpty()) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(14.dp),
+                            painter = painterResource(id = R.drawable.svg_memo),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Text(
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(end = 10.dp)
+                                .basicMarquee(),
+                            text = task.memo,
+                            style = TodoTheme.typography.taskDescTextStyle,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                     verticalAlignment = Alignment.CenterVertically,

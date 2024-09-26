@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design_system.theme.TodoTheme
 import com.example.model.TimePicker
-import com.example.setting.R
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun SettingTimePicker(
@@ -47,12 +47,12 @@ internal fun SettingTimePicker(
         verticalArrangement = Arrangement.spacedBy(30.dp),
     ) {
         Text(
-            text = stringResource(R.string.choose_time_picker_style),
+            text = stringResource(DesignSystemR.string.choose_time_picker_style),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSecondaryContainer,
         )
         Row(
-            modifier = Modifier.fillMaxWidth().padding(20.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
         ) {

@@ -54,6 +54,7 @@ import com.example.model.TimePicker
 import com.example.utils.checkValidTask
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun EditTaskRoute(
@@ -77,8 +78,8 @@ internal fun EditTaskRoute(
     }
 
     LaunchedEffect(uiEffect) {
-        if (uiEffect is EditTaskUiEffect.SuccessUpdateTask) {
-            val message = (uiEffect as EditTaskUiEffect.SuccessUpdateTask).message
+        if (uiEffect is EditTaskUiEffect.SuccessAction) {
+            val message = (uiEffect as EditTaskUiEffect.SuccessAction).message
             onShowMessageSnackBar(message)
             popBackStack()
         }
@@ -88,6 +89,7 @@ internal fun EditTaskRoute(
         uiState = uiState,
         popBackStack = popBackStack,
         onUpdateTaskClick = viewModel::updateTask,
+        onTaskDelete = viewModel::deleteTask,
         onShowMessageSnackBar = onShowMessageSnackBar
     )
 }
@@ -97,6 +99,7 @@ private fun EditTaskContent(
     uiState: EditTaskUiState,
     popBackStack: () -> Unit,
     onUpdateTaskClick: (Task) -> Unit,
+    onTaskDelete: (Long) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     when (uiState) {
@@ -110,6 +113,7 @@ private fun EditTaskContent(
                 timePicker = uiState.timePicker,
                 popBackStack = popBackStack,
                 onUpdateTaskClick = onUpdateTaskClick,
+                onTaskDelete = onTaskDelete,
                 onShowMessageSnackBar = onShowMessageSnackBar
             )
         }
@@ -123,6 +127,7 @@ private fun EditTaskScreen(
     timePicker: TimePicker,
     popBackStack: () -> Unit,
     onUpdateTaskClick: (Task) -> Unit,
+    onTaskDelete: (Long) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val titleFocusRequester = FocusRequester()
@@ -151,8 +156,8 @@ private fun EditTaskScreen(
                 ),
                 title = {
                     Text(
-                        text = stringResource(R.string.edit_task),
-                        style = TodoTheme.typography.headlineLarge,
+                        text = stringResource(DesignSystemR.string.edit_task),
+                        style = TodoTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                 },
@@ -160,12 +165,24 @@ private fun EditTaskScreen(
                     IconButton(onClick = popBackStack) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_left),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_left),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 },
+                actions = {
+                    IconButton(
+                        onClick = { onTaskDelete(task.id) }
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_delete),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
             )
         }
     ) { paddingValues ->
@@ -305,7 +322,7 @@ private fun EditTaskScreen(
                 ) {
                     Text(
                         modifier = Modifier.padding(8.dp),
-                        text = stringResource(R.string.edit_task),
+                        text = stringResource(DesignSystemR.string.edit_task),
                         style = TodoTheme.typography.headlineSmall,
                     )
                 }

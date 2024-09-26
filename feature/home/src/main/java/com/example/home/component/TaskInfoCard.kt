@@ -22,7 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.theme.TodoTheme
-import com.example.home.R
+import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun TaskInfoCard(
@@ -87,7 +87,7 @@ private fun TaskInfoCardPreview() {
         TaskInfoCard(
             modifier = Modifier,
             title = "Completed",
-            icon = R.drawable.svg_completed,
+            icon = DesignSystemR.drawable.svg_completed,
             content = "2 Tasks",
             backgroundColor = MaterialTheme.colorScheme.primaryContainer,
             onClick = { }
