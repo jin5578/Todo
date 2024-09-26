@@ -88,7 +88,7 @@ fun InputTaskTime(
             ) {
                 Icon(
                     modifier = Modifier.size(14.dp),
-                    imageVector = ImageVector.vectorResource(R.drawable.svg_calendar),
+                    imageVector = ImageVector.vectorResource(R.drawable.svg_clock),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurface
                 )

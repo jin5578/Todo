@@ -36,9 +36,10 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.design_system.component.ClockTimePickerDialog
 import com.example.design_system.component.DatePickerDialog
 import com.example.design_system.component.Loading
-import com.example.design_system.component.TimePickerDialog
+import com.example.design_system.component.ScrollTimePickerDialog
 import com.example.design_system.component.input.InputTaskDate
 import com.example.design_system.component.input.InputTaskMemo
 import com.example.design_system.component.input.InputTaskPriority
@@ -197,14 +198,23 @@ private fun EditTaskScreen(
         }
 
         if (isShowTimePickerDialog) {
-            TimePickerDialog(
-                timePicker = timePicker,
-                initTime = taskTime,
-                onClose = {
-                    taskTime = it
-                    isShowTimePickerDialog = false
-                }
-            )
+            if (timePicker == TimePicker.SCROLL_TIME_PICKER) {
+                ScrollTimePickerDialog(
+                    initTime = taskTime,
+                    onClose = {
+                        taskTime = it
+                        isShowTimePickerDialog = false
+                    }
+                )
+            } else {
+                ClockTimePickerDialog(
+                    initTime = taskTime,
+                    onClose = {
+                        taskTime = it
+                        isShowTimePickerDialog = false
+                    }
+                )
+            }
         }
 
         LaunchedEffect(
