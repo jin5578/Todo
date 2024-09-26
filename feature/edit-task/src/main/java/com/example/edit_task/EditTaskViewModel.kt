@@ -45,8 +45,8 @@ class EditTaskViewModel @Inject constructor(
                     task = editTask.task,
                     timePicker = editTaskSetting.timePicker
                 )
-            }.catch {
-
+            }.catch { throwable ->
+                _errorFlow.emit(throwable)
             }.collect {
                 _uiState.value = it
             }

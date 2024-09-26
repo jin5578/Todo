@@ -5,6 +5,7 @@ import com.example.data_api.repository.TaskRepository
 import com.example.model.edittask.EditTask
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetEditTaskDataUseCase @Inject constructor(
@@ -14,7 +15,9 @@ class GetEditTaskDataUseCase @Inject constructor(
     operator fun invoke(taskId: Long): Flow<EditTask> {
         return combine(
             systemRepository.getEditTaskSystem(),
-            taskRepository.getFlowTaskById(taskId),
+            flow {
+                emit(taskRepository.getTaskById(taskId))
+            }
         ) { editTaskSystem, task ->
             EditTask(
                 task = task,

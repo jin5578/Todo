@@ -41,4 +41,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     kspAndroidTest(libs.hilt.android.compiler)
+
+    implementation(libs.timber)
 }
