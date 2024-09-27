@@ -19,8 +19,9 @@ import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
 
 @Composable
-fun EmptyTask(
+fun EmptyContent(
     modifier: Modifier = Modifier,
+    title: String,
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
@@ -36,7 +37,7 @@ fun EmptyTask(
                 contentDescription = null
             )
             Text(
-                text = stringResource(R.string.no_tasks),
+                text = title,
                 style = TodoTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -46,8 +47,10 @@ fun EmptyTask(
 
 @Preview
 @Composable
-private fun EmptyTaskPreview() {
+private fun EmptyContentPreview() {
     TodoTheme {
-        EmptyTask()
+        EmptyContent(
+            title = stringResource(R.string.no_tasks)
+        )
     }
 }

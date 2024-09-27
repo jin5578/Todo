@@ -2,6 +2,7 @@ package com.example.database.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.database.CategoryDatabase
 import com.example.database.TaskDatabase
 import dagger.Module
 import dagger.Provides
@@ -19,6 +20,15 @@ internal object DatabaseModule {
         @ApplicationContext context: Context
     ): TaskDatabase =
         Room.databaseBuilder(context, TaskDatabase::class.java, "task")
+            .fallbackToDestructiveMigration()
+            .build()
+
+    @Provides
+    @Singleton
+    fun providesCategoryDatabase(
+        @ApplicationContext context: Context
+    ): CategoryDatabase =
+        Room.databaseBuilder(context, CategoryDatabase::class.java, "category")
             .fallbackToDestructiveMigration()
             .build()
 }

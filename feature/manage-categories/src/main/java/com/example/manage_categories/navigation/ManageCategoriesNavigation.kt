@@ -1,26 +1,22 @@
-package com.example.setting.navigation
+package com.example.manage_categories.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.example.manage_categories.ManageCategoriesRoute
 import com.example.navigation.Route
-import com.example.setting.SettingRoute
 
-fun NavController.navigateSetting() {
-    navigate(route = Route.Setting)
+fun NavController.navigateManageCategories() {
+    navigate(route = Route.ManageCategories)
 }
 
-fun NavGraphBuilder.settingNavGraph(
-    navigateInfo: () -> Unit,
-    navigateManageCategories: () -> Unit,
+fun NavGraphBuilder.manageCategoriesNavGraph(
     popBackStack: () -> Unit,
     onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
-    composable<Route.Setting> {
-        SettingRoute(
-            navigateInfo = navigateInfo,
-            navigateManageCategories = navigateManageCategories,
+    composable<Route.ManageCategories> { navBackStackEntry ->
+        ManageCategoriesRoute(
             popBackStack = popBackStack,
             onShowErrorSnackBar = onShowErrorSnackBar,
             onShowMessageSnackBar = onShowMessageSnackBar,

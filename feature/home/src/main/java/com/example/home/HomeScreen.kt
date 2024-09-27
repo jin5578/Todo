@@ -40,7 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.design_system.component.EmptyTask
+import com.example.design_system.component.EmptyContent
 import com.example.design_system.component.Loading
 import com.example.design_system.component.SortTaskDialog
 import com.example.design_system.component.TaskCard
@@ -319,7 +319,7 @@ private fun HomeScreen(
             }
 
             if (incompleteTasks.isEmpty()) {
-                EmptyTask()
+                EmptyContent(title = stringResource(DesignSystemR.string.no_tasks))
             } else {
                 Row(
                     modifier = Modifier.fillMaxWidth()

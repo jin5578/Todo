@@ -39,6 +39,7 @@ include(
     ":feature:edit-task",
     ":feature:home",
     ":feature:main",
+    ":feature:manage-categories",
     ":feature:setting",
     ":feature:tasks"
 )

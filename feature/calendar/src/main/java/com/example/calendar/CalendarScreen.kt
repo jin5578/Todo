@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,7 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.calendar.model.CalendarUiState
-import com.example.design_system.component.EmptyTask
+import com.example.design_system.component.EmptyContent
 import com.example.design_system.component.Loading
 import com.example.design_system.component.TaskCard
 import com.example.design_system.component.WeekendDay
@@ -233,12 +234,11 @@ private fun CalendarScreen(
             )
             val selectedDayTasks = tasks.filter { it.date == selectedDay }.toPersistentList()
             if (selectedDayTasks.isEmpty()) {
-                EmptyTask()
+                EmptyContent(title = stringResource(DesignSystemR.string.no_tasks))
             } else {
                 Spacer(modifier = Modifier.height(10.dp))
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize()
-                        .padding(horizontal = 16.dp, vertical = 0.dp)
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 0.dp)
                 ) {
                     itemsIndexed(
                         items = selectedDayTasks,

@@ -55,6 +55,7 @@ import com.example.design_system.R as DesignSystemR
 internal fun SettingRoute(
     viewModel: SettingViewModel = hiltViewModel(),
     navigateInfo: () -> Unit,
+    navigateManageCategories: () -> Unit,
     popBackStack: () -> Unit,
     onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
@@ -72,6 +73,7 @@ internal fun SettingRoute(
     SettingContent(
         uiState = uiState,
         navigateInfo = navigateInfo,
+        navigateManageCategories = navigateManageCategories,
         popBackStack = popBackStack,
         openUrl = { url -> openUrl(context, url) },
         onThemeChanged = viewModel::updateTheme,
@@ -84,6 +86,7 @@ internal fun SettingRoute(
 private fun SettingContent(
     uiState: SettingUiState,
     navigateInfo: () -> Unit,
+    navigateManageCategories: () -> Unit,
     popBackStack: () -> Unit,
     openUrl: (String) -> Unit,
     onThemeChanged: (ThemeType) -> Unit,
@@ -101,6 +104,7 @@ private fun SettingContent(
                 timePicker = uiState.timePicker,
                 buildVersion = uiState.buildVersion,
                 navigateInfo = navigateInfo,
+                navigateManageCategories = navigateManageCategories,
                 popBackStack = popBackStack,
                 openUrl = openUrl,
                 onThemeChanged = onThemeChanged,
@@ -118,6 +122,7 @@ private fun SettingScreen(
     timePicker: TimePicker,
     buildVersion: String,
     navigateInfo: () -> Unit,
+    navigateManageCategories: () -> Unit,
     popBackStack: () -> Unit,
     openUrl: (String) -> Unit,
     onThemeChanged: (ThemeType) -> Unit,
@@ -156,6 +161,11 @@ private fun SettingScreen(
             onClick = {
                 showBottomSheet = BottomSheetType.TIME_PICKER
             },
+        ),
+        CategoryItemUiState(
+            title = DesignSystemR.string.category,
+            icon = DesignSystemR.drawable.svg_category,
+            onClick = { navigateManageCategories() }
         )
     )
 
@@ -251,6 +261,7 @@ private fun SettingScreenPreview() {
             timePicker = TimePicker.SCROLL_TIME_PICKER,
             buildVersion = "1.0.0",
             navigateInfo = {},
+            navigateManageCategories = {},
             popBackStack = {},
             openUrl = {},
             onThemeChanged = {},

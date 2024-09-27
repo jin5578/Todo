@@ -1,11 +1,6 @@
-package com.example.tasks
+package com.example.manage_categories
 
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,33 +21,30 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.design_system.R
 import com.example.design_system.component.EmptyContent
 import com.example.design_system.component.Loading
-import com.example.design_system.component.TaskCard
 import com.example.design_system.theme.TodoTheme
-import com.example.model.Task
-import com.example.tasks.model.TasksUiState
+import com.example.manage_categories.component.CategoryCard
+import com.example.manage_categories.model.ManageCategoriesUiState
+import com.example.model.Category
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.collectLatest
 import com.example.design_system.R as DesignSystemR
 
 @Composable
-internal fun TasksRoute(
-    viewModel: TasksViewModel = hiltViewModel(),
-    title: String,
+internal fun ManageCategoriesRoute(
+    viewModel: ManageCategoriesViewModel = hiltViewModel(),
     popBackStack: () -> Unit,
-    navigateEditTask: (Long) -> Unit,
     onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(title) {
-        viewModel.fetchTasks(title)
-    }
 
     LaunchedEffect(true) {
         viewModel.errorFlow.collectLatest { throwable ->
@@ -60,45 +52,28 @@ internal fun TasksRoute(
         }
     }
 
-    TasksContent(
+    ManageCategoriesContent(
         uiState = uiState,
-        title = title,
         popBackStack = popBackStack,
-        navigateEditTask = navigateEditTask,
-        onTaskToggleCompletion = { taskId, isCompleted ->
-            viewModel.toggleTaskCompletion(
-                taskId = taskId,
-                isCompleted = isCompleted
-            )
-        },
-        onTaskDelete = viewModel::deleteTask,
-        onShowMessageSnackBar = onShowMessageSnackBar,
+        onShowMessageSnackBar = onShowMessageSnackBar
     )
 }
 
 @Composable
-private fun TasksContent(
-    uiState: TasksUiState,
-    title: String,
+private fun ManageCategoriesContent(
+    uiState: ManageCategoriesUiState,
     popBackStack: () -> Unit,
-    navigateEditTask: (Long) -> Unit,
-    onTaskToggleCompletion: (Long, Boolean) -> Unit,
-    onTaskDelete: (Long) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     when (uiState) {
-        is TasksUiState.Loading -> {
+        is ManageCategoriesUiState.Loading -> {
             Loading()
         }
 
-        is TasksUiState.Success -> {
-            TasksScreen(
-                title = title,
-                tasks = uiState.tasks,
+        is ManageCategoriesUiState.Success -> {
+            ManageCategoriesScreen(
+                categories = uiState.categories,
                 popBackStack = popBackStack,
-                navigateEditTask = navigateEditTask,
-                onTaskToggleCompletion = onTaskToggleCompletion,
-                onTaskDelete = onTaskDelete,
                 onShowMessageSnackBar = onShowMessageSnackBar
             )
         }
@@ -107,13 +82,9 @@ private fun TasksContent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TasksScreen(
-    title: String,
-    tasks: ImmutableList<Task>,
+private fun ManageCategoriesScreen(
+    categories: ImmutableList<Category>,
     popBackStack: () -> Unit,
-    navigateEditTask: (Long) -> Unit,
-    onTaskToggleCompletion: (Long, Boolean) -> Unit,
-    onTaskDelete: (Long) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     Scaffold(
@@ -124,7 +95,7 @@ private fun TasksScreen(
                 ),
                 title = {
                     Text(
-                        text = title,
+                        text = stringResource(DesignSystemR.string.category),
                         style = TodoTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
@@ -133,7 +104,7 @@ private fun TasksScreen(
                     IconButton(onClick = popBackStack) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_left),
+                            imageVector = ImageVector.vectorResource(R.drawable.svg_arrow_left),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
                         )
@@ -142,12 +113,10 @@ private fun TasksScreen(
             )
         }
     ) { paddingValues ->
-        if (tasks.isEmpty()) {
+        if (categories.isEmpty()) {
             EmptyContent(
-                modifier = Modifier.fillMaxSize()
-                    .padding(paddingValues)
-                    .background(MaterialTheme.colorScheme.surface),
-                title = stringResource(DesignSystemR.string.no_tasks)
+                modifier = Modifier.fillMaxSize(),
+                title = stringResource(R.string.no_categories)
             )
         } else {
             LazyColumn(
@@ -157,28 +126,32 @@ private fun TasksScreen(
                         start = 16.dp,
                         end = 16.dp,
                         bottom = 10.dp,
-                    )
+                    ),
             ) {
                 itemsIndexed(
-                    items = tasks,
-                    key = { _, task ->
-                        task.id
+                    items = categories,
+                    key = { _, category ->
+                        category.id
                     }
-                ) { _, task ->
-                    Box(
-                        modifier = Modifier.animateItem(tween(500))
-                    ) {
-                        TaskCard(
-                            task = task,
-                            isAvailableSwipe = false,
-                            onTaskEdit = { taskId -> navigateEditTask(taskId) },
-                            onTaskToggleCompletion = onTaskToggleCompletion,
-                            onTaskDelete = { taskId -> onTaskDelete(taskId) },
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(10.dp))
+                ) { _, category ->
+                    CategoryCard(
+                        backgroundColor = category.backgroundColor,
+                        onClick = {},
+                    )
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun ManageCategoriesPreview() {
+    TodoTheme {
+        ManageCategoriesScreen(
+            categories = persistentListOf(),
+            popBackStack = {},
+            onShowMessageSnackBar = {}
+        )
     }
 }

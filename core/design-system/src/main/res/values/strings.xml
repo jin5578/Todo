@@ -41,4 +41,10 @@
     <string name="now">Now</string>
     <string name="in_1_hour">In 1 hour</string>
     <string name="in_2_hours">In 2 hour</string>
+
+    <!-- core design-system module -->
+    <string name="category">Category</string>
+
+    <!-- feature manage-categories module -->
+    <string name="no_categories">No Categories</string>
 </resources>

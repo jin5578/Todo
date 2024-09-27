@@ -29,4 +29,7 @@ sealed interface Route {
     data class EditTask(
         val taskId: Long
     ) : Route
+
+    @Serializable
+    data object ManageCategories : Route
 }

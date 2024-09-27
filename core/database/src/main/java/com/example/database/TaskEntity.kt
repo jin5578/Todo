@@ -14,7 +14,7 @@ import java.time.LocalTime
     LocalTimeConverter::class,
     LocalDateConverter::class,
 )
-data class TaskEntity constructor(
+data class TaskEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Long = 0L,
