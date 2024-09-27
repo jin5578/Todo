@@ -41,8 +41,8 @@ import com.example.model.Theme
 import com.example.model.ThemeType
 import com.example.model.TimePicker
 import com.example.setting.component.SettingCategory
-import com.example.setting.component.SettingTheme
-import com.example.setting.component.SettingTimePicker
+import com.example.setting.component.SettingThemeBottomSheet
+import com.example.setting.component.SettingTimePickerBottomSheet
 import com.example.setting.model.BottomSheetType
 import com.example.setting.model.CategoryItemUiState
 import com.example.setting.model.SettingUiState
@@ -204,14 +204,14 @@ private fun SettingScreen(
                 Box() {
                     when (showBottomSheet) {
                         BottomSheetType.THEME -> {
-                            SettingTheme(
+                            SettingThemeBottomSheet(
                                 initTheme = theme.type,
                                 onSelect = onThemeChanged,
                             )
                         }
 
                         BottomSheetType.TIME_PICKER -> {
-                            SettingTimePicker(
+                            SettingTimePickerBottomSheet(
                                 initTimePicker = timePicker,
                                 onSelect = onTimePickerChanged,
                             )

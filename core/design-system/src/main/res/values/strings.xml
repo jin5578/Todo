@@ -47,4 +47,10 @@
 
     <!-- feature manage-categories module -->
     <string name="no_categories">No Categories</string>
+    <string name="new_category">New category</string>
+    <string name="edit_category">Edit category</string>
+    <string name="please_enter_the_category_you_want_to_add">Please enter the category you want to add</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
+    <string name="title_can_not_be_empty">Title can\'t be empty</string>
 </resources>

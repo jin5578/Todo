@@ -13,13 +13,11 @@ fun NavController.navigateManageCategories() {
 fun NavGraphBuilder.manageCategoriesNavGraph(
     popBackStack: () -> Unit,
     onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
-    onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     composable<Route.ManageCategories> { navBackStackEntry ->
         ManageCategoriesRoute(
             popBackStack = popBackStack,
             onShowErrorSnackBar = onShowErrorSnackBar,
-            onShowMessageSnackBar = onShowMessageSnackBar,
         )
     }
 }

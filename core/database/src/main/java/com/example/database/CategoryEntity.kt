@@ -11,6 +11,6 @@ data class CategoryEntity(
     val id: Long = 0L,
     @ColumnInfo(name = "title")
     val title: String = "",
-    @ColumnInfo(name = "backgroundColor")
-    val backgroundColor: Int,
+    @ColumnInfo(name = "colorName")
+    val colorName: String,
 )

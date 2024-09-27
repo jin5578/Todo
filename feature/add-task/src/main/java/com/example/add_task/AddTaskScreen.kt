@@ -209,6 +209,7 @@ private fun AddTaskScreen(
                 }
             }
         )
+
         Column(
             modifier = Modifier.fillMaxSize()
                 .padding(paddingValues)

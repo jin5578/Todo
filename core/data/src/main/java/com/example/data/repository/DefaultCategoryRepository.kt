@@ -19,9 +19,18 @@ internal class DefaultCategoryRepository @Inject constructor(
         }
     }
 
+    override suspend fun getCategoryById(id: Long): Category {
+        return categoryDataSource.getCategoryById(id).toCategory()
+    }
+
     override suspend fun insertCategory(category: Category) {
         val entity = category.toCategoryEntity()
         categoryDataSource.insertCategory(entity)
+    }
+
+    override suspend fun updateCategory(category: Category) {
+        val entity = category.toCategoryEntity()
+        categoryDataSource.updateCategory(entity)
     }
 
     override suspend fun deleteCategory(category: Category) {
@@ -32,12 +41,12 @@ internal class DefaultCategoryRepository @Inject constructor(
     private fun CategoryEntity.toCategory() = Category(
         id = this.id,
         title = this.title,
-        backgroundColor = this.backgroundColor
+        colorName = this.colorName,
     )
 
     private fun Category.toCategoryEntity() = CategoryEntity(
         id = this.id,
         title = this.title,
-        backgroundColor = this.backgroundColor
+        colorName = this.colorName,
     )
 }

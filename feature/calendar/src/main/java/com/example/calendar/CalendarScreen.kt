@@ -210,7 +210,7 @@ private fun CalendarScreen(
             ) {
                 Icon(
                     modifier = Modifier.size(32.dp),
-                    imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_plus),
+                    imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_plus_small),
                     contentDescription = null
                 )
             }

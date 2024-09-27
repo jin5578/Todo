@@ -34,7 +34,7 @@ import com.example.model.TimePicker
 import com.example.design_system.R as DesignSystemR
 
 @Composable
-internal fun SettingTimePicker(
+internal fun SettingTimePickerBottomSheet(
     initTimePicker: TimePicker,
     onSelect: (TimePicker) -> Unit,
 ) {
@@ -135,9 +135,9 @@ private fun ToggleButton(
 
 @Preview
 @Composable
-private fun SettingTimePickerPreview() {
+private fun SettingTimePickerBottomSheetPreview() {
     TodoTheme {
-        SettingTimePicker(
+        SettingTimePickerBottomSheet(
             initTimePicker = TimePicker.SCROLL_TIME_PICKER,
             onSelect = {}
         )

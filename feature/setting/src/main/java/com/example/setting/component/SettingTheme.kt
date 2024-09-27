@@ -53,7 +53,7 @@ import com.example.setting.model.ThemeColor
 import com.example.design_system.R as DesignSystemR
 
 @Composable
-internal fun SettingTheme(
+internal fun SettingThemeBottomSheet(
     initTheme: ThemeType,
     onSelect: (ThemeType) -> Unit,
 ) {
@@ -186,9 +186,9 @@ private fun ThemeItem(
 
 @Preview
 @Composable
-private fun SettingThemePreview() {
+private fun SettingThemeBottomSheetPreview() {
     TodoTheme {
-        SettingTheme(
+        SettingThemeBottomSheet(
             initTheme = ThemeType.SUN_RISE,
             onSelect = {}
         )

@@ -1,7 +1,6 @@
 package com.example.manage_categories.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,44 +9,70 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.design_system.R
+import com.example.design_system.theme.Red
 import com.example.design_system.theme.TodoTheme
 
 @Composable
 internal fun CategoryCard(
-    backgroundColor: Int,
-    onClick: () -> Unit,
+    id: Long,
+    title: String,
+    colorName: String,
+    color: Color,
+    onEditClick: (id: Long, title: String, colorName: String) -> Unit,
+    onDeleteClick: (Long) -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth()
-            .clickable { onClick() }
+            .clickable { onEditClick(id, title, colorName) }
             .padding(
-                horizontal = 16.dp,
+                horizontal = 20.dp,
                 vertical = 16.dp
             ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-
         Box(
             modifier = Modifier.size(20.dp)
                 .background(
-                    color = Color(backgroundColor)
-                )
-                .border(
-                    width = 2.dp,
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    color = color,
                     shape = CircleShape
                 ),
             contentAlignment = Alignment.Center,
             content = {}
         )
+        Text(
+            modifier = Modifier.weight(1f),
+            text = title,
+            style = TodoTheme.typography.infoTextStyle.copy(
+                fontSize = 16.sp
+            ),
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        IconButton(
+            modifier = Modifier.size(20.dp),
+            onClick = { onDeleteClick(id) },
+        ) {
+            Icon(
+                modifier = Modifier.size(21.dp),
+                imageVector = ImageVector.vectorResource(R.drawable.svg_cancel_small),
+                tint = MaterialTheme.colorScheme.onSurface,
+                contentDescription = null
+            )
+        }
     }
 }
 
@@ -56,8 +81,12 @@ internal fun CategoryCard(
 private fun CategoryCardPreview() {
     TodoTheme {
         CategoryCard(
-            backgroundColor = MaterialTheme.colorScheme.primaryContainer.hashCode(),
-            onClick = {},
+            id = 0L,
+            title = "Red",
+            colorName = "Red",
+            color = Red,
+            onEditClick = { _, _, _ -> },
+            onDeleteClick = {},
         )
     }
 }

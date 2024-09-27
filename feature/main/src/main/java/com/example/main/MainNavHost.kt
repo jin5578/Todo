@@ -75,7 +75,6 @@ internal fun MainNavHost(
             manageCategoriesNavGraph(
                 popBackStack = navigator::popBackStackIfNotHome,
                 onShowErrorSnackBar = onShowErrorSnackBar,
-                onShowMessageSnackBar = onShowMessageSnackBar,
             )
         }
     }
