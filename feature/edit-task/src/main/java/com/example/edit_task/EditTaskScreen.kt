@@ -176,7 +176,7 @@ private fun EditTaskScreen(
                         onClick = { onTaskDelete(task.id) }
                     ) {
                         Icon(
-                            modifier = Modifier.size(24.dp),
+                            modifier = Modifier.size(21.dp),
                             imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_delete),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface

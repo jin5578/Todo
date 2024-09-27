@@ -93,7 +93,7 @@ private fun CategoryItem(
             color = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Icon(
-            modifier = Modifier.size(14.dp),
+            modifier = Modifier.size(18.dp),
             imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_arrow_right_twin),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSecondaryContainer

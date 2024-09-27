@@ -98,7 +98,6 @@ private fun CategoryItem(
                 onClick = { onDeleteClick() },
             ) {
                 Icon(
-                    modifier = Modifier.size(18.dp),
                     imageVector = ImageVector.vectorResource(R.drawable.svg_cancel),
                     tint = iconColor,
                     contentDescription = null

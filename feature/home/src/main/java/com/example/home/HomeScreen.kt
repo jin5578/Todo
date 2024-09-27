@@ -211,7 +211,7 @@ private fun HomeScreen(
                         onClick = navigateCalendar
                     ) {
                         Icon(
-                            modifier = Modifier.size(24.dp),
+                            modifier = Modifier.size(21.dp),
                             imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_calendar),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface
@@ -235,7 +235,7 @@ private fun HomeScreen(
                 onClick = navigateAddTask,
             ) {
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(32.dp),
                     imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_plus),
                     contentDescription = null
                 )
@@ -336,7 +336,7 @@ private fun HomeScreen(
 
                     IconButton(onClick = { isShowSortTaskDialog = true }) {
                         Icon(
-                            modifier = Modifier.size(21.dp),
+                            modifier = Modifier.size(18.dp),
                             imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_sort),
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.primary

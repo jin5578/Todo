@@ -209,7 +209,7 @@ private fun CalendarScreen(
                 onClick = navigateAddTask,
             ) {
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(32.dp),
                     imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_plus),
                     contentDescription = null
                 )
