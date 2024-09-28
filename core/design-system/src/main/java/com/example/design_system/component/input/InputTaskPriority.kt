@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -92,10 +93,8 @@ private fun InputTaskPriorityItem(
 
         Box(
             modifier = Modifier.fillMaxWidth()
-                .background(
-                    color = bgColor,
-                    shape = RoundedCornerShape(8.dp)
-                )
+                .clip(RoundedCornerShape(8.dp))
+                .background(color = bgColor)
                 .clickable { onClick() },
             contentAlignment = Alignment.Center
         ) {

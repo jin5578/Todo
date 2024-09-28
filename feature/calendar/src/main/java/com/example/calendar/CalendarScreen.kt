@@ -184,7 +184,7 @@ private fun CalendarScreen(
                                 }
                             }
                                 .border(
-                                    width = 1.dp,
+                                    width = 2.dp,
                                     color = MaterialTheme.colorScheme.primary,
                                     shape = RoundedCornerShape(8.dp)
                                 ),
