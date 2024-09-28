@@ -5,13 +5,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.calendar.CalendarRoute
 import com.example.navigation.Route
+import java.time.LocalDate
 
 fun NavController.navigateCalendar() {
     navigate(route = Route.Calendar)
 }
 
 fun NavGraphBuilder.calendarNavGraph(
-    navigateAddTask: () -> Unit,
+    navigateAddTask: (date: LocalDate) -> Unit,
     navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
     onShowErrorSnackBar: (throwable: Throwable?) -> Unit,

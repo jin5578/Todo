@@ -66,7 +66,7 @@ import com.example.design_system.R as DesignSystemR
 @Composable
 internal fun CalendarRoute(
     viewModel: CalendarViewModel = hiltViewModel(),
-    navigateAddTask: () -> Unit,
+    navigateAddTask: (date: LocalDate) -> Unit,
     navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
     onShowErrorSnackBar: (throwable: Throwable?) -> Unit,
@@ -98,7 +98,7 @@ internal fun CalendarRoute(
 @Composable
 private fun CalendarContent(
     uiState: CalendarUiState,
-    navigateAddTask: () -> Unit,
+    navigateAddTask: (date: LocalDate) -> Unit,
     navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
@@ -128,7 +128,7 @@ private fun CalendarContent(
 private fun CalendarScreen(
     tasks: ImmutableList<Task> = persistentListOf(),
     categories: ImmutableList<Category>,
-    navigateAddTask: () -> Unit,
+    navigateAddTask: (date: LocalDate) -> Unit,
     navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
@@ -209,7 +209,7 @@ private fun CalendarScreen(
             FloatingActionButton(
                 containerColor = MaterialTheme.colorScheme.tertiary,
                 contentColor = MaterialTheme.colorScheme.surface,
-                onClick = navigateAddTask,
+                onClick = { navigateAddTask(selectedDay) },
             ) {
                 Icon(
                     modifier = Modifier.size(32.dp),
