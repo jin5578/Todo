@@ -148,8 +148,8 @@ private fun ThemeItem(
         Box(
             modifier = Modifier.fillMaxWidth()
                 .clip(RoundedCornerShape(8.dp))
-                .clickable { onClick() }
-                .background(themeColor.backgroundColor),
+                .background(themeColor.backgroundColor)
+                .clickable { onClick() },
             contentAlignment = Alignment.Center
         ) {
             Text(

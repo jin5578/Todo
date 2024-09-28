@@ -94,10 +94,10 @@ private fun ToggleButton(
         Box(
             modifier = Modifier.fillMaxWidth()
                 .clip(RoundedCornerShape(8.dp))
-                .clickable { onClick() }
                 .background(
                     if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
-                ),
+                )
+                .clickable { onClick() },
             contentAlignment = Alignment.Center
         ) {
             Text(

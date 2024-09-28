@@ -98,7 +98,7 @@ private fun CategoryItem(
                 onClick = { onDeleteClick() },
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.svg_cancel),
+                    imageVector = ImageVector.vectorResource(R.drawable.svg_cancel_circle),
                     tint = iconColor,
                     contentDescription = null
                 )
@@ -119,7 +119,7 @@ private fun InputTaskCategoriesPreview() {
         val categories = persistentListOf(
             Category(
                 title = "solum",
-                backgroundColor = MaterialTheme.colorScheme.primaryContainer.hashCode()
+                colorName = "Red"
             )
         )
         InputTaskCategories(
