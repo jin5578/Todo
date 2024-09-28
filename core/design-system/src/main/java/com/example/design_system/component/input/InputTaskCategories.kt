@@ -110,9 +110,9 @@ private fun CategoryItem(
             )
             .background(bgColor)
             .clickable { onSelectClick() }
-            .padding(horizontal = 10.dp, vertical = 10.dp),
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Box(
             modifier = Modifier.size(10.dp)

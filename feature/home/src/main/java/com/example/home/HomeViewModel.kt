@@ -53,6 +53,7 @@ class HomeViewModel @Inject constructor(
                 HomeUiState.Success(
                     completedTasks = completedTasks,
                     incompleteTasks = incompleteTasks,
+                    categories = home.categories.toPersistentList(),
                     sleepTime = homeSystem.sleepTime,
                     sortTask = homeSystem.sortTask,
                     theme = homeSystem.theme,

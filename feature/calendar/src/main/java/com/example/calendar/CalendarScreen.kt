@@ -46,6 +46,7 @@ import com.example.design_system.component.Loading
 import com.example.design_system.component.TaskCard
 import com.example.design_system.component.WeekendDay
 import com.example.design_system.theme.TodoTheme
+import com.example.model.Category
 import com.example.model.Task
 import com.kizitonwose.calendar.compose.WeekCalendar
 import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
@@ -111,6 +112,7 @@ private fun CalendarContent(
         is CalendarUiState.Success -> {
             CalendarScreen(
                 tasks = uiState.tasks,
+                categories = uiState.categories,
                 navigateAddTask = navigateAddTask,
                 navigateEditTask = navigateEditTask,
                 popBackStack = popBackStack,
@@ -125,6 +127,7 @@ private fun CalendarContent(
 @Composable
 private fun CalendarScreen(
     tasks: ImmutableList<Task> = persistentListOf(),
+    categories: ImmutableList<Category>,
     navigateAddTask: () -> Unit,
     navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
@@ -248,6 +251,8 @@ private fun CalendarScreen(
                     ) { _, task ->
                         TaskCard(
                             task = task,
+                            category = categories.filter { it.id == task.categoryId }
+                                .getOrNull(0),
                             isAvailableSwipe = true,
                             onTaskEdit = { taskId -> navigateEditTask(taskId) },
                             onTaskToggleCompletion = { taskId, isCompleted ->
@@ -269,6 +274,7 @@ private fun CalendarScreenPreview() {
     TodoTheme {
         CalendarScreen(
             tasks = persistentListOf(),
+            categories = persistentListOf(),
             navigateAddTask = {},
             navigateEditTask = {},
             popBackStack = {},

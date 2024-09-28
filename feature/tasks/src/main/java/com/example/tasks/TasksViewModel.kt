@@ -59,9 +59,10 @@ class TasksViewModel @Inject constructor(
 
     private fun fetchTasksByState(isCompleted: Boolean) {
         viewModelScope.launch {
-            getTasksByStateUseCase(isCompleted).map { tasks ->
+            getTasksByStateUseCase(isCompleted).map {
                 TasksUiState.Success(
-                    tasks = tasks.toPersistentList()
+                    tasks = it.tasks.toPersistentList(),
+                    categories = it.categories.toPersistentList(),
                 )
             }.catch { throwable ->
                 _errorFlow.emit(throwable)
@@ -73,9 +74,10 @@ class TasksViewModel @Inject constructor(
 
     private fun fetchTasksByDateRange(fromDate: LocalDate, toDate: LocalDate) {
         viewModelScope.launch {
-            getTasksByDateRangeUseCase(fromDate = fromDate, toDate = toDate).map { tasks ->
+            getTasksByDateRangeUseCase(fromDate = fromDate, toDate = toDate).map {
                 TasksUiState.Success(
-                    tasks = tasks.toPersistentList()
+                    tasks = it.tasks.toPersistentList(),
+                    categories = it.categories.toPersistentList()
                 )
             }.catch { throwable ->
                 _errorFlow.emit(throwable)
@@ -87,9 +89,10 @@ class TasksViewModel @Inject constructor(
 
     private fun fetchAllTasks() {
         viewModelScope.launch {
-            getAllTaskUseCase().map { tasks ->
+            getAllTaskUseCase().map {
                 TasksUiState.Success(
-                    tasks = tasks.toPersistentList()
+                    tasks = it.tasks.toPersistentList(),
+                    categories = it.categories.toPersistentList()
                 )
             }.catch { throwable ->
                 _errorFlow.emit(throwable)

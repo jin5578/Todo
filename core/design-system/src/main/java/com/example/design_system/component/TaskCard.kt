@@ -22,6 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
@@ -30,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
+import com.example.model.Category
 import com.example.model.Task
 import java.time.LocalDate
 import java.time.LocalTime
@@ -39,6 +42,7 @@ import java.util.Locale
 @Composable
 fun TaskCard(
     task: Task,
+    category: Category? = null,
     isAvailableSwipe: Boolean,
     onTaskEdit: (Long) -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
@@ -102,64 +106,39 @@ fun TaskCard(
                     modifier = Modifier.fillMaxWidth()
                         .basicMarquee(),
                     text = task.title,
-                    style = TodoTheme.typography.headlineSmall,
+                    style = TodoTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 if (task.memo.isNotEmpty()) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(14.dp),
-                            painter = painterResource(id = R.drawable.svg_memo),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                        Text(
-                            modifier = Modifier.fillMaxWidth()
-                                .padding(end = 10.dp)
-                                .basicMarquee(),
-                            text = task.memo,
-                            style = TodoTheme.typography.taskDescTextStyle,
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
+                    Text(
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(end = 10.dp)
+                            .basicMarquee(),
+                        text = task.memo,
+                        style = TodoTheme.typography.infoTextStyle,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Icon(
-                        modifier = Modifier.size(14.dp),
-                        painter = painterResource(id = R.drawable.svg_clock),
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
+                    if (category != null) {
+                        ExtraInfo(
+                            color = Color(category.colorValue.toLong()),
+                            title = category.title
+                        )
+                    }
                     val timeFormat = DateTimeFormatter.ofPattern("hh:mm a", Locale.US)
-                    Text(
-                        text = task.time.format(timeFormat),
-                        style = TodoTheme.typography.taskDescTextStyle,
-                        color = MaterialTheme.colorScheme.onPrimary
+                    ExtraInfo(
+                        painter = painterResource(id = R.drawable.svg_clock),
+                        title = task.time.format(timeFormat),
                     )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Icon(
-                        modifier = Modifier.size(14.dp),
+                    ExtraInfo(
                         painter = painterResource(id = R.drawable.svg_calendar),
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                    Text(
-                        text = task.date.toString(),
-                        style = TodoTheme.typography.taskDescTextStyle,
-                        color = MaterialTheme.colorScheme.onPrimary
+                        title = task.date.toString(),
                     )
                 }
             }
@@ -177,6 +156,49 @@ fun TaskCard(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ExtraInfo(
+    painter: Painter? = null,
+    color: Color? = null,
+    title: String
+) {
+    Row(
+        modifier = Modifier.border(
+            width = 1.dp,
+            color = MaterialTheme.colorScheme.onPrimary,
+            shape = RoundedCornerShape(8.dp)
+        )
+            .padding(horizontal = 4.dp, vertical = 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        if (painter != null) {
+            Icon(
+                modifier = Modifier.size(14.dp),
+                painter = painter,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimary
+            )
+        }
+        if (color != null) {
+            Box(
+                modifier = Modifier.size(14.dp)
+                    .background(
+                        color = color,
+                        shape = CircleShape
+                    ),
+                contentAlignment = Alignment.Center,
+                content = {}
+            )
+        }
+        Text(
+            text = title,
+            style = TodoTheme.typography.taskDescTextStyle,
+            color = MaterialTheme.colorScheme.onPrimary
+        )
     }
 }
 

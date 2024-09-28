@@ -48,6 +48,7 @@ import com.example.design_system.theme.TodoTheme
 import com.example.home.component.SwipeActionBox
 import com.example.home.component.TaskInfoCard
 import com.example.home.model.HomeUiState
+import com.example.model.Category
 import com.example.model.SortTask
 import com.example.model.Task
 import com.example.model.Theme
@@ -129,6 +130,7 @@ private fun HomeContent(
             HomeScreen(
                 completedTasks = uiState.completedTasks,
                 incompleteTasks = uiState.incompleteTasks,
+                categories = uiState.categories,
                 sleepTime = uiState.sleepTime,
                 sortTask = uiState.sortTask,
                 theme = uiState.theme,
@@ -155,6 +157,7 @@ private fun HomeContent(
 private fun HomeScreen(
     completedTasks: ImmutableList<Task>,
     incompleteTasks: ImmutableList<Task>,
+    categories: ImmutableList<Category>,
     sleepTime: LocalTime,
     sortTask: SortTask,
     theme: Theme,
@@ -402,6 +405,8 @@ private fun HomeScreen(
                             ) {
                                 TaskCard(
                                     task = task,
+                                    category = categories.filter { it.id == task.categoryId }
+                                        .getOrNull(0),
                                     isAvailableSwipe = true,
                                     onTaskEdit = { taskId -> navigateEditTask(taskId) },
                                     onTaskToggleCompletion = { taskId, isCompleted ->
@@ -438,6 +443,7 @@ fun HomeScreenPreview() {
         HomeScreen(
             completedTasks = completedTasks,
             incompleteTasks = persistentListOf(),
+            categories = persistentListOf(),
             sleepTime = LocalTime.now(),
             sortTask = SortTask.BY_TIME_ASCENDING,
             theme = Theme(ThemeType.SUN_RISE),

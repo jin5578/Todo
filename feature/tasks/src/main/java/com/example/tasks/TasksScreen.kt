@@ -33,6 +33,7 @@ import com.example.design_system.component.EmptyContent
 import com.example.design_system.component.Loading
 import com.example.design_system.component.TaskCard
 import com.example.design_system.theme.TodoTheme
+import com.example.model.Category
 import com.example.model.Task
 import com.example.tasks.model.TasksUiState
 import kotlinx.collections.immutable.ImmutableList
@@ -95,6 +96,7 @@ private fun TasksContent(
             TasksScreen(
                 title = title,
                 tasks = uiState.tasks,
+                categories = uiState.categories,
                 popBackStack = popBackStack,
                 navigateEditTask = navigateEditTask,
                 onTaskToggleCompletion = onTaskToggleCompletion,
@@ -110,6 +112,7 @@ private fun TasksContent(
 private fun TasksScreen(
     title: String,
     tasks: ImmutableList<Task>,
+    categories: ImmutableList<Category>,
     popBackStack: () -> Unit,
     navigateEditTask: (Long) -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
@@ -170,6 +173,8 @@ private fun TasksScreen(
                     ) {
                         TaskCard(
                             task = task,
+                            category = categories.filter { it.id == task.categoryId }
+                                .getOrNull(0),
                             isAvailableSwipe = false,
                             onTaskEdit = { taskId -> navigateEditTask(taskId) },
                             onTaskToggleCompletion = onTaskToggleCompletion,

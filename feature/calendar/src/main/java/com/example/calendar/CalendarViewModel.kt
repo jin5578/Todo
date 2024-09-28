@@ -41,6 +41,7 @@ class CalendarViewModel @Inject constructor(
             getCalendarDataUseCase().map { calendar ->
                 CalendarUiState.Success(
                     tasks = calendar.tasks.toPersistentList(),
+                    categories = calendar.categories.toPersistentList(),
                     sortTask = calendar.calendarSystem.sortTask
                 )
             }.catch { throwable ->

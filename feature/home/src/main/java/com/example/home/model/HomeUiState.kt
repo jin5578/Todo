@@ -2,6 +2,7 @@ package com.example.home.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import com.example.model.Category
 import com.example.model.SortTask
 import com.example.model.Task
 import com.example.model.Theme
@@ -18,6 +19,7 @@ sealed interface HomeUiState {
     data class Success(
         val completedTasks: ImmutableList<Task> = persistentListOf(),
         val incompleteTasks: ImmutableList<Task> = persistentListOf(),
+        val categories: ImmutableList<Category> = persistentListOf(),
         val sleepTime: LocalTime,
         val sortTask: SortTask,
         val theme: Theme,

@@ -1,5 +1,6 @@
 package com.example.domain.usecase
 
+import com.example.data_api.repository.CategoryRepository
 import com.example.data_api.repository.SystemRepository
 import com.example.data_api.repository.TaskRepository
 import com.example.model.calendar.Calendar
@@ -9,16 +10,19 @@ import javax.inject.Inject
 
 class GetCalendarDataUseCase @Inject constructor(
     private val systemRepository: SystemRepository,
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val categoryRepository: CategoryRepository,
 ) {
     operator fun invoke(): Flow<Calendar> {
         return combine(
             systemRepository.getCalendarSystem(),
-            taskRepository.getAllTask()
-        ) { calendarSystem, tasks ->
+            taskRepository.getAllTask(),
+            categoryRepository.getAllCategory()
+        ) { calendarSystem, tasks, categories ->
             Calendar(
                 tasks = tasks,
-                calendarSystem = calendarSystem
+                categories = categories,
+                calendarSystem = calendarSystem,
             )
         }
     }
