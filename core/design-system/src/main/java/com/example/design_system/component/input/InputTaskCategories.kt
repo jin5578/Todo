@@ -17,17 +17,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.design_system.R
 import com.example.design_system.theme.Red
 import com.example.design_system.theme.TodoTheme
@@ -40,10 +42,16 @@ import kotlinx.collections.immutable.persistentListOf
 fun InputTaskCategories(
     modifier: Modifier = Modifier,
     categories: ImmutableList<Category>,
-    onSelectClick: (Category) -> Unit,
+    categoryId: Long,
+    onSelectClick: (Long) -> Unit,
 ) {
-    val selectedCategory: Category? by remember { mutableStateOf(null) }
+    var selectedCategory by remember { mutableLongStateOf(categoryId) }
+
     val scrollState = rememberScrollState()
+
+    LaunchedEffect(categoryId) {
+        selectedCategory = categoryId
+    }
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -67,8 +75,12 @@ fun InputTaskCategories(
                         .getOrNull(0) ?: CategoryColor.RED
                 CategoryItem(
                     title = category.title,
+                    isSelected = category.id == selectedCategory,
                     categoryColor = categoryColor,
-                    onSelectClick = { onSelectClick(category) },
+                    onSelectClick = {
+                        onSelectClick(category.id)
+                        selectedCategory = category.id
+                    },
                 )
             }
         }
@@ -79,9 +91,15 @@ fun InputTaskCategories(
 private fun CategoryItem(
     modifier: Modifier = Modifier,
     title: String,
+    isSelected: Boolean,
     categoryColor: CategoryColor,
     onSelectClick: () -> Unit,
 ) {
+    val bgColor = if (isSelected)
+        MaterialTheme.colorScheme.secondaryContainer
+    else
+        MaterialTheme.colorScheme.surface
+
     Row(
         modifier = modifier.fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
@@ -90,6 +108,7 @@ private fun CategoryItem(
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 shape = RoundedCornerShape(8.dp),
             )
+            .background(bgColor)
             .clickable { onSelectClick() }
             .padding(horizontal = 10.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -106,8 +125,11 @@ private fun CategoryItem(
         )
         Text(
             text = title,
-            style = TodoTheme.typography.infoTextStyle.copy(fontSize = 16.sp),
             color = MaterialTheme.colorScheme.onSecondaryContainer,
+            style = if (isSelected)
+                TodoTheme.typography.infoDescTextStyle.copy(fontWeight = FontWeight.Bold)
+            else
+                TodoTheme.typography.infoDescTextStyle,
         )
     }
 }
@@ -124,6 +146,7 @@ private fun InputTaskCategoriesPreview() {
         )
         InputTaskCategories(
             categories = categories,
+            categoryId = -1L,
             onSelectClick = {},
         )
     }

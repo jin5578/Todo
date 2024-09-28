@@ -23,6 +23,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -144,7 +145,7 @@ private fun AddTaskScreen(
     var isShowTimePickerDialog by remember { mutableStateOf(false) }
 
     var taskTitle by remember { mutableStateOf("") }
-    val taskCategory: Category? by remember { mutableStateOf(null) }
+    var taskCategory by remember { mutableLongStateOf(-1L) }
     var taskDate by remember { mutableStateOf(date) }
     var taskTime by remember { mutableStateOf(LocalTime.now()) }
     var taskPriority by remember { mutableStateOf(Priority.LOW) }
@@ -235,10 +236,13 @@ private fun AddTaskScreen(
                     taskTitle = taskTitle,
                     onValueChange = { taskTitle = it }
                 )
-                InputTaskCategories(
-                    categories = categories,
-                    onSelectClick = {}
-                )
+                if (categories.isNotEmpty()) {
+                    InputTaskCategories(
+                        categories = categories,
+                        categoryId = taskCategory,
+                        onSelectClick = { taskCategory = it }
+                    )
+                }
                 InputTaskDate(
                     date = taskDate,
                     onDateChange = { taskDate = it },

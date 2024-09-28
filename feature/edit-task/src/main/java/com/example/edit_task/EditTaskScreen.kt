@@ -23,6 +23,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -145,7 +146,7 @@ private fun EditTaskScreen(
     var isShowTimePickerDialog by remember { mutableStateOf(false) }
 
     var taskTitle by remember { mutableStateOf(task.title) }
-    var taskCategory: Category? by remember { mutableStateOf(null) }
+    var taskCategory by remember { mutableLongStateOf(task.categoryId) }
     var taskDate by remember { mutableStateOf(task.date) }
     var taskTime by remember { mutableStateOf(task.time) }
     var taskMemo by remember { mutableStateOf(task.memo) }
@@ -250,10 +251,13 @@ private fun EditTaskScreen(
                     taskTitle = taskTitle,
                     onValueChange = { taskTitle = it }
                 )
-                InputTaskCategories(
-                    categories = categories,
-                    onSelectClick = {}
-                )
+                if (categories.isNotEmpty()) {
+                    InputTaskCategories(
+                        categories = categories,
+                        categoryId = taskCategory,
+                        onSelectClick = { taskCategory = it }
+                    )
+                }
                 InputTaskDate(
                     date = taskDate,
                     onDateChange = { taskDate = it },
@@ -290,7 +294,8 @@ private fun EditTaskScreen(
                             time = taskTime,
                             date = taskDate,
                             memo = taskMemo,
-                            priority = taskPriority.ordinal
+                            priority = taskPriority.ordinal,
+                            categoryId = taskCategory
                         )
 
                         val (isValid, errorMessage) = checkValidTask(

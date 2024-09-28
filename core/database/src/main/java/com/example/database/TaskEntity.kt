@@ -34,4 +34,6 @@ data class TaskEntity(
     val memo: String = "",
     @ColumnInfo(name = "priority")
     val priority: Int = 0,
+    @ColumnInfo(name = "categoryId")
+    val categoryId: Long = -1L
 )

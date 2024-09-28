@@ -84,7 +84,8 @@ internal class DefaultTaskRepository @Inject constructor(
         time = this.time,
         date = this.date,
         memo = this.memo,
-        priority = this.priority
+        priority = this.priority,
+        categoryId = this.categoryId
     )
 
     private fun Task.toTaskEntity() = TaskEntity(
@@ -96,6 +97,7 @@ internal class DefaultTaskRepository @Inject constructor(
         date = this.date,
         epochDay = this.date.toEpochDay(),
         memo = this.memo,
-        priority = this.priority
+        priority = this.priority,
+        categoryId = this.categoryId
     )
 }

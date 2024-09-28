@@ -12,4 +12,5 @@ data class Task(
     val date: LocalDate,
     val memo: String,
     val priority: Int = 0,
+    val categoryId: Long = -1L,
 )
