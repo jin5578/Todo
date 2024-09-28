@@ -41,12 +41,12 @@ internal class DefaultCategoryRepository @Inject constructor(
     private fun CategoryEntity.toCategory() = Category(
         id = this.id,
         title = this.title,
-        colorName = this.colorName,
+        colorValue = this.colorValue.toULong(),
     )
 
     private fun Category.toCategoryEntity() = CategoryEntity(
         id = this.id,
         title = this.title,
-        colorName = this.colorName,
+        colorValue = this.colorValue.toLong(),
     )
 }

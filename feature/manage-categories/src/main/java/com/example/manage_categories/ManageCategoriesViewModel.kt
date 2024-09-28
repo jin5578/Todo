@@ -53,11 +53,11 @@ class ManageCategoriesViewModel @Inject constructor(
         }
     }
 
-    fun insertCategory(title: String, colorName: String) {
+    fun insertCategory(title: String, colorValue: ULong) {
         viewModelScope.launch {
             val category = Category(
                 title = title,
-                colorName = colorName,
+                colorValue = colorValue,
             )
             insertCategoryUseCase(category)
         }
@@ -70,9 +70,9 @@ class ManageCategoriesViewModel @Inject constructor(
         }
     }
 
-    fun updateCategory(id: Long, title: String, colorName: String) {
+    fun updateCategory(id: Long, title: String, colorValue: ULong) {
         viewModelScope.launch {
-            val category = Category(id = id, title = title, colorName = colorName)
+            val category = Category(id = id, title = title, colorValue = colorValue)
             updateCategoryUseCase(category)
         }
     }

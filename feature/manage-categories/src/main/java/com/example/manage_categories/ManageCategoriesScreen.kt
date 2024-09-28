@@ -40,9 +40,9 @@ import com.example.manage_categories.component.AddCategoryBottomSheet
 import com.example.manage_categories.component.CategoryCard
 import com.example.manage_categories.component.EditCategoryBottomSheet
 import com.example.manage_categories.model.BottomSheetType
-import com.example.manage_categories.model.CategoryColor
 import com.example.manage_categories.model.ManageCategoriesUiState
 import com.example.model.Category
+import com.example.model.CategoryColor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.collectLatest
@@ -65,9 +65,20 @@ internal fun ManageCategoriesRoute(
     ManageCategoriesContent(
         uiState = uiState,
         popBackStack = popBackStack,
-        onCategoryAdd = viewModel::insertCategory,
+        onCategoryAdd = { title, categoryColor ->
+            viewModel.insertCategory(
+                title = title,
+                colorValue = categoryColor.colorValue.toULong()
+            )
+        },
         onCategoryDelete = viewModel::deleteCategory,
-        onCategoryUpdate = viewModel::updateCategory,
+        onCategoryUpdate = { id, title, categoryColor ->
+            viewModel.updateCategory(
+                id = id,
+                title = title,
+                colorValue = categoryColor.colorValue.toULong()
+            )
+        },
     )
 }
 
@@ -75,9 +86,9 @@ internal fun ManageCategoriesRoute(
 private fun ManageCategoriesContent(
     uiState: ManageCategoriesUiState,
     popBackStack: () -> Unit,
-    onCategoryAdd: (title: String, colorName: String) -> Unit,
+    onCategoryAdd: (title: String, categoryColor: CategoryColor) -> Unit,
     onCategoryDelete: (Long) -> Unit,
-    onCategoryUpdate: (id: Long, title: String, colorName: String) -> Unit,
+    onCategoryUpdate: (id: Long, title: String, categoryColor: CategoryColor) -> Unit,
 ) {
     when (uiState) {
         is ManageCategoriesUiState.Loading -> {
@@ -101,16 +112,16 @@ private fun ManageCategoriesContent(
 private fun ManageCategoriesScreen(
     categories: ImmutableList<Category>,
     popBackStack: () -> Unit,
-    onCategoryAdd: (title: String, colorName: String) -> Unit,
+    onCategoryAdd: (title: String, categoryColor: CategoryColor) -> Unit,
     onCategoryDelete: (Long) -> Unit,
-    onCategoryUpdate: (id: Long, title: String, colorName: String) -> Unit,
+    onCategoryUpdate: (id: Long, title: String, categoryColor: CategoryColor) -> Unit,
 ) {
     val bottomSheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(BottomSheetType.IDLE) }
 
     var editId by remember { mutableLongStateOf(0L) }
     var editTitle by remember { mutableStateOf("") }
-    var editColorName by remember { mutableStateOf("") }
+    var editColor by remember { mutableStateOf(CategoryColor.RED) }
 
     Scaffold(
         topBar = {
@@ -161,8 +172,8 @@ private fun ManageCategoriesScreen(
                         BottomSheetType.ADD_CATEGORY -> {
                             AddCategoryBottomSheet(
                                 onCancelClick = { showBottomSheet = BottomSheetType.IDLE },
-                                onCreateClick = { title, colorName ->
-                                    onCategoryAdd(title, colorName)
+                                onCreateClick = { title, categoryColor ->
+                                    onCategoryAdd(title, categoryColor)
                                     showBottomSheet = BottomSheetType.IDLE
                                 }
                             )
@@ -172,10 +183,10 @@ private fun ManageCategoriesScreen(
                             EditCategoryBottomSheet(
                                 id = editId,
                                 title = editTitle,
-                                colorName = editColorName,
+                                categoryColor = editColor,
                                 onCancelClick = { showBottomSheet = BottomSheetType.IDLE },
-                                onEditClick = { id, title, colorName ->
-                                    onCategoryUpdate(id, title, colorName)
+                                onEditClick = { id, title, categoryColor ->
+                                    onCategoryUpdate(id, title, categoryColor)
                                     showBottomSheet = BottomSheetType.IDLE
                                 }
                             )
@@ -203,18 +214,17 @@ private fun ManageCategoriesScreen(
                         category.id
                     }
                 ) { _, category ->
-                    val color = CategoryColor.entries.filter { it.colorName == category.colorName }
-                        .map { it.color }.getOrNull(0) ?: CategoryColor.RED.color
-
+                    val categoryColor =
+                        CategoryColor.entries.filter { it.colorValue == category.colorValue.toLong() }
+                            .getOrNull(0) ?: CategoryColor.RED
                     CategoryCard(
                         id = category.id,
                         title = category.title,
-                        colorName = category.colorName,
-                        color = color,
-                        onEditClick = { id, title, colorName ->
+                        categoryColor = categoryColor,
+                        onEditClick = { id, title, categoryColor ->
                             editId = id
                             editTitle = title
-                            editColorName = colorName
+                            editColor = categoryColor
                             showBottomSheet = BottomSheetType.EDIT_CATEGORY
                         },
                         onDeleteClick = onCategoryDelete

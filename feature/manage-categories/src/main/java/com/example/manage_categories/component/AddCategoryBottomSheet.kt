@@ -36,20 +36,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design_system.theme.TodoTheme
-import com.example.manage_categories.model.CategoryColor
+import com.example.model.CategoryColor
 import kotlinx.coroutines.job
 import com.example.design_system.R as DesignSystemR
 
 @Composable
 internal fun AddCategoryBottomSheet(
     onCancelClick: () -> Unit,
-    onCreateClick: (title: String, colorName: String) -> Unit,
+    onCreateClick: (title: String, categoryColor: CategoryColor) -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val focusRequester = FocusRequester()
 
     var categoryTitle by remember { mutableStateOf("") }
-    var selectedColorName by remember { mutableStateOf("Red") }
+    var selectedCategoryColor by remember { mutableStateOf(CategoryColor.RED) }
 
     LaunchedEffect(
         key1 = true,
@@ -105,12 +105,11 @@ internal fun AddCategoryBottomSheet(
             modifier = Modifier.horizontalScroll(scrollState),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            CategoryColor.entries.forEachIndexed { index, categoryColor ->
+            CategoryColor.entries.forEachIndexed { _, categoryColor ->
                 CategoryColorItem(
-                    colorName = categoryColor.colorName,
-                    backgroundColor = categoryColor.color,
-                    isSelected = selectedColorName == categoryColor.colorName,
-                    onSelect = { selectedColorName = it }
+                    categoryColor = categoryColor,
+                    isSelected = selectedCategoryColor == categoryColor,
+                    onSelect = { selectedCategoryColor = it }
                 )
             }
         }
@@ -146,8 +145,8 @@ internal fun AddCategoryBottomSheet(
             Box(
                 modifier = Modifier.weight(1f)
                     .clickable {
-                        if (categoryTitle.isNotEmpty() && selectedColorName.isNotEmpty()) {
-                            onCreateClick(categoryTitle, selectedColorName)
+                        if (categoryTitle.isNotEmpty()) {
+                            onCreateClick(categoryTitle, selectedCategoryColor)
                         }
                     }
                     .background(

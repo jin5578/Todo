@@ -37,22 +37,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design_system.R
 import com.example.design_system.theme.TodoTheme
-import com.example.manage_categories.model.CategoryColor
+import com.example.model.CategoryColor
 import kotlinx.coroutines.job
 
 @Composable
 internal fun EditCategoryBottomSheet(
     id: Long,
     title: String,
-    colorName: String,
+    categoryColor: CategoryColor,
     onCancelClick: () -> Unit,
-    onEditClick: (id: Long, title: String, colorName: String) -> Unit
+    onEditClick: (id: Long, title: String, categoryColor: CategoryColor) -> Unit
 ) {
     val scrollState = rememberScrollState()
     val focusRequester = FocusRequester()
 
     var categoryTitle by remember { mutableStateOf(title) }
-    var selectedColorName by remember { mutableStateOf(colorName) }
+    var selectedCategoryColor by remember { mutableStateOf(categoryColor) }
 
     LaunchedEffect(
         key1 = true,
@@ -108,12 +108,11 @@ internal fun EditCategoryBottomSheet(
             modifier = Modifier.horizontalScroll(scrollState),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            CategoryColor.entries.forEachIndexed { index, categoryColor ->
+            CategoryColor.entries.forEachIndexed { _, categoryColor ->
                 CategoryColorItem(
-                    colorName = categoryColor.colorName,
-                    backgroundColor = categoryColor.color,
-                    isSelected = selectedColorName == categoryColor.colorName,
-                    onSelect = { selectedColorName = it }
+                    categoryColor = categoryColor,
+                    isSelected = selectedCategoryColor == categoryColor,
+                    onSelect = { selectedCategoryColor = it },
                 )
             }
         }
@@ -149,8 +148,8 @@ internal fun EditCategoryBottomSheet(
             Box(
                 modifier = Modifier.weight(1f)
                     .clickable {
-                        if (categoryTitle.isNotEmpty() && selectedColorName.isNotEmpty()) {
-                            onEditClick(id, categoryTitle, selectedColorName)
+                        if (categoryTitle.isNotEmpty()) {
+                            onEditClick(id, categoryTitle, selectedCategoryColor)
                         }
                     }
                     .background(
@@ -180,7 +179,7 @@ private fun EditCategoryBottomSheetPreview() {
         EditCategoryBottomSheet(
             id = 0L,
             title = "Work",
-            colorName = "Red",
+            categoryColor = CategoryColor.RED,
             onCancelClick = {},
             onEditClick = { _, _, _ -> }
         )

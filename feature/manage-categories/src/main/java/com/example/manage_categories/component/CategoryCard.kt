@@ -23,21 +23,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design_system.R
-import com.example.design_system.theme.Red
 import com.example.design_system.theme.TodoTheme
+import com.example.model.CategoryColor
 
 @Composable
 internal fun CategoryCard(
     id: Long,
     title: String,
-    colorName: String,
-    color: Color,
-    onEditClick: (id: Long, title: String, colorName: String) -> Unit,
+    categoryColor: CategoryColor,
+    onEditClick: (id: Long, title: String, categoryColor: CategoryColor) -> Unit,
     onDeleteClick: (Long) -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth()
-            .clickable { onEditClick(id, title, colorName) }
+            .clickable { onEditClick(id, title, categoryColor) }
             .padding(
                 horizontal = 20.dp,
                 vertical = 16.dp
@@ -48,7 +47,7 @@ internal fun CategoryCard(
         Box(
             modifier = Modifier.size(20.dp)
                 .background(
-                    color = color,
+                    color = Color(categoryColor.colorValue),
                     shape = CircleShape
                 ),
             contentAlignment = Alignment.Center,
@@ -83,8 +82,7 @@ private fun CategoryCardPreview() {
         CategoryCard(
             id = 0L,
             title = "Red",
-            colorName = "Red",
-            color = Red,
+            categoryColor = CategoryColor.RED,
             onEditClick = { _, _, _ -> },
             onDeleteClick = {},
         )

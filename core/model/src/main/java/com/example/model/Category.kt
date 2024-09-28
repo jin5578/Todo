@@ -3,5 +3,5 @@ package com.example.model
 data class Category(
     val id: Long = 0L,
     val title: String,
-    val colorName: String,
+    val colorValue: ULong,
 )

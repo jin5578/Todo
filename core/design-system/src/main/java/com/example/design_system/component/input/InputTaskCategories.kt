@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design_system.R
+import com.example.design_system.theme.Red
 import com.example.design_system.theme.TodoTheme
 import com.example.model.Category
 import kotlinx.collections.immutable.ImmutableList
@@ -119,7 +120,7 @@ private fun InputTaskCategoriesPreview() {
         val categories = persistentListOf(
             Category(
                 title = "solum",
-                colorName = "Red"
+                colorValue = Red.value
             )
         )
         InputTaskCategories(
