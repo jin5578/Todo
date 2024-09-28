@@ -42,6 +42,7 @@ import com.example.design_system.component.ClockTimePickerDialog
 import com.example.design_system.component.DatePickerDialog
 import com.example.design_system.component.Loading
 import com.example.design_system.component.ScrollTimePickerDialog
+import com.example.design_system.component.input.InputTaskCategories
 import com.example.design_system.component.input.InputTaskDate
 import com.example.design_system.component.input.InputTaskMemo
 import com.example.design_system.component.input.InputTaskPriority
@@ -49,10 +50,12 @@ import com.example.design_system.component.input.InputTaskTime
 import com.example.design_system.component.input.InputTaskTitle
 import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
+import com.example.model.Category
 import com.example.model.Priority
 import com.example.model.Task
 import com.example.model.TimePicker
 import com.example.utils.checkValidTask
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
 import java.time.LocalDate
@@ -113,6 +116,7 @@ private fun AddTaskContent(
             AddTaskScreen(
                 date = uiState.date,
                 timePicker = uiState.timePicker,
+                categories = uiState.categories,
                 popBackStack = popBackStack,
                 onAddTaskClick = onAddTaskClick,
                 onShowMessageSnackBar = onShowMessageSnackBar
@@ -126,6 +130,7 @@ private fun AddTaskContent(
 private fun AddTaskScreen(
     date: LocalDate,
     timePicker: TimePicker,
+    categories: ImmutableList<Category>,
     popBackStack: () -> Unit,
     onAddTaskClick: (Task) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
@@ -139,10 +144,11 @@ private fun AddTaskScreen(
     var isShowTimePickerDialog by remember { mutableStateOf(false) }
 
     var taskTitle by remember { mutableStateOf("") }
+    val taskCategory: Category? by remember { mutableStateOf(null) }
     var taskDate by remember { mutableStateOf(date) }
     var taskTime by remember { mutableStateOf(LocalTime.now()) }
-    var taskMemo by remember { mutableStateOf("") }
     var taskPriority by remember { mutableStateOf(Priority.LOW) }
+    var taskMemo by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -219,8 +225,7 @@ private fun AddTaskScreen(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(20.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(30.dp),
             ) {
@@ -229,6 +234,10 @@ private fun AddTaskScreen(
                     backgroundColor = priorityColors[taskPriority.ordinal],
                     taskTitle = taskTitle,
                     onValueChange = { taskTitle = it }
+                )
+                InputTaskCategories(
+                    categories = categories,
+                    onSelectClick = {}
                 )
                 InputTaskDate(
                     date = taskDate,
@@ -240,14 +249,14 @@ private fun AddTaskScreen(
                     onTimeChange = { taskTime = it },
                     onShowTimePickerDialog = { isShowTimePickerDialog = true },
                 )
+                InputTaskPriority(
+                    initPriority = taskPriority,
+                    onSelect = { taskPriority = it }
+                )
                 InputTaskMemo(
                     focusRequester = memoFocusRequester,
                     taskMemo = taskMemo,
                     onValueChange = { taskMemo = it }
-                )
-                InputTaskPriority(
-                    initPriority = taskPriority,
-                    onSelect = { taskPriority = it }
                 )
             }
             Column(

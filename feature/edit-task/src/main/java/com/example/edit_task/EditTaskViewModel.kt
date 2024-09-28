@@ -10,6 +10,7 @@ import com.example.edit_task.model.EditTaskUiEffect
 import com.example.edit_task.model.EditTaskUiState
 import com.example.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -43,7 +44,8 @@ class EditTaskViewModel @Inject constructor(
                 val editTaskSetting = editTask.editTaskSystem
                 EditTaskUiState.Success(
                     task = editTask.task,
-                    timePicker = editTaskSetting.timePicker
+                    timePicker = editTaskSetting.timePicker,
+                    categories = editTask.categories.toPersistentList(),
                 )
             }.catch { throwable ->
                 _errorFlow.emit(throwable)

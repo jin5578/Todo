@@ -8,6 +8,7 @@ import com.example.domain.usecase.GetAddTaskDataUseCase
 import com.example.domain.usecase.InsertTaskUseCase
 import com.example.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -40,7 +41,8 @@ class AddTaskViewModel @Inject constructor(
                 val addTaskSetting = addTask.addTaskSystem
                 AddTaskUiState.Success(
                     date = date,
-                    timePicker = addTaskSetting.timePicker
+                    timePicker = addTaskSetting.timePicker,
+                    categories = addTask.categories.toPersistentList()
                 )
             }.catch { throwable ->
                 _errorFlow.emit(throwable)

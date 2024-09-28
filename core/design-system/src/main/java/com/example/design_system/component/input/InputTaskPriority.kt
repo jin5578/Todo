@@ -42,7 +42,8 @@ fun InputTaskPriority(
     var selectedPriority by remember { mutableStateOf(initPriority) }
 
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth()
+            .padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         Text(

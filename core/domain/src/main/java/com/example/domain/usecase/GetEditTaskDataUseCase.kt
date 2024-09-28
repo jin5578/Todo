@@ -1,5 +1,6 @@
 package com.example.domain.usecase
 
+import com.example.data_api.repository.CategoryRepository
 import com.example.data_api.repository.SystemRepository
 import com.example.data_api.repository.TaskRepository
 import com.example.model.edittask.EditTask
@@ -11,17 +12,20 @@ import javax.inject.Inject
 class GetEditTaskDataUseCase @Inject constructor(
     private val systemRepository: SystemRepository,
     private val taskRepository: TaskRepository,
+    private val categoryRepository: CategoryRepository,
 ) {
     operator fun invoke(taskId: Long): Flow<EditTask> {
         return combine(
             systemRepository.getEditTaskSystem(),
             flow {
                 emit(taskRepository.getTaskById(taskId))
-            }
-        ) { editTaskSystem, task ->
+            },
+            categoryRepository.getAllCategory()
+        ) { editTaskSystem, task, categories ->
             EditTask(
                 task = task,
-                editTaskSystem = editTaskSystem
+                editTaskSystem = editTaskSystem,
+                categories = categories,
             )
         }
     }

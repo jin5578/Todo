@@ -73,7 +73,8 @@ fun InputTaskTime(
     val timeFormat = DateTimeFormatter.ofPattern("hh : mm a", Locale.US)
 
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth()
+            .padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         Row(

@@ -40,6 +40,7 @@ import com.example.design_system.component.ClockTimePickerDialog
 import com.example.design_system.component.DatePickerDialog
 import com.example.design_system.component.Loading
 import com.example.design_system.component.ScrollTimePickerDialog
+import com.example.design_system.component.input.InputTaskCategories
 import com.example.design_system.component.input.InputTaskDate
 import com.example.design_system.component.input.InputTaskMemo
 import com.example.design_system.component.input.InputTaskPriority
@@ -49,10 +50,12 @@ import com.example.design_system.theme.TodoTheme
 import com.example.design_system.theme.priorityColors
 import com.example.edit_task.model.EditTaskUiEffect
 import com.example.edit_task.model.EditTaskUiState
+import com.example.model.Category
 import com.example.model.Priority
 import com.example.model.Task
 import com.example.model.TimePicker
 import com.example.utils.checkValidTask
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
 import com.example.design_system.R as DesignSystemR
@@ -112,6 +115,7 @@ private fun EditTaskContent(
             EditTaskScreen(
                 task = uiState.task,
                 timePicker = uiState.timePicker,
+                categories = uiState.categories,
                 popBackStack = popBackStack,
                 onUpdateTaskClick = onUpdateTaskClick,
                 onTaskDelete = onTaskDelete,
@@ -126,6 +130,7 @@ private fun EditTaskContent(
 private fun EditTaskScreen(
     task: Task,
     timePicker: TimePicker,
+    categories: ImmutableList<Category>,
     popBackStack: () -> Unit,
     onUpdateTaskClick: (Task) -> Unit,
     onTaskDelete: (Long) -> Unit,
@@ -140,6 +145,7 @@ private fun EditTaskScreen(
     var isShowTimePickerDialog by remember { mutableStateOf(false) }
 
     var taskTitle by remember { mutableStateOf(task.title) }
+    var taskCategory: Category? by remember { mutableStateOf(null) }
     var taskDate by remember { mutableStateOf(task.date) }
     var taskTime by remember { mutableStateOf(task.time) }
     var taskMemo by remember { mutableStateOf(task.memo) }
@@ -234,8 +240,7 @@ private fun EditTaskScreen(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(20.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(30.dp),
             ) {
@@ -244,6 +249,10 @@ private fun EditTaskScreen(
                     backgroundColor = priorityColors[taskPriority.ordinal],
                     taskTitle = taskTitle,
                     onValueChange = { taskTitle = it }
+                )
+                InputTaskCategories(
+                    categories = categories,
+                    onSelectClick = {}
                 )
                 InputTaskDate(
                     date = taskDate,
@@ -255,14 +264,14 @@ private fun EditTaskScreen(
                     onTimeChange = { taskTime = it },
                     onShowTimePickerDialog = { isShowTimePickerDialog = true },
                 )
+                InputTaskPriority(
+                    initPriority = taskPriority,
+                    onSelect = { taskPriority = it }
+                )
                 InputTaskMemo(
                     focusRequester = memoFocusRequester,
                     taskMemo = taskMemo,
                     onValueChange = { taskMemo = it }
-                )
-                InputTaskPriority(
-                    initPriority = taskPriority,
-                    onSelect = { taskPriority = it }
                 )
             }
             Column(
