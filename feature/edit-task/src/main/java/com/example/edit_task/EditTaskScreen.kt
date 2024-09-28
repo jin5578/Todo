@@ -55,7 +55,6 @@ import com.example.model.TimePicker
 import com.example.utils.checkValidTask
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
-import java.time.LocalTime
 import com.example.design_system.R as DesignSystemR
 
 @Composable
@@ -142,7 +141,7 @@ private fun EditTaskScreen(
 
     var taskTitle by remember { mutableStateOf(task.title) }
     var taskDate by remember { mutableStateOf(task.date) }
-    var taskTime by remember { mutableStateOf(LocalTime.now()) }
+    var taskTime by remember { mutableStateOf(task.time) }
     var taskMemo by remember { mutableStateOf(task.memo) }
     var taskPriority by remember {
         mutableStateOf(Priority.entries.getOrNull(task.priority) ?: Priority.LOW)
