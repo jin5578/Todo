@@ -129,7 +129,7 @@ fun TaskCard(
                         tint = priorityColors[task.priority],
                     )
                     if (category != null) {
-                        CatgegoryInfo(
+                        CategoryInfo(
                             color = Color(category.colorValue.toLong()),
                             title = category.title
                         )
@@ -167,7 +167,7 @@ fun TaskCard(
 }
 
 @Composable
-private fun CatgegoryInfo(
+private fun CategoryInfo(
     color: Color,
     title: String
 ) {

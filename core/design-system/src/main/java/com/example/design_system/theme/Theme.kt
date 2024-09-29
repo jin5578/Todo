@@ -353,6 +353,38 @@ private val WidgetColorProviders = colorProviders(
         SunRiseColorScheme.onTertiaryContainer,
         MidnightBlueColorScheme.onTertiaryContainer
     ),
+    background = ColorProvider(
+        SunRiseColorScheme.background,
+        MidnightBlueColorScheme.background
+    ),
+    onBackground = ColorProvider(
+        SunRiseColorScheme.onBackground,
+        MidnightBlueColorScheme.onBackground
+    ),
+    surface = ColorProvider(
+        SunRiseColorScheme.surface,
+        MidnightBlueColorScheme.surface
+    ),
+    onSurface = ColorProvider(
+        SunRiseColorScheme.onSurface,
+        MidnightBlueColorScheme.onSurface
+    ),
+    surfaceVariant = ColorProvider(
+        SunRiseColorScheme.surfaceVariant,
+        MidnightBlueColorScheme.surfaceVariant
+    ),
+    onSurfaceVariant = ColorProvider(
+        SunRiseColorScheme.onSurfaceVariant,
+        MidnightBlueColorScheme.onSurfaceVariant
+    ),
+    inverseSurface = ColorProvider(
+        SunRiseColorScheme.inverseSurface,
+        MidnightBlueColorScheme.inverseSurface
+    ),
+    inverseOnSurface = ColorProvider(
+        SunRiseColorScheme.inverseOnSurface,
+        MidnightBlueColorScheme.inverseOnSurface
+    ),
     error = ColorProvider(
         SunRiseColorScheme.error,
         MidnightBlueColorScheme.error
@@ -369,42 +401,10 @@ private val WidgetColorProviders = colorProviders(
         SunRiseColorScheme.onErrorContainer,
         MidnightBlueColorScheme.onErrorContainer
     ),
-    surface = ColorProvider(
-        SunRiseColorScheme.surface,
-        MidnightBlueColorScheme.surface
-    ),
-    onSurface = ColorProvider(
-        SunRiseColorScheme.onSurface,
-        MidnightBlueColorScheme.onSurface
-    ),
-    inverseSurface = ColorProvider(
-        SunRiseColorScheme.inverseSurface,
-        MidnightBlueColorScheme.inverseSurface
-    ),
-    inverseOnSurface = ColorProvider(
-        SunRiseColorScheme.inverseOnSurface,
-        MidnightBlueColorScheme.inverseOnSurface
-    ),
     outline = ColorProvider(
         SunRiseColorScheme.outline,
         MidnightBlueColorScheme.outline
     ),
-    background = ColorProvider(
-        SunRiseColorScheme.background,
-        MidnightBlueColorScheme.background
-    ),
-    onBackground = ColorProvider(
-        SunRiseColorScheme.onBackground,
-        MidnightBlueColorScheme.onBackground
-    ),
-    surfaceVariant = ColorProvider(
-        SunRiseColorScheme.surfaceVariant,
-        MidnightBlueColorScheme.surfaceVariant
-    ),
-    onSurfaceVariant = ColorProvider(
-        SunRiseColorScheme.onSurfaceVariant,
-        MidnightBlueColorScheme.onSurfaceVariant
-    )
 )
 
 @Composable
