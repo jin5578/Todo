@@ -34,11 +34,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:model"))
     implementation(project(":core:design-system"))
     implementation(project(":core:domain"))
+    implementation(project(":core:model"))
     implementation(project(":core:navigation"))
-    implementation(project(":core:utils"))
 
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewModelCompose)

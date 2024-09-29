@@ -138,7 +138,7 @@ private fun SettingScreen(
         CategoryItemUiState(
             title = DesignSystemR.string.about,
             icon = DesignSystemR.drawable.svg_information,
-            onClick = navigateInfo
+            onClick = { openUrl("https://intelligent-party-142.notion.site/TODO-1109ff809974806cb274f0b95d4a71d4?pvs=4") }
         ),
         CategoryItemUiState(
             title = DesignSystemR.string.github,
