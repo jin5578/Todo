@@ -43,3 +43,4 @@ include(
     ":feature:setting",
     ":feature:tasks"
 )
+include(":widget")

@@ -40,6 +40,8 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":core:utils"))
 
+    implementation(project(":widget"))
+
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
 

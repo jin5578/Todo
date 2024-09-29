@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.edit_task"
+    namespace = "com.example.widget"
     compileSdk = 34
 
     defaultConfig {
@@ -34,29 +34,25 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:model"))
     implementation(project(":core:design-system"))
     implementation(project(":core:domain"))
-    implementation(project(":core:navigation"))
-    implementation(project(":core:utils"))
-
-    implementation(project(":widget"))
-
-    implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.viewModelCompose)
+    implementation(project(":core:model"))
 
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.core)
     testImplementation(libs.coroutines.test)
 
+    implementation(libs.androidx.glance)
+    implementation(libs.androidx.glance.appwidget)
+    implementation(libs.glance.tools.appwidget.host)
+
     implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
+    ksp(libs.hilt.compiler)
     kspAndroidTest(libs.hilt.android.compiler)
 
     implementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)
     androidTestImplementation(libs.androidx.test.ext)
@@ -64,12 +60,4 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.testManifest)
-
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.androidx.compose.navigation)
-    androidTestImplementation(libs.androidx.compose.navigation.test)
-
-    implementation(libs.kotlinx.immutable)
-
-    implementation(libs.timber)
 }

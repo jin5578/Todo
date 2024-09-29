@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
@@ -56,6 +57,7 @@ import com.example.model.Priority
 import com.example.model.Task
 import com.example.model.TimePicker
 import com.example.utils.checkValidTask
+import com.example.widget.utils.sendWidgetUpdateCommand
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.job
@@ -72,6 +74,8 @@ internal fun EditTaskRoute(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val uiEffect by viewModel.uiEffect.collectAsStateWithLifecycle()
 
+    val context = LocalContext.current
+
     LaunchedEffect(taskId) {
         viewModel.fetchEditTask(taskId)
     }
@@ -86,6 +90,7 @@ internal fun EditTaskRoute(
         if (uiEffect is EditTaskUiEffect.SuccessAction) {
             val message = (uiEffect as EditTaskUiEffect.SuccessAction).message
             onShowMessageSnackBar(message)
+            sendWidgetUpdateCommand(context)
             popBackStack()
         }
     }

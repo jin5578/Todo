@@ -13,6 +13,9 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import androidx.glance.GlanceTheme
+import androidx.glance.color.ColorProvider
+import androidx.glance.color.colorProviders
 import com.example.model.Theme
 import com.example.model.ThemeType
 
@@ -295,4 +298,121 @@ object TodoTheme {
     val typography: TodoTypography
         @Composable
         get() = LocalTypography.current
+}
+
+private val WidgetColorProviders = colorProviders(
+    primary = ColorProvider(
+        SunRiseColorScheme.primary,
+        MidnightBlueColorScheme.primary
+    ),
+    onPrimary = ColorProvider(
+        SunRiseColorScheme.onPrimary,
+        MidnightBlueColorScheme.onPrimary
+    ),
+    primaryContainer = ColorProvider(
+        SunRiseColorScheme.primaryContainer,
+        MidnightBlueColorScheme.primaryContainer
+    ),
+    onPrimaryContainer = ColorProvider(
+        SunRiseColorScheme.onPrimaryContainer,
+        MidnightBlueColorScheme.onPrimaryContainer
+    ),
+    inversePrimary = ColorProvider(
+        SunRiseColorScheme.inversePrimary,
+        MidnightBlueColorScheme.inversePrimary
+    ),
+    secondary = ColorProvider(
+        SunRiseColorScheme.secondary,
+        MidnightBlueColorScheme.secondary
+    ),
+    onSecondary = ColorProvider(
+        SunRiseColorScheme.onSecondary,
+        MidnightBlueColorScheme.onSecondary
+    ),
+    secondaryContainer = ColorProvider(
+        SunRiseColorScheme.secondaryContainer,
+        MidnightBlueColorScheme.secondaryContainer
+    ),
+    onSecondaryContainer = ColorProvider(
+        SunRiseColorScheme.onSecondaryContainer,
+        MidnightBlueColorScheme.onSecondaryContainer
+    ),
+    tertiary = ColorProvider(
+        SunRiseColorScheme.tertiary,
+        MidnightBlueColorScheme.tertiary
+    ),
+    onTertiary = ColorProvider(
+        SunRiseColorScheme.onTertiary,
+        MidnightBlueColorScheme.onTertiary
+    ),
+    tertiaryContainer = ColorProvider(
+        SunRiseColorScheme.tertiaryContainer,
+        MidnightBlueColorScheme.tertiaryContainer
+    ),
+    onTertiaryContainer = ColorProvider(
+        SunRiseColorScheme.onTertiaryContainer,
+        MidnightBlueColorScheme.onTertiaryContainer
+    ),
+    error = ColorProvider(
+        SunRiseColorScheme.error,
+        MidnightBlueColorScheme.error
+    ),
+    onError = ColorProvider(
+        SunRiseColorScheme.onError,
+        MidnightBlueColorScheme.onError
+    ),
+    errorContainer = ColorProvider(
+        SunRiseColorScheme.errorContainer,
+        MidnightBlueColorScheme.errorContainer
+    ),
+    onErrorContainer = ColorProvider(
+        SunRiseColorScheme.onErrorContainer,
+        MidnightBlueColorScheme.onErrorContainer
+    ),
+    surface = ColorProvider(
+        SunRiseColorScheme.surface,
+        MidnightBlueColorScheme.surface
+    ),
+    onSurface = ColorProvider(
+        SunRiseColorScheme.onSurface,
+        MidnightBlueColorScheme.onSurface
+    ),
+    inverseSurface = ColorProvider(
+        SunRiseColorScheme.inverseSurface,
+        MidnightBlueColorScheme.inverseSurface
+    ),
+    inverseOnSurface = ColorProvider(
+        SunRiseColorScheme.inverseOnSurface,
+        MidnightBlueColorScheme.inverseOnSurface
+    ),
+    outline = ColorProvider(
+        SunRiseColorScheme.outline,
+        MidnightBlueColorScheme.outline
+    ),
+    background = ColorProvider(
+        SunRiseColorScheme.background,
+        MidnightBlueColorScheme.background
+    ),
+    onBackground = ColorProvider(
+        SunRiseColorScheme.onBackground,
+        MidnightBlueColorScheme.onBackground
+    ),
+    surfaceVariant = ColorProvider(
+        SunRiseColorScheme.surfaceVariant,
+        MidnightBlueColorScheme.surfaceVariant
+    ),
+    onSurfaceVariant = ColorProvider(
+        SunRiseColorScheme.onSurfaceVariant,
+        MidnightBlueColorScheme.onSurfaceVariant
+    )
+)
+
+@Composable
+fun TodoGlanceTheme(
+    content: @Composable () -> Unit,
+) {
+    GlanceTheme(
+        colors = WidgetColorProviders,
+        content = content
+    )
 }

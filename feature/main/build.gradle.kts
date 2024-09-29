@@ -49,6 +49,8 @@ dependencies {
     implementation(project(":feature:setting"))
     implementation(project(":feature:tasks"))
 
+    implementation(project(":widget"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.appcompat)
