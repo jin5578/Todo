@@ -13,9 +13,6 @@ sealed interface Route {
     data object Setting : Route
 
     @Serializable
-    data object Info : Route
-
-    @Serializable
     data class AddTask(
         val date: String
     ) : Route

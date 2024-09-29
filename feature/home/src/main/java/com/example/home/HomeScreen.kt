@@ -334,7 +334,7 @@ private fun HomeScreen(
                         modifier = Modifier.padding(16.dp),
                         text = stringResource(DesignSystemR.string.today_tasks),
                         style = TodoTheme.typography.headlineMedium,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
 
                     IconButton(onClick = { isShowSortTaskDialog = true }) {
@@ -342,7 +342,7 @@ private fun HomeScreen(
                             modifier = Modifier.size(18.dp),
                             imageVector = ImageVector.vectorResource(DesignSystemR.drawable.svg_sort),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }

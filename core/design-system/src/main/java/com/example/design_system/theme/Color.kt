@@ -235,7 +235,7 @@ val Indigo = Color(0xFF003366)
 val Violet = Color(0xFF8A2BE2)
 
 val priorityColors = listOf(
-    Green,
-    Yellow,
+    Violet,
+    Orange,
     Red,
 )
