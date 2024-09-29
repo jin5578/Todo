@@ -23,6 +23,6 @@ internal fun actionStartActivityWithTaskId(
             context.packageManager.getLaunchIntentForPackage(
                 context.packageName
             )
-        ).putExtra(TodoWidget.KEY_TASK_ID, taskId)
+        ).putExtra(TodoWidget.KEY_TASK_ID, taskId.toString())
             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
     )
