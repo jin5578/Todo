@@ -44,6 +44,4 @@ dependencies {
     kspAndroidTest(libs.hilt.android.compiler)
 
     implementation(libs.timber)
-
-    implementation(libs.paging.common.ktx)
 }

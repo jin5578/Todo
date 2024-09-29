@@ -48,10 +48,6 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     kspAndroidTest(libs.hilt.android.compiler)
 
-    implementation(libs.landscapist.bom)
-    implementation(libs.landscapist.coil)
-    implementation(libs.landscapist.placeholder)
-
     implementation(libs.androidx.glance)
 
     implementation(platform(libs.androidx.compose.bom))
