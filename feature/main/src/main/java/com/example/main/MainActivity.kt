@@ -1,5 +1,7 @@
 package com.example.main
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,9 +17,13 @@ import com.example.widget.TodoWidget.Companion.KEY_TASK_ID
 import com.example.widget.utils.sendWidgetUpdateCommand
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var notificationManager: NotificationManager
+
     private val viewModel by viewModels<MainViewModel>()
     private val taskIdFromWidget: MutableStateFlow<String?> = MutableStateFlow(null)
 
@@ -26,6 +32,7 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
+        createNotificationChannel()
         sendWidgetUpdateCommand(application)
 
         intent.getStringExtra(KEY_TASK_ID)?.let {
@@ -52,5 +59,16 @@ class MainActivity : ComponentActivity() {
                 MainScreen(navigator)
             }
         }
+    }
+
+    private fun createNotificationChannel() {
+        val channel =
+            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+        notificationManager.createNotificationChannel(channel)
+    }
+
+    companion object {
+        private const val CHANNEL_ID = "todo-notification"
+        private const val CHANNEL_NAME = "TODO Reminder"
     }
 }

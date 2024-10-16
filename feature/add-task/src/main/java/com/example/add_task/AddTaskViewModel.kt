@@ -6,6 +6,7 @@ import com.example.add_task.model.AddTaskUiEffect
 import com.example.add_task.model.AddTaskUiState
 import com.example.domain.usecase.GetAddTaskDataUseCase
 import com.example.domain.usecase.InsertTaskUseCase
+import com.example.domain.usecase.ScheduleNotificationUseCase
 import com.example.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toPersistentList
@@ -23,6 +24,7 @@ import javax.inject.Inject
 class AddTaskViewModel @Inject constructor(
     private val getAddTaskDataUseCase: GetAddTaskDataUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
+    private val scheduleNotificationUseCase: ScheduleNotificationUseCase
 ) : ViewModel() {
     private val _errorFlow: MutableSharedFlow<Throwable> = MutableSharedFlow()
     val errorFlow = _errorFlow.asSharedFlow()
@@ -55,8 +57,10 @@ class AddTaskViewModel @Inject constructor(
     fun insertTask(task: Task) {
         viewModelScope.launch {
             insertTaskUseCase(task)
-            _uiEffect.value =
-                AddTaskUiEffect.SuccessInsertTask(SUCCESSFULLY_ADDED_THE_SCHEDULE)
+            scheduleNotificationUseCase(task)
+            _uiEffect.value = AddTaskUiEffect.SuccessInsertTask(
+                message = SUCCESSFULLY_ADDED_THE_SCHEDULE
+            )
         }
     }
 

@@ -67,6 +67,10 @@ wheelpickerCompose = "1.1.11"
 pagingCommonKtx = "3.3.1"
 pagingCompose = "3.3.1"
 
+hiltWork = "1.2.0"
+hiltCompiler = "1.2.0"
+workRuntimeKtx = "2.9.1"
+
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
@@ -164,6 +168,10 @@ paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pag
 
 kizitonwose-calendar = { module = "com.kizitonwose.calendar:compose", version.ref = "kizitonwoseCalendar" }
 wheelpicker-compose = { module = "com.github.commandiron:WheelPickerCompose", version.ref = "wheelpickerCompose" }
+
+androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
+androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 
 [bundles]
 

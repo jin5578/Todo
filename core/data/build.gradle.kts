@@ -53,4 +53,8 @@ dependencies {
     implementation(libs.kotlinx.datetime)
 
     implementation(libs.paging.common.ktx)
+
+    implementation(libs.timber)
+
+    implementation(libs.androidx.hilt.work)
 }
