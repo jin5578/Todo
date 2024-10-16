@@ -13,7 +13,7 @@ class UpdateTaskUseCase @Inject constructor(
         taskRepository.updateTask(task)
         if (task.isCompleted) {
             cancelNotificationWorkUseCase(task.uuid)
-        } else {
+        } else if (task.isRemind) {
             scheduleNotificationWorkUseCase(task)
         }
     }

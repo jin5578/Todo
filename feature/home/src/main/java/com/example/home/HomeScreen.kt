@@ -434,6 +434,7 @@ fun HomeScreenPreview() {
                 uuid = "cu",
                 title = "purus",
                 isCompleted = false,
+                isRemind = true,
                 time = LocalTime.now(),
                 date = LocalDate.now(),
                 memo = "memo",

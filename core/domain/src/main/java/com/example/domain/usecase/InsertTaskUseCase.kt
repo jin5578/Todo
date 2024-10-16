@@ -6,10 +6,12 @@ import javax.inject.Inject
 
 class InsertTaskUseCase @Inject constructor(
     private val taskRepository: TaskRepository,
-    private val scheduleNotificationWorkUseCase: ScheduleNotificationWorkUseCase
+    private val scheduleNotificationWorkUseCase: ScheduleNotificationWorkUseCase,
 ) {
     suspend operator fun invoke(task: Task) {
         taskRepository.insertTask(task)
-        scheduleNotificationWorkUseCase(task)
+        if (task.isRemind) {
+            scheduleNotificationWorkUseCase(task)
+        }
     }
 }

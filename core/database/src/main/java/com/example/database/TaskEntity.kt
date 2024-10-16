@@ -24,6 +24,8 @@ data class TaskEntity(
     val title: String = "",
     @ColumnInfo(name = "isCompleted")
     val isCompleted: Boolean = false,
+    @ColumnInfo(name = "isRemind")
+    val isRemind: Boolean = false,
     @ColumnInfo(name = "time")
     val time: LocalTime = LocalTime.now(),
     @ColumnInfo(name = "date")

@@ -296,6 +296,7 @@ private fun EditTaskScreen(
                             uuid = task.uuid,
                             title = taskTitle.trim(),
                             isCompleted = task.isCompleted,
+                            isRemind = task.isRemind,
                             time = taskTime,
                             date = taskDate,
                             memo = taskMemo,

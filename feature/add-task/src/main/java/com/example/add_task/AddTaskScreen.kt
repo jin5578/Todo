@@ -48,6 +48,7 @@ import com.example.design_system.component.input.InputTaskCategories
 import com.example.design_system.component.input.InputTaskDate
 import com.example.design_system.component.input.InputTaskMemo
 import com.example.design_system.component.input.InputTaskPriority
+import com.example.design_system.component.input.InputTaskReminder
 import com.example.design_system.component.input.InputTaskTime
 import com.example.design_system.component.input.InputTaskTitle
 import com.example.design_system.theme.TodoTheme
@@ -155,6 +156,7 @@ private fun AddTaskScreen(
     var taskTime by remember { mutableStateOf(LocalTime.now()) }
     var taskPriority by remember { mutableStateOf(Priority.LOW) }
     var taskMemo by remember { mutableStateOf("") }
+    var taskReminder by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -267,10 +269,14 @@ private fun AddTaskScreen(
                     taskMemo = taskMemo,
                     onValueChange = { taskMemo = it }
                 )
+                InputTaskReminder(
+                    isRemind = taskReminder,
+                    onReminderChanged = { taskReminder = it }
+                )
             }
             Column(
                 modifier = Modifier.fillMaxWidth()
-                    .padding(20.dp),
+                    .padding(start = 20.dp, top = 30.dp, end = 20.dp, bottom = 20.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Button(
@@ -280,6 +286,7 @@ private fun AddTaskScreen(
                             uuid = UUID.randomUUID().toString(),
                             title = taskTitle.trim(),
                             isCompleted = false,
+                            isRemind = taskReminder,
                             time = taskTime,
                             date = taskDate,
                             memo = taskMemo,

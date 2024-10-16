@@ -8,6 +8,7 @@ data class Task(
     val uuid: String,
     val title: String,
     val isCompleted: Boolean,
+    val isRemind: Boolean,
     val time: LocalTime,
     val date: LocalDate,
     val memo: String,

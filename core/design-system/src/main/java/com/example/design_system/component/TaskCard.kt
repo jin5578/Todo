@@ -147,6 +147,21 @@ fun TaskCard(
                         textColor = MaterialTheme.colorScheme.onSurface,
                         tint = MaterialTheme.colorScheme.onSurface
                     )
+                    val notificationIcon: Int
+                    val notificationText: String
+                    if (task.isRemind) {
+                        notificationIcon = R.drawable.svg_notification
+                        notificationText = "ON"
+                    } else {
+                        notificationIcon = R.drawable.svg_notification_slash
+                        notificationText = "OFF"
+                    }
+                    ExtraInfo(
+                        painter = painterResource(id = notificationIcon),
+                        title = notificationText,
+                        textColor = MaterialTheme.colorScheme.onSurface,
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
                 }
             }
             if (!isAvailableSwipe) {
@@ -236,6 +251,7 @@ private fun TaskCardPreview() {
             uuid = "corrumpit",
             title = "inceptos",
             isCompleted = false,
+            isRemind = true,
             time = LocalTime.now(),
             date = LocalDate.now(),
             memo = "memo",
