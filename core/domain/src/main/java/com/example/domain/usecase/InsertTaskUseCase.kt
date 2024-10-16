@@ -5,8 +5,11 @@ import com.example.model.Task
 import javax.inject.Inject
 
 class InsertTaskUseCase @Inject constructor(
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val scheduleNotificationWorkUseCase: ScheduleNotificationWorkUseCase
 ) {
-    suspend operator fun invoke(task: Task) =
+    suspend operator fun invoke(task: Task) {
         taskRepository.insertTask(task)
+        scheduleNotificationWorkUseCase(task)
+    }
 }

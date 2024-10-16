@@ -109,7 +109,7 @@ private fun EditTaskContent(
     uiState: EditTaskUiState,
     popBackStack: () -> Unit,
     onUpdateTaskClick: (Task) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     when (uiState) {
@@ -139,7 +139,7 @@ private fun EditTaskScreen(
     categories: ImmutableList<Category>,
     popBackStack: () -> Unit,
     onUpdateTaskClick: (Task) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     val titleFocusRequester = FocusRequester()
@@ -184,7 +184,7 @@ private fun EditTaskScreen(
                 },
                 actions = {
                     IconButton(
-                        onClick = { onTaskDelete(task.id) }
+                        onClick = { onTaskDelete(task.id, task.uuid) }
                     ) {
                         Icon(
                             modifier = Modifier.size(21.dp),

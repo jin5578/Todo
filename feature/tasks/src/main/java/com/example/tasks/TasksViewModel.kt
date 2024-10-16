@@ -112,7 +112,7 @@ class TasksViewModel @Inject constructor(
         }
     }
 
-    fun deleteTask(taskId: Long) {
+    fun deleteTask(taskId: Long, uuid: String) {
         viewModelScope.launch {
             val task = getTaskByIdUseCase(taskId)
             deleteTaskUseCase(task)

@@ -84,7 +84,7 @@ private fun TasksContent(
     popBackStack: () -> Unit,
     navigateEditTask: (Long) -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     when (uiState) {
@@ -116,7 +116,7 @@ private fun TasksScreen(
     popBackStack: () -> Unit,
     navigateEditTask: (Long) -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
     Scaffold(
@@ -178,7 +178,7 @@ private fun TasksScreen(
                             isAvailableSwipe = false,
                             onTaskEdit = { taskId -> navigateEditTask(taskId) },
                             onTaskToggleCompletion = onTaskToggleCompletion,
-                            onTaskDelete = { taskId -> onTaskDelete(taskId) },
+                            onTaskDelete = { taskId, uuid -> onTaskDelete(taskId, uuid) },
                         )
                     }
                     Spacer(modifier = Modifier.height(10.dp))

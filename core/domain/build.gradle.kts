@@ -33,6 +33,7 @@ dependencies {
     implementation(project(":core:data-api"))
     implementation(project(":core:design-system"))
     implementation(project(":core:model"))
+    implementation(project(":core:utils"))
 
     implementation(libs.inject)
 
@@ -46,7 +47,5 @@ dependencies {
 
     implementation(libs.timber)
 
-    implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.hilt.work)
-    ksp(libs.androidx.hilt.compiler)
 }

@@ -85,9 +85,9 @@ internal fun CalendarRoute(
         navigateAddTask = navigateAddTask,
         navigateEditTask = navigateEditTask,
         popBackStack = popBackStack,
-        onTaskToggleCompletion = { taskId, isChecked ->
+        onTaskToggleCompletion = { id, isChecked ->
             viewModel.toggleTaskCompletion(
-                taskId = taskId,
+                id = id,
                 isCompleted = isChecked
             )
         },
@@ -101,8 +101,8 @@ private fun CalendarContent(
     navigateAddTask: (date: LocalDate) -> Unit,
     navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
-    onTaskToggleCompletion: (Long, Boolean) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskToggleCompletion: (id: Long, isCompleted: Boolean) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
 ) {
     when (uiState) {
         is CalendarUiState.Loading -> {
@@ -131,8 +131,8 @@ private fun CalendarScreen(
     navigateAddTask: (date: LocalDate) -> Unit,
     navigateEditTask: (Long) -> Unit,
     popBackStack: () -> Unit,
-    onTaskToggleCompletion: (Long, Boolean) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskToggleCompletion: (id: Long, isCompleted: Boolean) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -255,10 +255,10 @@ private fun CalendarScreen(
                                 .getOrNull(0),
                             isAvailableSwipe = true,
                             onTaskEdit = { taskId -> navigateEditTask(taskId) },
-                            onTaskToggleCompletion = { taskId, isCompleted ->
-                                onTaskToggleCompletion(taskId, isCompleted)
+                            onTaskToggleCompletion = { id, isCompleted ->
+                                onTaskToggleCompletion(id, isCompleted)
                             },
-                            onTaskDelete = { taskId -> onTaskDelete(taskId) },
+                            onTaskDelete = { taskId, uuid -> onTaskDelete(taskId, uuid) },
                         )
                         Spacer(modifier = Modifier.height(10.dp))
                     }
@@ -279,7 +279,7 @@ private fun CalendarScreenPreview() {
             navigateEditTask = {},
             popBackStack = {},
             onTaskToggleCompletion = { _, _ -> },
-            onTaskDelete = {}
+            onTaskDelete = { _, _ -> }
         )
     }
 }

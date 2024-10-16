@@ -6,7 +6,10 @@ import javax.inject.Inject
 
 class DeleteTaskUseCase @Inject constructor(
     private val taskRepository: TaskRepository,
+    private val cancelNotificationWorkUseCase: CancelNotificationWorkUseCase,
 ) {
-    suspend operator fun invoke(task: Task) =
+    suspend operator fun invoke(task: Task) {
         taskRepository.deleteTask(task)
+        cancelNotificationWorkUseCase(task.uuid)
+    }
 }

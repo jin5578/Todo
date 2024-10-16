@@ -117,7 +117,7 @@ private fun HomeContent(
     navigateAllTask: (String) -> Unit,
     navigateEditTask: (Long) -> Unit,
     onSortTaskChanged: (SortTask) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
@@ -171,7 +171,7 @@ private fun HomeScreen(
     navigateAllTask: (String) -> Unit,
     navigateEditTask: (Long) -> Unit,
     onSortTaskChanged: (SortTask) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
     onTaskToggleCompletion: (Long, Boolean) -> Unit,
     onShowMessageSnackBar: (message: String) -> Unit,
 ) {
@@ -399,7 +399,7 @@ private fun HomeScreen(
                             SwipeActionBox(
                                 item = task,
                                 onDeleteAction = {
-                                    onTaskDelete(it.id)
+                                    onTaskDelete(it.id, it.uuid)
                                     onShowMessageSnackBar("Task Deleted")
                                 }
                             ) {
@@ -412,7 +412,7 @@ private fun HomeScreen(
                                     onTaskToggleCompletion = { taskId, isCompleted ->
                                         onTaskToggleCompletion(taskId, isCompleted)
                                     },
-                                    onTaskDelete = { taskId -> onTaskDelete(taskId) },
+                                    onTaskDelete = { taskId, uuid -> onTaskDelete(taskId, uuid) },
                                 )
                             }
                         }
@@ -457,7 +457,7 @@ fun HomeScreenPreview() {
             navigateAllTask = {},
             navigateEditTask = {},
             onSortTaskChanged = {},
-            onTaskDelete = {},
+            onTaskDelete = { _, _ -> },
             onTaskToggleCompletion = { _, _ -> },
             onShowMessageSnackBar = {},
         )

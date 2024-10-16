@@ -4,12 +4,13 @@ import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.model.Task
+import com.example.utils.NotificationWorker
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class ScheduleNotificationUseCase @Inject constructor(
+class ScheduleNotificationWorkUseCase @Inject constructor(
     private val workManager: WorkManager
 ) {
     operator fun invoke(task: Task) {

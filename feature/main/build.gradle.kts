@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:model"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:utils"))
 
     implementation(project(":feature:add-task"))
     implementation(project(":feature:calendar"))

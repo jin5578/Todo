@@ -46,8 +46,8 @@ fun TaskCard(
     category: Category? = null,
     isAvailableSwipe: Boolean,
     onTaskEdit: (Long) -> Unit,
-    onTaskToggleCompletion: (Long, Boolean) -> Unit,
-    onTaskDelete: (Long) -> Unit,
+    onTaskToggleCompletion: (id: Long, isCompleted: Boolean) -> Unit,
+    onTaskDelete: (id: Long, uuid: String) -> Unit,
 ) {
     Box(
         modifier = Modifier.fillMaxWidth()
@@ -152,7 +152,7 @@ fun TaskCard(
             if (!isAvailableSwipe) {
                 IconButton(
                     modifier = Modifier.weight(0.1f),
-                    onClick = { onTaskDelete(task.id) },
+                    onClick = { onTaskDelete(task.id, task.uuid) },
                 ) {
                     Icon(
                         modifier = Modifier.size(18.dp),
@@ -247,7 +247,7 @@ private fun TaskCardPreview() {
             isAvailableSwipe = false,
             onTaskEdit = {},
             onTaskToggleCompletion = { _, _ -> },
-            onTaskDelete = {}
+            onTaskDelete = { _, _ -> }
         )
     }
 }

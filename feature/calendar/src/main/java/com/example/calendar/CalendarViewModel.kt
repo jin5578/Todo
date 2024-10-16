@@ -53,16 +53,16 @@ class CalendarViewModel @Inject constructor(
     }
 
     fun toggleTaskCompletion(
-        taskId: Long,
+        id: Long,
         isCompleted: Boolean
     ) {
         viewModelScope.launch {
-            val task = getTaskByIdUseCase(taskId).copy(isCompleted = isCompleted)
+            val task = getTaskByIdUseCase(id).copy(isCompleted = isCompleted)
             updateTaskUseCase(task)
         }
     }
 
-    fun deleteTask(taskId: Long) {
+    fun deleteTask(taskId: Long, uuid: String) {
         viewModelScope.launch {
             val task = getTaskByIdUseCase(taskId)
             deleteTaskUseCase(task)
