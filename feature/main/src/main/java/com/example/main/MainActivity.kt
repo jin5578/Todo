@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
-        notificationHelper.createNotificationChannel()
+        setUpNotification()
+
         sendWidgetUpdateCommand(application)
 
         intent.getStringExtra(KEY_TASK_ID)?.let {
@@ -58,5 +59,10 @@ class MainActivity : ComponentActivity() {
                 MainScreen(navigator)
             }
         }
+    }
+
+    private fun setUpNotification() {
+        notificationHelper.createNotificationChannel()
+        notificationHelper.cancelAll()
     }
 }

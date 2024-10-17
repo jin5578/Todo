@@ -10,7 +10,7 @@
 
     <style name="Theme.Todo.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#FFFFFF</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_app_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/svg_splash_app_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.Todo</item>
     </style>
 </resources>
