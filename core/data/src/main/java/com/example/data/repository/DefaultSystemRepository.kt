@@ -96,6 +96,10 @@ internal class DefaultSystemRepository @Inject constructor(
         systemDataSource.updateBuildVersion(buildVersion)
     }
 
+    override suspend fun updateNotificationState(isEnabled: Boolean) {
+        systemDataSource.updateNotificationState(isEnabled)
+    }
+
     private fun String.toTheme() = when (this) {
         "System" -> Theme(type = ThemeType.SYSTEM)
         "SunRise" -> Theme(type = ThemeType.SUN_RISE)

@@ -9,4 +9,5 @@ interface SystemPreferencesDataSource {
     suspend fun updateTheme(theme: String)
     suspend fun updateTimePicker(timePicker: String)
     suspend fun updateBuildVersion(buildVersion: String)
+    suspend fun updateNotificationState(isEnabled: Boolean)
 }

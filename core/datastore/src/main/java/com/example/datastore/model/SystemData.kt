@@ -6,4 +6,5 @@ data class SystemData(
     val theme: String,
     val timePicker: String,
     val buildVersion: String,
+    val notificationState: Boolean,
 )

@@ -22,4 +22,5 @@ interface SystemRepository {
     suspend fun updateTheme(themeType: ThemeType)
     suspend fun updateTimePicker(timePicker: TimePicker)
     suspend fun updateBuildVersion(buildVersion: String)
+    suspend fun updateNotificationState(isEnabled: Boolean)
 }
